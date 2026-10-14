@@ -478,11 +478,15 @@ function initFacebookLikesListener() {
   if (window.FB && window.FB.Event) {
     window.FB.Event.subscribe('edge.create', function(targetUrl) {
       console.log('Facebook Like event captured for:', targetUrl);
+      if (targetUrl && (targetUrl.includes('dhwalnwn.ahmd.nayl') || targetUrl.includes('facebook.com'))) {
+        localStorage.setItem('za_alnoon_page_followed', 'true');
+        if (typeof updateFbFollowersUI === 'function') updateFbFollowersUI();
+        showToast('🎉 تم تسجيل إعجابك بصفحة فيسبوك وزيادة عدد المتابعين مباشرة!');
+      }
       if (activePoem) {
         if (!isPoemLiked(activePoem.id)) {
           togglePoemLike(activePoem.id);
         }
-        showToast('🎉 شكراً لك! تم تسجيل إعجابك بفيسبوك وزيادة عداد الموقع مباشرة!');
       }
     });
   }
@@ -1062,7 +1066,67 @@ window.switchFbView = function(mode) {
   }
 };
 
+// --- إدارة عداد متابعي فيسبوك المباشر ---
+const BASE_FB_FOLLOWERS = 48520;
+const BASE_FB_PAGE_LIKES = 36410;
+
+function getLiveFbFollowers() {
+  const isFollowed = localStorage.getItem('za_alnoon_page_followed') === 'true';
+  const extraFollowers = parseInt(localStorage.getItem('za_alnoon_extra_followers') || '0', 10);
+  return BASE_FB_FOLLOWERS + extraFollowers + (isFollowed ? 1 : 0);
+}
+
+function updateFbFollowersUI() {
+  const countEl = document.getElementById('fb-followers-count');
+  const likesEl = document.getElementById('fb-likes-count');
+  const followBtn = document.getElementById('btn-interactive-follow');
+  const followText = document.getElementById('fb-follow-btn-text');
+  const liveBadge = document.getElementById('fb-follow-live-badge');
+
+  const count = getLiveFbFollowers();
+  const isFollowed = localStorage.getItem('za_alnoon_page_followed') === 'true';
+
+  if (countEl) {
+    countEl.textContent = count.toLocaleString();
+  }
+  if (likesEl) {
+    likesEl.textContent = (BASE_FB_PAGE_LIKES + (isFollowed ? 1 : 0)).toLocaleString();
+  }
+
+  if (followBtn) {
+    if (isFollowed) {
+      followBtn.classList.add('followed');
+      if (followText) followText.textContent = '✓ تمت المتابعة';
+      if (liveBadge) liveBadge.textContent = 'متابع نشط';
+    } else {
+      followBtn.classList.remove('followed');
+      if (followText) followText.textContent = 'متابعة الصفحة';
+      if (liveBadge) liveBadge.textContent = `+${(count / 1000).toFixed(1)}K`;
+    }
+  }
+}
+
+window.toggleFbPageFollow = function() {
+  const isFollowed = localStorage.getItem('za_alnoon_page_followed') === 'true';
+  const nowFollowed = !isFollowed;
+  localStorage.setItem('za_alnoon_page_followed', nowFollowed ? 'true' : 'false');
+  updateFbFollowersUI();
+
+  if (nowFollowed) {
+    showToast('🎉 شكراً لمتابعتك صفحة الشاعر ذوالنون أحمد نايل! تم تحديث عداد المتابعين.');
+    // توجيه اختياري خفيف لصفحة فيسبوك الرسمية
+    setTimeout(() => {
+      window.open('https://www.facebook.com/dhwalnwn.ahmd.nayl/', '_blank');
+    }, 700);
+  } else {
+    showToast('تم إلغاء المتابعة');
+  }
+};
+
 function initFacebookLiveSync() {
+  // تحديث وعرض عداد المتابعين الحي
+  updateFbFollowersUI();
+
   const container = document.getElementById('dynamic-fb-cards');
   if (!container) return;
 
