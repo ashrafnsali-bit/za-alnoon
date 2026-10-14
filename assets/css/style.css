@@ -497,6 +497,7 @@ body {
   width: 100%;
   height: 520px;
   object-fit: cover;
+  object-position: center 30%;
   border-radius: calc(var(--radius-lg) - 6px);
   display: block;
 }
