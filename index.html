@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الشاعر ذو النون أحمد نايل | الموقع الرسمي والديوان الأدبي</title>
+  
+  <!-- SEO & Social Meta Tags -->
+  <meta name="description" content="الموقع الرسمي والديوان الرقمي للشاعر والإعلامي السوداني ذو النون أحمد نايل (الدرويش). استمع واقرأ أشهر قصائده: هسي قولا، حواس، شنو الريد، بالله كيف، وضاريتك.">
+  <meta name="keywords" content="ذو النون أحمد نايل, ذوالنون احمد نايل, شعر سوداني, الشاعر الدرويش, هسي قولا, شنو الريد, حواس, أدب سوداني">
+  <meta name="author" content="ذو النون أحمد نايل">
+  <meta property="og:title" content="الشاعر ذو النون أحمد نايل | ديوان الحواس وبوح الدراويش">
+  <meta property="og:description" content="البوابة الرسمية لقريض ونصوص الشاعر السوداني ذوالنون أحمد نايل مستلهمة من صفحته الأدبية">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/images/poet_portrait.jpg">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📜</text></svg>">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "ذو النون أحمد نايل",
+    "alternateName": ["الدرويش", "ذوالنون أحمد نايل"],
+    "jobTitle": "شاعر وإعلامي سوداني",
+    "sameAs": [
+      "https://www.facebook.com/dhwalnwn.ahmd.nayl/"
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Ambient Canvas Background -->
+  <canvas id="ambient-canvas"></canvas>
+  <div class="ambient-glow ambient-glow-1"></div>
+  <div class="ambient-glow ambient-glow-2"></div>
+
+  <!-- Main Navigation Header -->
+  <header class="main-header">
+    <div class="container nav-wrap">
+      <a href="#hero" class="logo-brand">
+        <div class="logo-icon">ذ</div>
+        <div class="logo-text">
+          <h1>ذو النون أحمد نايل</h1>
+          <span>ديوان الحواس وبوح الدرويش</span>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#hero" class="active">الرئيسية</a></li>
+          <li><a href="#poems">ديوان القصائد</a></li>
+          <li><a href="#about">عن الشاعر</a></li>
+          <li><a href="#facebook-feed">مقتطفات فيسبوك</a></li>
+          <li><a href="#guestbook">دفتر الخواطر</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button id="toggle-ambient-audio" class="btn-ambient-audio" title="تشغيل نغم هادئ يرافق القراءة">
+          <div class="sound-wave">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <span class="audio-text">استمع لنغم هادئ</span>
+        </button>
+
+        <button class="mobile-toggle" aria-label="فتح القائمة">
+          ☰
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero" class="hero-section" style="background-image: url('assets/images/poetic_night_bg.jpg');">
+    <div class="hero-overlay"></div>
+    <div class="container hero-grid">
+      
+      <!-- Content Side -->
+      <div class="hero-content">
+        <div class="badge-poetry">
+          <span>✨</span>
+          <span>شعر ووجدان سوداني أصيل</span>
+        </div>
+
+        <h2 class="hero-title">
+          حين يتنفّس الحرف شوقاً <br>
+          ويصدح <span class="highlight">بوح الدرويش</span>
+        </h2>
+
+        <p class="hero-subtitle">
+          مرحباً بكم في العالم الشعري والوجداني للشاعر والإعلامي السوداني <strong>ذو النون أحمد نايل</strong>؛
+          حيث تسافر الكلمات بين أصالة النيل، وأشواق الغربة، ورهافة الحواس.
+        </p>
+
+        <!-- Quote Box -->
+        <div class="hero-quote-box">
+          <p class="hero-quote-text">
+            « قدر ما دي العين تشوفك وتنسجن ما بين ذهولا.. ياخ احبك.. والبحسها ما بيحتاج من يقولا! »
+          </p>
+          <span class="hero-quote-author">— ذوالنون أحمد نايل (من قصيدة "هسي قُولا")</span>
+        </div>
+
+        <!-- Call to Actions -->
+        <div class="hero-cta-group">
+          <a href="#poems" class="btn-primary">
+            تصفح ديوان القصائد
+            <span>🡸</span>
+          </a>
+          <a href="https://www.facebook.com/dhwalnwn.ahmd.nayl/" target="_blank" rel="noopener noreferrer" class="btn-facebook">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            صفحته على فيسبوك
+          </a>
+          <a href="#about" class="btn-secondary">
+            سيرة الشاعر
+          </a>
+        </div>
+      </div>
+
+      <!-- Visual Side (Portrait) -->
+      <div class="hero-visual">
+        <div class="portrait-frame">
+          <img src="assets/images/poet_portrait.jpg" alt="الشاعر ذو النون أحمد نايل">
+          <div class="portrait-floating-tag">
+            <div class="floating-tag-icon">✒️</div>
+            <div class="floating-tag-text">
+              <h4>ذو النون أحمد نايل</h4>
+              <p>شاعر وإعلامي سوداني</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Daily Verse Banner (حكمة وبوح اليوم) -->
+  <section class="container" style="padding-top: 0; padding-bottom: 20px;">
+    <div class="daily-verse-banner">
+      <div class="verse-content-wrapper">
+        <div class="verse-text-group">
+          <div class="verse-header-tag">
+            <span>🌙</span>
+            <span>قبس من بوح الشاعر اليومي:</span>
+          </div>
+          <p id="daily-verse-quote">« جاري تحميل النص الشعري... »</p>
+          <span id="daily-verse-poem-name">—</span>
+        </div>
+        <div class="verse-actions">
+          <button id="copy-verse-btn" class="icon-btn" title="نسخ البيت">
+            📋 نسخ البيت
+          </button>
+          <button id="next-verse-btn" class="icon-btn" title="بيت آخر">
+            🔄 بيت آخر
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Poetry Showcase Section -->
+  <section id="poems">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-subtitle">الديوان الوجداني الرقمي</span>
+        <h2 class="section-title">روائع القصائد والنصوص</h2>
+        <p class="section-desc">
+          مختارات من أبرز أعمال الشاعر ذوالنون أحمد نايل التي لامست قلوب الآلاف؛ مقسمة ومتاحة للقراءة والمشاركة.
+        </p>
+      </div>
+
+      <!-- Filters & Search Controls -->
+      <div class="poetry-controls">
+        <div class="poetry-filter-tabs">
+          <button class="tab-btn active" data-filter="all">جميع القصائد</button>
+          <button class="tab-btn" data-filter="darwish">بوح ودراويش</button>
+          <button class="tab-btn" data-filter="shawq">دفاتر الشوق</button>
+          <button class="tab-btn" data-filter="ghina">أعمال غنائية</button>
+        </div>
+
+        <div class="poetry-search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="poem-search" placeholder="ابحث في نصوص وقصائد الشاعر..." aria-label="بحث في القصائد">
+        </div>
+      </div>
+
+      <!-- Poems Grid Container -->
+      <div id="poems-container" class="poems-grid">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Biography & Literary World Section -->
+  <section id="about" class="about-section">
+    <div class="container about-grid">
+      
+      <!-- Showcase Book Visual -->
+      <div class="book-showcase-card">
+        <div class="book-showcase-frame">
+          <img src="assets/images/poetry_book_cover.jpg" alt="ديوان ذو النون">
+        </div>
+      </div>
+
+      <!-- Biography Details -->
+      <div class="about-text-wrap">
+        <span class="section-subtitle">عن الشاعر والدرويش</span>
+        <h2 class="section-title" style="text-align: right; display: block;">صوت الوجدان ورسول المشاعر</h2>
+        
+        <p class="about-quote">
+          "الشعر ليس مجرد صياغة كلمات، بل هو ارتعاشة الحواس الصادقة حين تعانق روح الإنسان، وتنثر أسرار العشق والأمل على ضفاف النيل."
+        </p>
+
+        <p class="about-desc">
+          يُعد الشاعر والإعلامي <strong>ذو النون أحمد نايل</strong> (الملقب في الأوساط الثقافية بـ <em>الدرويش</em>) أحد أبرز الأصوات الشعرية السودانية المعاصرة التي تميزت بالنبرة الوجدانية الصادقة، والقدرة الفائقة على تحويل العامية السودانية الرقيقة إلى لغة شعرية ساحرة تفيض دفئاً وإنسانية.
+        </p>
+
+        <div class="poet-attributes">
+          <div class="attr-box">
+            <span class="attr-icon">📻</span>
+            <div class="attr-info">
+              <h5>مشاركات إعلامية</h5>
+              <p>حضور في "دفتر مشاعر" والمنصات الثقافية</p>
+            </div>
+          </div>
+          <div class="attr-box">
+            <span class="attr-icon">🎶</span>
+            <div class="attr-info">
+              <h5>أعمال غنائية</h5>
+              <p>تغنى بكلماته ملحنون وفنانون مبدعون</p>
+            </div>
+          </div>
+          <div class="attr-box">
+            <span class="attr-icon">📖</span>
+            <div class="attr-info">
+              <h5>الأسلوب الأدبي</h5>
+              <p>شعر العامية الوجداني والتصوف العاطفي</p>
+            </div>
+          </div>
+          <div class="attr-box">
+            <span class="attr-icon">🤍</span>
+            <div class="attr-info">
+              <h5>تفاعل جماهيري</h5>
+              <p>متابعة وتأثير واسع عبر منصات التواصل</p>
+            </div>
+          </div>
+        </div>
+
+        <a href="https://www.facebook.com/dhwalnwn.ahmd.nayl/" target="_blank" rel="noopener noreferrer" class="btn-primary">
+          متابعة جديد الشاعر على فيسبوك 🡸
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Facebook Social Hub Section -->
+  <section id="facebook-feed" class="facebook-hub-section">
+    <div class="container">
+      <div class="section-head">
+        <div class="live-pulse-badge">
+          <span class="pulse-dot"></span>
+          <span>ربط مباشر وتحديث تلقائي لحظي</span>
+        </div>
+        <h2 class="section-title">نافذة البث المباشر من فيسبوك</h2>
+        <p class="section-desc">
+          تظهر هنا منشورات الشاعر ذوالنون لحظة بلحظة عبر الربط التلقائي بصفحته الرسمية على فيسبوك.
+        </p>
+      </div>
+
+      <!-- Hero Profile Banner -->
+      <div class="fb-hero-card">
+        <div class="fb-profile-info">
+          <div class="fb-avatar">
+            <img src="assets/images/poet_portrait.jpg" alt="ذو النون أحمد نايل">
+          </div>
+          <div class="fb-details">
+            <h3>
+              ذوالنون أحمد نايل (Dhwalnwn Ahmd Nayl)
+              <span class="verified-badge">✓</span>
+            </h3>
+            <p>كاتب وشاعر وإعلامي سوداني • متصل ومربوط مباشرة بالصفحة</p>
+          </div>
+        </div>
+        
+        <div class="fb-header-actions">
+          <a href="https://www.facebook.com/dhwalnwn.ahmd.nayl/" target="_blank" rel="noopener noreferrer" class="btn-facebook">
+            زيارة الصفحة على فيسبوك
+            <span>↗</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Feed Mode Switcher -->
+      <div class="fb-view-switcher">
+        <div class="switcher-buttons">
+          <button id="btn-view-live" class="switch-btn active" onclick="switchFbView('live')">
+            <span class="icon">🔴</span>
+            البث المباشر التلقائي من فيسبوك (Meta Live)
+          </button>
+          <button id="btn-view-cards" class="switch-btn" onclick="switchFbView('cards')">
+            <span class="icon">👑</span>
+            البطاقات المنسقة بالثيم الملوكي الداكن
+          </button>
+        </div>
+
+        <div class="feed-status-info">
+          <span id="sync-status-text">🟢 البث المباشر متصل بمصدر فيسبوك الرسمي</span>
+        </div>
+      </div>
+
+      <!-- View 1: Meta Official Live Page Plugin Container -->
+      <div id="fb-live-view-container" class="fb-live-wrapper">
+        <div class="fb-live-frame-box">
+          <!-- Facebook Root SDK -->
+          <div id="fb-root"></div>
+          <script async defer crossorigin="anonymous" src="https://connect.facebook.net/ar_AR/sdk.js#xfbml=1&version=v19.0"></script>
+          
+          <!-- Official Meta Page Embed Widget -->
+          <div class="fb-page" 
+               data-href="https://www.facebook.com/dhwalnwn.ahmd.nayl/" 
+               data-tabs="timeline" 
+               data-width="500" 
+               data-height="700" 
+               data-small-header="false" 
+               data-adapt-container-width="true" 
+               data-hide-cover="false" 
+               data-show-facepile="true">
+            <blockquote cite="https://www.facebook.com/dhwalnwn.ahmd.nayl/" class="fb-xfbml-parse-ignore">
+              <a href="https://www.facebook.com/dhwalnwn.ahmd.nayl/">الصفحة الرسمية للشاعر ذوالنون أحمد نايل</a>
+            </blockquote>
+          </div>
+        </div>
+
+        <div class="fb-live-notice">
+          <div class="notice-card">
+            <h4>💡 كيف يعمل الربط المباشر؟</h4>
+            <p>
+              يتم استدعاء المنشورات مباشرة من خوادم <strong>Meta (Facebook)</strong> بشكل فوري وتلقائي؛ حيث تظهر أي قصيدة أو منشور ينشره الشاعر في هذه النافذة فور نشرها دون أي تدخل يدوي.
+            </p>
+            <div class="notice-meta">
+              <span>رابط التغذية: <code>https://www.facebook.com/dhwalnwn.ahmd.nayl/</code></span>
+            </div>
+            <a href="https://www.facebook.com/dhwalnwn.ahmd.nayl/" target="_blank" rel="noopener noreferrer" class="btn-secondary" style="margin-top: 1rem; width: 100%; justify-content: center;">
+              فتح صفحة الشاعر في نافذة مستقلة ↗
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- View 2: Dark Golden Styled Dynamic Cards Grid -->
+      <div id="fb-cards-view-container" class="fb-cards-wrapper" style="display: none;">
+        <div id="dynamic-fb-cards" class="fb-posts-grid">
+          <!-- Rendered via JS Live Sync System -->
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Guestbook Section (دفتر التوقيعات والخواطر) -->
+  <section id="guestbook">
+    <div class="container">
+      <div class="guestbook-wrap">
+        
+        <!-- Form Side -->
+        <div class="guestbook-form-side">
+          <span class="section-subtitle">شاركنا أثر الكلمات</span>
+          <h3>دفتر الخواطر والتوقيعات</h3>
+          <p>
+            اكتب رسالة أو خاطرة أو بيتاً أعجبك للشاعر ذوالنون، لتُسجَّل في دفتر الزوار وتخلّد إحساسك في هذا الفضاء.
+          </p>
+
+          <form id="guestbook-form" class="guestbook-form">
+            <div class="form-group">
+              <label for="guest-name-input">الاسم الكريم أو اللقب الأدبي</label>
+              <input type="text" id="guest-name-input" placeholder="مثال: محب للشعر الوجداني" required>
+            </div>
+            <div class="form-group">
+              <label for="guest-message-input">رسالتك أو خاطرتك</label>
+              <textarea id="guest-message-input" rows="4" placeholder="اكتب مشاعرك وانطباعك هنا..." required></textarea>
+            </div>
+            <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">
+              تدوين الخاطرة في الدفتر ✍️
+            </button>
+          </form>
+        </div>
+
+        <!-- Entries Side -->
+        <div class="guestbook-messages-side">
+          <div id="guestbook-entries" class="guestbook-list">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal Poem Reader -->
+  <div id="poem-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-container">
+      <header class="modal-header">
+        <div class="modal-title-wrap">
+          <h3 id="modal-poem-title">عنوان القصيدة</h3>
+          <span id="modal-poem-category">التصنيف</span>
+        </div>
+        
+        <div class="modal-actions">
+          <div class="font-size-control">
+            <button id="font-zoom-in" class="font-btn" title="تكبير الخط">أ+</button>
+            <button id="font-zoom-out" class="font-btn" title="تصغير الخط">أ-</button>
+          </div>
+          <button id="close-modal-btn" class="modal-close-btn" aria-label="إغلاق النافذة">×</button>
+        </div>
+      </header>
+
+      <div class="modal-body">
+        <div id="modal-poem-body" class="modal-poem-content">
+          <!-- Full poem text inserted here -->
+        </div>
+      </div>
+
+      <footer class="modal-footer">
+        <button id="modal-copy-btn" class="icon-btn">
+          📋 نسخ النص كاملاً
+        </button>
+        <button id="modal-share-btn" class="icon-btn">
+          🔗 مشاركة القصيدة
+        </button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-grid">
+        
+        <div class="footer-brand">
+          <h2>الشاعر ذو النون أحمد نايل</h2>
+          <p>
+            مساحة أدبية وجدانية تحتفي بالحرف السوداني الأصيل، وتحفظ أعمال وقصائد الشاعر مستلهمة من نتاجه الفكري والإعلامي وصفحته الرسمية على فيسبوك.
+          </p>
+          <div class="footer-social-links">
+            <a href="https://www.facebook.com/dhwalnwn.ahmd.nayl/" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="صفحة فيسبوك">
+              <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>أقسام الموقع</h4>
+          <ul>
+            <li><a href="#hero">الرئيسية</a></li>
+            <li><a href="#poems">ديوان القصائد</a></li>
+            <li><a href="#about">سيرة الشاعر</a></li>
+            <li><a href="#facebook-feed">مقتطفات فيسبوك</a></li>
+            <li><a href="#guestbook">دفتر الخواطر</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>أشهر الأعمال</h4>
+          <ul>
+            <li><a href="#poems">هسي قُولا (شعر وجداني)</a></li>
+            <li><a href="#poems">شنو الريد؟! (عمل غنائي)</a></li>
+            <li><a href="#poems">حواس (شعر فكري)</a></li>
+            <li><a href="#poems">بالله كيف (دفاتر الشوق)</a></li>
+            <li><a href="#poems">بوح دراويش الزمان</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p>جميع الحقوق الأدبية والفكرية محفوظة للشاعر ذو النون أحمد نايل © <span id="year-span">2026</span></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="assets/js/main.js"></script>
+  <script>
+    document.getElementById('year-span').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

@@ -1,0 +1,1666 @@
+/* ==========================================================================
+   الشاعر ذو النون أحمد نايل - التصميم الملكي الداكن (Dark Royal Obsidian & Gold)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Cairo:wght@300;400;600;700;900&family=Reem+Kufi:wght@500;700&display=swap');
+
+:root {
+  /* Color Palette */
+  --bg-main: #080a0f;
+  --bg-card: rgba(18, 22, 33, 0.72);
+  --bg-card-hover: rgba(26, 32, 48, 0.85);
+  --bg-elevated: #111520;
+  --bg-glass: rgba(15, 19, 28, 0.65);
+  
+  --gold-primary: #d4af37;
+  --gold-glow: #f5cf68;
+  --gold-dark: #997d25;
+  --gold-subtle: rgba(212, 175, 55, 0.15);
+  --gold-border: rgba(212, 175, 55, 0.28);
+  
+  --amber-warm: #e69138;
+  --sand-accent: #e5d3b3;
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --text-dim: #6b7280;
+  
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --shadow-gold: 0 8px 32px -4px rgba(212, 175, 55, 0.18);
+  --shadow-ambient: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+
+  /* Typography */
+  --font-poetry: 'Amiri', serif;
+  --font-ui: 'Cairo', sans-serif;
+  --font-calligraphy: 'Reem Kufi', sans-serif;
+
+  /* Layout */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-full: 9999px;
+  --transition-smooth: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Reset & Base Setup */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  direction: rtl;
+}
+
+body {
+  font-family: var(--font-ui);
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  line-height: 1.8;
+  overflow-x: hidden;
+  position: relative;
+  selection-background-color: var(--gold-primary);
+  selection-color: #000;
+}
+
+::selection {
+  background: var(--gold-primary);
+  color: #050608;
+}
+
+/* Background Ambient Lighting & Particles */
+#ambient-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.75;
+}
+
+.ambient-glow {
+  position: fixed;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  filter: blur(140px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.15;
+}
+
+.ambient-glow-1 {
+  top: -100px;
+  right: -100px;
+  background: radial-gradient(circle, var(--gold-primary), transparent 70%);
+}
+
+.ambient-glow-2 {
+  bottom: 10%;
+  left: -150px;
+  background: radial-gradient(circle, #3b82f6, transparent 70%);
+  opacity: 0.1;
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* Header & Navigation */
+.main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  background: rgba(8, 10, 15, 0.75);
+  border-bottom: 1px solid var(--border-subtle);
+  transition: var(--transition-smooth);
+}
+
+.main-header.scrolled {
+  background: rgba(8, 10, 15, 0.92);
+  border-bottom-color: var(--gold-border);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.nav-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+}
+
+.logo-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-main);
+}
+
+.logo-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold-glow), var(--gold-dark));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-poetry);
+  font-size: 1.45rem;
+  font-weight: bold;
+  color: #0b0d12;
+  box-shadow: var(--shadow-gold);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.logo-text h1 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.2;
+  background: linear-gradient(120deg, #fff, var(--gold-glow));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.logo-text span {
+  font-size: 0.75rem;
+  color: var(--gold-primary);
+  letter-spacing: 0.5px;
+  font-family: var(--font-poetry);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 2rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: var(--transition-smooth);
+  position: relative;
+  padding: 6px 0;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(to left, var(--gold-primary), var(--gold-glow));
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: #fff;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  width: 100%;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.btn-ambient-audio {
+  background: rgba(212, 175, 55, 0.12);
+  border: 1px solid var(--gold-border);
+  color: var(--gold-primary);
+  border-radius: var(--radius-full);
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  font-family: var(--font-ui);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--transition-smooth);
+}
+
+.btn-ambient-audio:hover {
+  background: rgba(212, 175, 55, 0.25);
+  box-shadow: var(--shadow-gold);
+  transform: translateY(-2px);
+}
+
+.btn-ambient-audio.playing {
+  background: linear-gradient(135deg, var(--gold-primary), var(--amber-warm));
+  color: #0b0d12;
+  font-weight: bold;
+}
+
+.btn-ambient-audio .sound-wave {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 14px;
+}
+
+.sound-wave span {
+  width: 2.5px;
+  height: 6px;
+  background: currentColor;
+  border-radius: 1px;
+}
+
+.btn-ambient-audio.playing .sound-wave span:nth-child(1) {
+  animation: pulseHeight 0.6s infinite alternate;
+}
+.btn-ambient-audio.playing .sound-wave span:nth-child(2) {
+  animation: pulseHeight 0.9s infinite alternate 0.2s;
+}
+.btn-ambient-audio.playing .sound-wave span:nth-child(3) {
+  animation: pulseHeight 0.7s infinite alternate 0.4s;
+}
+
+@keyframes pulseHeight {
+  from { height: 4px; }
+  to { height: 14px; }
+}
+
+.mobile-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  color: var(--text-main);
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   Hero Section
+   ========================================================================== */
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 100px;
+  padding-bottom: 60px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(8, 10, 15, 0.75) 0%,
+    rgba(8, 10, 15, 0.88) 60%,
+    rgba(8, 10, 15, 1) 100%
+  );
+  z-index: 1;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 3.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-content {
+  text-align: right;
+}
+
+.badge-poetry {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(212, 175, 55, 0.12);
+  border: 1px solid var(--gold-border);
+  color: var(--gold-glow);
+  padding: 6px 18px;
+  border-radius: var(--radius-full);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  backdrop-filter: blur(10px);
+}
+
+.hero-title {
+  font-family: var(--font-poetry);
+  font-size: clamp(2.4rem, 4.5vw, 4rem);
+  font-weight: 700;
+  line-height: 1.25;
+  color: #ffffff;
+  margin-bottom: 1.25rem;
+}
+
+.hero-title .highlight {
+  background: linear-gradient(135deg, #f9f295 0%, #e0aa3e 40%, #e78024 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.hero-subtitle {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  max-width: 600px;
+  margin-bottom: 2rem;
+  line-height: 1.85;
+}
+
+.hero-quote-box {
+  background: var(--bg-glass);
+  border-right: 3px solid var(--gold-primary);
+  border-left: 1px solid var(--border-subtle);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 1.25rem 1.75rem;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  margin-bottom: 2.5rem;
+  backdrop-filter: blur(12px);
+  position: relative;
+}
+
+.hero-quote-text {
+  font-family: var(--font-poetry);
+  font-size: 1.35rem;
+  font-style: italic;
+  color: var(--sand-accent);
+  line-height: 1.7;
+}
+
+.hero-quote-author {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--gold-primary);
+  margin-top: 8px;
+}
+
+.hero-cta-group {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--gold-glow) 0%, var(--gold-primary) 70%, var(--gold-dark) 100%);
+  color: #080a0f;
+  font-weight: 700;
+  padding: 12px 28px;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: var(--transition-smooth);
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(212, 175, 55, 0.55);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-main);
+  font-weight: 600;
+  padding: 12px 26px;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: var(--transition-smooth);
+  backdrop-filter: blur(8px);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--gold-primary);
+  color: var(--gold-glow);
+  transform: translateY(-3px);
+}
+
+.btn-facebook {
+  background: rgba(24, 119, 242, 0.15);
+  border: 1px solid rgba(24, 119, 242, 0.35);
+  color: #60a5fa;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--transition-smooth);
+}
+
+.btn-facebook:hover {
+  background: #1877f2;
+  color: #ffffff;
+  box-shadow: 0 4px 20px rgba(24, 119, 242, 0.4);
+  transform: translateY(-3px);
+}
+
+/* Hero Portrait Card */
+.hero-visual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.portrait-frame {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  border-radius: var(--radius-lg);
+  padding: 10px;
+  background: linear-gradient(145deg, rgba(212, 175, 55, 0.4), rgba(255, 255, 255, 0.05) 50%, rgba(212, 175, 55, 0.2));
+  box-shadow: var(--shadow-ambient), 0 0 60px rgba(212, 175, 55, 0.12);
+  transition: transform 0.5s ease;
+}
+
+.portrait-frame:hover {
+  transform: translateY(-6px) scale(1.01);
+}
+
+.portrait-frame img {
+  width: 100%;
+  height: 520px;
+  object-fit: cover;
+  border-radius: calc(var(--radius-lg) - 6px);
+  display: block;
+}
+
+.portrait-floating-tag {
+  position: absolute;
+  bottom: -15px;
+  left: 25px;
+  background: rgba(15, 18, 28, 0.92);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--gold-border);
+  padding: 12px 20px;
+  border-radius: var(--radius-md);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.floating-tag-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--gold-subtle);
+  color: var(--gold-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.floating-tag-text h4 {
+  font-size: 0.95rem;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.floating-tag-text p {
+  font-size: 0.75rem;
+  color: var(--gold-primary);
+}
+
+/* ==========================================================================
+   Section Common Styles
+   ========================================================================== */
+section {
+  padding: 90px 0;
+  position: relative;
+  z-index: 2;
+}
+
+.section-head {
+  text-align: center;
+  margin-bottom: 4rem;
+  position: relative;
+}
+
+.section-subtitle {
+  color: var(--gold-primary);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.section-title {
+  font-family: var(--font-poetry);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 700;
+  color: #ffffff;
+  position: relative;
+  display: inline-block;
+}
+
+.section-title::after {
+  content: '❦';
+  display: block;
+  font-size: 1.2rem;
+  color: var(--gold-primary);
+  margin-top: 8px;
+  opacity: 0.8;
+}
+
+.section-desc {
+  color: var(--text-muted);
+  max-width: 680px;
+  margin: 0.75rem auto 0;
+  font-size: 1.05rem;
+}
+
+/* ==========================================================================
+   Verse of the Day (حكمة وبوح اليوم)
+   ========================================================================== */
+.daily-verse-banner {
+  background: linear-gradient(135deg, rgba(24, 29, 44, 0.9), rgba(13, 16, 24, 0.95));
+  border: 1px solid var(--gold-border);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem 3rem;
+  margin-bottom: 5rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+}
+
+.daily-verse-banner::before {
+  content: '"';
+  position: absolute;
+  top: -20px;
+  right: 25px;
+  font-size: 140px;
+  font-family: var(--font-poetry);
+  color: rgba(212, 175, 55, 0.05);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.verse-content-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.verse-text-group {
+  flex: 1;
+  min-width: 280px;
+}
+
+.verse-header-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--gold-glow);
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+#daily-verse-quote {
+  font-family: var(--font-poetry);
+  font-size: 1.6rem;
+  line-height: 1.8;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+#daily-verse-poem-name {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  font-style: italic;
+}
+
+.verse-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.icon-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-main);
+  padding: 10px 18px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  font-family: var(--font-ui);
+  transition: var(--transition-smooth);
+}
+
+.icon-btn:hover {
+  background: var(--gold-subtle);
+  border-color: var(--gold-primary);
+  color: var(--gold-glow);
+}
+
+/* ==========================================================================
+   Poetry Showcase (ديوان النصوص والقصائد)
+   ========================================================================== */
+.poetry-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  background: var(--bg-card);
+  padding: 1rem 1.5rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+}
+
+.poetry-filter-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-muted);
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-ui);
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.tab-btn:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.tab-btn.active {
+  background: var(--gold-subtle);
+  border-color: var(--gold-border);
+  color: var(--gold-glow);
+}
+
+.poetry-search-box {
+  position: relative;
+  min-width: 260px;
+}
+
+.poetry-search-box input {
+  width: 100%;
+  background: rgba(8, 10, 15, 0.8);
+  border: 1px solid var(--border-subtle);
+  padding: 10px 42px 10px 16px;
+  border-radius: var(--radius-full);
+  color: #fff;
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  outline: none;
+  transition: var(--transition-smooth);
+}
+
+.poetry-search-box input:focus {
+  border-color: var(--gold-primary);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.25);
+}
+
+.poetry-search-box .search-icon {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-dim);
+  pointer-events: none;
+}
+
+/* Grid of Poems */
+.poems-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 2rem;
+}
+
+.poem-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 2.2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+}
+
+.poem-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(to left, var(--gold-primary), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.poem-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--gold-border);
+  background: var(--bg-card-hover);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.6), 0 0 30px rgba(212, 175, 55, 0.1);
+}
+
+.poem-card:hover::before {
+  opacity: 1;
+}
+
+.poem-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.poem-card-tag {
+  font-size: 0.78rem;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--gold-primary);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.poem-card-meta {
+  color: var(--text-dim);
+  font-size: 0.8rem;
+}
+
+.poem-card-title {
+  font-family: var(--font-poetry);
+  font-size: 1.65rem;
+  color: #ffffff;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.poem-card-excerpt {
+  font-family: var(--font-poetry);
+  font-size: 1.18rem;
+  color: var(--sand-accent);
+  line-height: 1.95;
+  margin-bottom: 1.8rem;
+  white-space: pre-line;
+  position: relative;
+}
+
+.poem-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 1.2rem;
+  margin-top: auto;
+}
+
+.btn-read-poem {
+  background: transparent;
+  border: none;
+  color: var(--gold-glow);
+  font-weight: 700;
+  font-size: 0.95rem;
+  font-family: var(--font-ui);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.btn-read-poem:hover {
+  color: #fff;
+  transform: translateX(-4px);
+}
+
+.btn-copy-card {
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: var(--transition-smooth);
+  padding: 4px;
+}
+
+.btn-copy-card:hover {
+  color: var(--gold-primary);
+}
+
+/* ==========================================================================
+   Modal Poem Reader
+   ========================================================================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 6, 10, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  padding: 1.5rem;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-container {
+  background: var(--bg-elevated);
+  border: 1px solid var(--gold-border);
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 760px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), var(--shadow-gold);
+  transform: scale(0.92);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-overlay.active .modal-container {
+  transform: scale(1);
+}
+
+.modal-header {
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(15, 19, 28, 0.8);
+}
+
+.modal-title-wrap h3 {
+  font-family: var(--font-poetry);
+  font-size: 1.75rem;
+  color: #fff;
+}
+
+.modal-title-wrap span {
+  font-size: 0.85rem;
+  color: var(--gold-primary);
+}
+
+.modal-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.font-size-control {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 4px 8px;
+  border-radius: var(--radius-full);
+}
+
+.font-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 2px 8px;
+  font-weight: bold;
+}
+
+.font-btn:hover {
+  color: var(--gold-primary);
+}
+
+.modal-close-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: none;
+  color: var(--text-main);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  font-size: 1.3rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-smooth);
+}
+
+.modal-close-btn:hover {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+
+.modal-body {
+  padding: 2.5rem 2.5rem;
+  overflow-y: auto;
+  text-align: center;
+}
+
+.modal-poem-content {
+  font-family: var(--font-poetry);
+  font-size: 1.45rem;
+  line-height: 2.3;
+  color: var(--sand-accent);
+  white-space: pre-line;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.modal-footer {
+  padding: 1.25rem 2rem;
+  border-top: 1px solid var(--border-subtle);
+  background: rgba(15, 19, 28, 0.8);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ==========================================================================
+   Biography & Journey (عن الشاعر والدرويش)
+   ========================================================================== */
+.about-section {
+  background: linear-gradient(180deg, var(--bg-main) 0%, #0d1017 50%, var(--bg-main) 100%);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.book-showcase-card {
+  position: relative;
+  text-align: center;
+}
+
+.book-showcase-frame {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 50px rgba(212, 175, 55, 0.15);
+  border: 1px solid var(--gold-border);
+  position: relative;
+}
+
+.book-showcase-frame img {
+  width: 100%;
+  max-height: 480px;
+  object-fit: cover;
+  display: block;
+}
+
+.about-text-wrap {
+  text-align: right;
+}
+
+.about-quote {
+  font-family: var(--font-poetry);
+  font-size: 1.35rem;
+  color: var(--gold-glow);
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  border-right: 3px solid var(--gold-primary);
+  padding-right: 1.25rem;
+}
+
+.about-desc {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.9;
+  margin-bottom: 2rem;
+}
+
+.poet-attributes {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+
+.attr-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.attr-icon {
+  font-size: 1.6rem;
+  color: var(--gold-primary);
+}
+
+.attr-info h5 {
+  font-size: 0.95rem;
+  color: #fff;
+  font-weight: 700;
+}
+
+.attr-info p {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+}
+
+/* ==========================================================================
+   Facebook Social & Community Hub (المقتطفات من فيسبوك والبث المباشر)
+   ========================================================================== */
+.facebook-hub-section {
+  position: relative;
+}
+
+.live-pulse-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #fca5a5;
+  padding: 6px 18px;
+  border-radius: var(--radius-full);
+  font-size: 0.88rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.pulse-dot {
+  width: 10px;
+  height: 10px;
+  background-color: #ef4444;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 10px #ef4444;
+  animation: pulseLive 1.5s infinite;
+}
+
+@keyframes pulseLive {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+  70% { transform: scale(1.2); box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+/* Mode Switcher */
+.fb-view-switcher {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 10px 16px;
+  margin-bottom: 2.5rem;
+}
+
+.switcher-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.switch-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  padding: 9px 20px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-ui);
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--transition-smooth);
+}
+
+.switch-btn:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.switch-btn.active {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.25), rgba(24, 119, 242, 0.25));
+  border-color: var(--gold-primary);
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+}
+
+.feed-status-info {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* View 1: Meta Live Embed */
+.fb-live-wrapper {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 2.5rem;
+  align-items: flex-start;
+  margin-bottom: 3rem;
+}
+
+.fb-live-frame-box {
+  background: rgba(15, 18, 28, 0.9);
+  border: 1px solid var(--gold-border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7), 0 0 30px rgba(24, 119, 242, 0.1);
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  min-height: 600px;
+}
+
+.fb-live-notice .notice-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 2.2rem;
+  backdrop-filter: blur(12px);
+}
+
+.notice-card h4 {
+  font-size: 1.25rem;
+  color: var(--gold-glow);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.notice-card p {
+  color: var(--text-muted);
+  font-size: 0.98rem;
+  line-height: 1.9;
+  margin-bottom: 1.5rem;
+}
+
+.notice-meta {
+  background: rgba(8, 10, 15, 0.8);
+  border: 1px solid var(--border-subtle);
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  color: var(--sand-accent);
+  word-break: break-all;
+}
+
+.notice-meta code {
+  color: #60a5fa;
+}
+
+.fb-hero-card {
+  background: linear-gradient(135deg, rgba(24, 30, 48, 0.95), rgba(12, 15, 24, 0.98));
+  border: 1px solid rgba(24, 119, 242, 0.3);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem 3rem;
+  margin-bottom: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+}
+
+.fb-profile-info {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.fb-avatar {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  border: 2px solid #1877f2;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(24, 119, 242, 0.4);
+}
+
+.fb-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fb-details h3 {
+  font-size: 1.35rem;
+  color: #fff;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.verified-badge {
+  color: #1877f2;
+  font-size: 1.1rem;
+}
+
+.fb-details p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.fb-posts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 2rem;
+}
+
+.fb-post-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition-smooth);
+}
+
+.fb-post-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(24, 119, 242, 0.4);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+}
+
+.fb-card-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 1.25rem;
+}
+
+.fb-mini-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.fb-mini-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fb-poster-meta h4 {
+  font-size: 0.95rem;
+  color: #fff;
+}
+
+.fb-poster-meta span {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+}
+
+.fb-post-content {
+  font-family: var(--font-poetry);
+  font-size: 1.15rem;
+  color: var(--sand-accent);
+  line-height: 1.85;
+  margin-bottom: 1.5rem;
+  white-space: pre-line;
+}
+
+.fb-post-metrics {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 1rem;
+  margin-top: auto;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+}
+
+.fb-metrics-icons {
+  display: flex;
+  gap: 14px;
+}
+
+/* ==========================================================================
+   Guestbook / دفتر التوقيعات والخواطر
+   ========================================================================== */
+.guestbook-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 3rem;
+  background: var(--bg-card);
+  border: 1px solid var(--gold-border);
+  border-radius: var(--radius-lg);
+  padding: 3rem;
+  backdrop-filter: blur(14px);
+}
+
+.guestbook-form-side h3 {
+  font-family: var(--font-poetry);
+  font-size: 1.7rem;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.guestbook-form-side p {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  margin-bottom: 1.75rem;
+}
+
+.guestbook-form .form-group {
+  margin-bottom: 1.2rem;
+}
+
+.guestbook-form label {
+  display: block;
+  font-size: 0.88rem;
+  color: var(--sand-accent);
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.guestbook-form input,
+.guestbook-form textarea {
+  width: 100%;
+  background: rgba(8, 10, 15, 0.85);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  color: #fff;
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  outline: none;
+  transition: var(--transition-smooth);
+}
+
+.guestbook-form input:focus,
+.guestbook-form textarea:focus {
+  border-color: var(--gold-primary);
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.25);
+}
+
+.guestbook-messages-side {
+  max-height: 480px;
+  overflow-y: auto;
+  padding-left: 10px;
+}
+
+.guestbook-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.guest-card {
+  background: rgba(12, 15, 23, 0.8);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.2rem;
+  animation: fadeIn 0.4s ease;
+}
+
+.guest-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.guest-name {
+  font-weight: 700;
+  color: var(--gold-glow);
+  font-size: 0.95rem;
+}
+
+.guest-time {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+
+.guest-message {
+  font-family: var(--font-poetry);
+  font-size: 1.05rem;
+  color: var(--sand-accent);
+  line-height: 1.6;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.main-footer {
+  background: #050609;
+  border-top: 1px solid var(--border-subtle);
+  padding: 4rem 0 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+.footer-brand h2 {
+  font-family: var(--font-poetry);
+  font-size: 1.8rem;
+  color: var(--gold-glow);
+  margin-bottom: 0.75rem;
+}
+
+.footer-brand p {
+  color: var(--text-muted);
+  max-width: 400px;
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+.footer-col h4 {
+  font-size: 1.1rem;
+  color: #fff;
+  margin-bottom: 1.25rem;
+  position: relative;
+  display: inline-block;
+}
+
+.footer-col h4::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  right: 0;
+  width: 28px;
+  height: 2px;
+  background: var(--gold-primary);
+}
+
+.footer-col ul {
+  list-style: none;
+}
+
+.footer-col ul li {
+  margin-bottom: 0.75rem;
+}
+
+.footer-col ul a {
+  text-decoration: none;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  transition: var(--transition-smooth);
+}
+
+.footer-col ul a:hover {
+  color: var(--gold-glow);
+  padding-right: 6px;
+}
+
+.footer-social-links {
+  display: flex;
+  gap: 12px;
+  margin-top: 1.5rem;
+}
+
+.social-icon-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+
+.social-icon-btn:hover {
+  background: var(--gold-subtle);
+  border-color: var(--gold-primary);
+  color: var(--gold-glow);
+  transform: translateY(-3px);
+}
+
+.footer-bottom {
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 2rem;
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 0.88rem;
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .hero-content {
+    text-align: center;
+  }
+  .hero-quote-box {
+    border-right: none;
+    border-top: 3px solid var(--gold-primary);
+    border-radius: var(--radius-md);
+  }
+  .hero-cta-group {
+    justify-content: center;
+  }
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+  .guestbook-wrap {
+    grid-template-columns: 1fr;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 80px;
+    left: 0;
+    right: 0;
+    background: rgba(8, 10, 15, 0.98);
+    flex-direction: column;
+    padding: 2rem;
+    border-bottom: 1px solid var(--gold-border);
+  }
+  .nav-links.open {
+    display: flex;
+  }
+  .mobile-toggle {
+    display: block;
+  }
+  .poems-grid {
+    grid-template-columns: 1fr;
+  }
+  .portrait-frame img {
+    height: 400px;
+  }
+  .fb-hero-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  .fb-profile-info {
+    flex-direction: column;
+  }
+}
