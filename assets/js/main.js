@@ -15,7 +15,7 @@ const POEMS_DATA = [
     fbPublishDate: "١٥ أغسطس ٢٠٢٦",
     fbPublishTime: "٠٨:٤٠ م",
     baseLikes: 2450,
-    fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/",
+    fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/1750358119379369/",
     excerpt: `قدر ما طيبتك تحاول ترضي اوقاتي وفضولا ياخ احبك ..\nقدر ما دي العين تشوفك وتنسجن ما بين ذهولا ياخ احبك ..\nوقدر ما إتنفستا ريحتك ودقت الاشواق طِبولا ياخ احبك ..`,
     fullText: `قدر ما طيبتك تحاول ترضي اوقاتي وفضولا
 ياخ احبك ..
@@ -85,7 +85,7 @@ const POEMS_DATA = [
     fbPublishDate: "٢٥ سبتمبر ٢٠٢٦",
     fbPublishTime: "١١:٢٠ م",
     baseLikes: 1340,
-    fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/",
+    fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/1617538373418049/",
     excerpt: `بالله كيف وسط المنام .. العين يِصحي اشواقا طيف\nوزمن مخيف يدفر سحاب فوق طين هواك يجلب خريف\nبالله كيف ؟`,
     fullText: `بالله كيف وسط المنام .. العين يِصحي اشواقا طيف
 وزمن مخيف يدفر سحاب فوق طين هواك يجلب خريف
@@ -183,7 +183,7 @@ const POEMS_DATA = [
     fbPublishDate: "٢٨ يوليو ٢٠٢٦",
     fbPublishTime: "٠٧:١٥ م",
     baseLikes: 1640,
-    fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/",
+    fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/1539458277866715/",
     excerpt: `شنو الريد ؟\nالبجيب لي سيدو بدل افراحو هم وجروح\nشنو الريد ؟\nالبزيد في غيااابو لا ميعاااد ولا طيف الرجوع بيلوح..\nألحان: أبوبكر الأنصاري | أداء: مؤمن أبو العزائم`,
     fullText: `شنو الريد ؟
 البجيب لي سيدو 
@@ -217,7 +217,7 @@ const POEMS_DATA = [
     fbPublishDate: "٥ يونيو ٢٠٢٦",
     fbPublishTime: "١٠:٠٠ م",
     baseLikes: 1420,
-    fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/",
+    fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/2926968804333646/",
     excerpt: `ضاريتك من عين الهوى ومن قسوة الليل الطويل\nشايلك مودة وريد ندي مسكون بي أنفاس النخيل\nوكَفّي الممدود في العتمة راجي صفاك بديل..`,
     fullText: `ضاريتك من عين الهوى ومن قسوة الليل الطويل
 شايلك مودة وريد ندي مسكون بي أنفاس النخيل
@@ -236,7 +236,7 @@ const POEMS_DATA = [
     fbPublishDate: "٢ مايو ٢٠٢٦",
     fbPublishTime: "١١:٠٠ م",
     baseLikes: 1280,
-    fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/",
+    fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/1068284412492430/",
     excerpt: `ضاريني بي طرحت زفافك من اساي\nغطيني من قسوة زماني ومن شقاي\nوتعالي جاي ..\nندخل ضريح آخر دراويش الزمان تعالي جاي`,
     fullText: `ضاريني بي طرحت زفافك من اساي
 غطيني من قسوة زماني ومن شقاي
@@ -256,7 +256,7 @@ const POEMS_DATA = [
     fbPublishDate: "١٤ أبريل ٢٠٢٦",
     fbPublishTime: "٠٥:٤٥ م",
     baseLikes: 930,
-    fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/",
+    fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/1028918633305035/",
     excerpt: `يا بكره يا واعد بشارة خير تفوت في كل درب\nتغسل عيون الخوف وترسم فرحة جوّة القلب..\nألحان: منتصر دونتاي`,
     fullText: `يا بكره يا واعد بشارة خير تفوت في كل درب
 تغسل عيون الخوف وترسم فرحة جوّة القلب
@@ -624,6 +624,42 @@ function initFacebookLikesListener() {
 let currentCategory = 'all';
 let currentSearch = '';
 
+// دالة التوجيه المباشر لرابط المنشور بصفحة فيسبوك
+window.openFbPostLink = function(url, event) {
+  if (event) {
+    if (typeof event.stopPropagation === 'function') {
+      event.stopPropagation();
+    }
+  }
+  const targetUrl = (url && typeof url === 'string' && url.trim().startsWith('http')) 
+    ? url.trim() 
+    : 'https://www.facebook.com/dhwalnwn.ahmd.nayl/';
+    
+  showToast('جاري نقلك مباشرة إلى منشور القصيدة بصفحة فيسبوك للتفاعل.. ↗');
+
+  try {
+    const newWindow = window.open(targetUrl, '_blank', 'noopener,noreferrer');
+    if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+      window.location.assign(targetUrl);
+    }
+  } catch (err) {
+    window.location.assign(targetUrl);
+  }
+};
+
+window.openModalFbPostLink = function(event) {
+  if (event) {
+    if (typeof event.stopPropagation === 'function') {
+      event.stopPropagation();
+    }
+  }
+  if (activePoem && activePoem.fbUrl) {
+    openFbPostLink(activePoem.fbUrl, event);
+  } else {
+    openFbPostLink('https://www.facebook.com/dhwalnwn.ahmd.nayl/', event);
+  }
+};
+
 function renderPoems(filteredPoems) {
   const grid = document.getElementById('poems-container');
   if (!grid) return;
@@ -662,7 +698,7 @@ function renderPoems(filteredPoems) {
           <span class="like-label" id="poem-like-label-${poem.id}">${isLiked ? 'أعجبني ❤️' : 'إعجاب'}</span>
         </button>
 
-        <a href="${poem.fbUrl}" target="_blank" rel="noopener noreferrer" class="btn-fb-like-action" title="تفاعل مع المنشور على فيسبوك">
+        <a href="${poem.fbUrl}" target="_blank" rel="noopener noreferrer" class="btn-fb-like-action" onclick="openFbPostLink('${poem.fbUrl}', event)" title="الانتقال المباشر لمنشور القصيدة والتفاعل على فيسبوك">
           <svg width="14" height="14" fill="#1877f2" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
           <span>تفاعل بفيسبوك 👍</span>
         </a>
@@ -740,6 +776,11 @@ window.openPoemModal = function(id) {
   const fbLinkEl = document.getElementById('modal-poem-fb-link');
   if (fbLinkEl) {
     fbLinkEl.href = poem.fbUrl || "https://www.facebook.com/dhwalnwn.ahmd.nayl/";
+  }
+
+  const fbDirectBtn = document.getElementById('modal-fb-direct-action-btn');
+  if (fbDirectBtn) {
+    fbDirectBtn.href = poem.fbUrl || "https://www.facebook.com/dhwalnwn.ahmd.nayl/";
   }
 
   // Update modal like button
@@ -1088,7 +1129,6 @@ function initGuestbook() {
       showToast('شكراً لمشاركتك العطرة! تم حفظ خاطرتك بالتاريخ والوقت في الدفتر.');
     });
   }
-  }
 }
 
 /* ==========================================================================
@@ -1209,7 +1249,7 @@ const DEFAULT_FB_POSTS = [
 اذا صوت الكلام مبحوح!`,
     likes: "١,٥٢٠",
     comments: "٢١٥",
-    url: "https://www.facebook.com/dhwalnwn.ahmd.nayl/",
+    url: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/1539458277866715/",
     sampleComment: {
       author: "عمر الطيب",
       date: "٢٨ يوليو ٢٠٢٦",
@@ -1231,7 +1271,7 @@ const DEFAULT_FB_POSTS = [
 هسي قُولا! ❤️`,
     likes: "٢,٤٥٠",
     comments: "٣٤٠",
-    url: "https://www.facebook.com/dhwalnwn.ahmd.nayl/",
+    url: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/1750358119379369/",
     sampleComment: {
       author: "سارة ميرغني",
       date: "١٥ أغسطس ٢٠٢٦",
@@ -1425,8 +1465,9 @@ function renderFbCards(posts) {
           <span>❤️ 👍 ${post.likes} تفاعل</span>
           <span>💬 ${post.comments} تعليق</span>
         </div>
-        <a href="${post.url}" target="_blank" rel="noopener noreferrer" style="color: #60a5fa; text-decoration: none; font-size: 0.85rem; font-weight: bold;">
-          فتح المنشور في فيسبوك ↗
+        <a href="${post.url}" target="_blank" rel="noopener noreferrer" class="btn-fb-like-action" onclick="openFbPostLink('${post.url}', event)" title="الانتقال المباشر لمنشور فيسبوك والتفاعل">
+          <svg width="13" height="13" fill="#1877f2" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          <span>تفاعل بفيسبوك على المنشور 👍 ↗</span>
         </a>
       </div>
     </article>
@@ -1590,8 +1631,9 @@ function renderVideos(list) {
           <button class="btn-watch-now" onclick="openVideoPlayer('${v.id}')">
             تشغيل المقطع المرئي ▶
           </button>
-          <a href="${v.fbUrl}" target="_blank" rel="noopener noreferrer" style="color: #60a5fa; text-decoration: none; font-size: 0.85rem; font-weight: 600;">
-            منشور فيسبوك ↗
+          <a href="${v.fbUrl}" target="_blank" rel="noopener noreferrer" class="btn-fb-like-action" onclick="openFbPostLink('${v.fbUrl}', event)" title="الانتقال للمنشور والتفاعل على فيسبوك">
+            <svg width="13" height="13" fill="#1877f2" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            <span>تفاعل بفيسبوك 👍 ↗</span>
           </a>
         </div>
       </div>
@@ -1611,7 +1653,13 @@ window.openVideoPlayer = function(id) {
     <p style="font-size: 0.95rem; color: var(--text-muted); font-family: var(--font-ui);">${vid.desc}</p>
   `;
 
-  document.getElementById('video-modal-fb-link').href = vid.fbUrl;
+  const vFbLink = document.getElementById('video-modal-fb-link');
+  if (vFbLink) {
+    vFbLink.href = vid.fbUrl;
+    vFbLink.onclick = function(e) {
+      openFbPostLink(vid.fbUrl, e);
+    };
+  }
 
   const playerContainer = document.getElementById('video-player-container');
   
@@ -1627,8 +1675,9 @@ window.openVideoPlayer = function(id) {
         <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 8px #22c55e;"></span>
         تسجيل مرئي كامل بالصوت الأصلي للشاعر (مقتطف مباشر من فيسبوك)
       </span>
-      <a href="${vid.fbUrl}" target="_blank" rel="noopener noreferrer" style="font-size: 0.85rem; color: #60a5fa; text-decoration: none; font-weight: 600;">
-        مشاهدة المنشور الأصلي والتفاعلات على فيسبوك ↗
+      <a href="${vid.fbUrl}" target="_blank" rel="noopener noreferrer" class="btn-fb-like-action" onclick="openFbPostLink('${vid.fbUrl}', event)" title="مشاهدة والتفاعل على فيسبوك">
+        <svg width="13" height="13" fill="#1877f2" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        <span>مشاهدة المنشور الأصلي والتفاعلات على فيسبوك ↗</span>
       </a>
     </div>
   `;
