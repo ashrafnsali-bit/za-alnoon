@@ -835,6 +835,7 @@ const VIDEOS_DATA = [
     categoryName: "إلقاء شعري",
     duration: "٠٣:٢٠",
     thumb: "assets/images/poet_portrait.jpg",
+    videoSrc: "assets/videos/video_hasi_qula.mp4",
     desc: "تسجيل مرئي للشاعر ذوالنون أحمد نايل يلقي رائعته الوجدانية 'هسي قولا'، مقتطف من مقاطع صفحته الرسمية على فيسبوك.",
     fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos",
     quote: "قدر ما طيبتك تحاول ترضي اوقاتي وفضولا ياخ احبك .. والبحسها ما بيحتاج من يقولا!"
@@ -846,6 +847,7 @@ const VIDEOS_DATA = [
     categoryName: "أعمال غنائية",
     duration: "٠٤:١٥",
     thumb: "assets/images/poetic_night_bg.jpg",
+    videoSrc: "assets/videos/video_shino_alraid.mp4",
     desc: "فيديو مصور للعمل الغنائي 'شنو الريد'؛ كلمات الشاعر ذوالنون نايل وألحان الموسيقار أبوبكر الأنصاري.",
     fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos",
     quote: "شنو الريد غير عيون ترتاح في شوفة زول حنين وطيب؟ شنو الريد غير مشاعر تصدق الإحساس وتهوانا قريب؟"
@@ -857,6 +859,7 @@ const VIDEOS_DATA = [
     categoryName: "إلقاء شعري",
     duration: "٠٢:٤٥",
     thumb: "assets/images/poet_real_portrait.jpg",
+    videoSrc: "assets/videos/video_dawini.mp4",
     desc: "مقطع مصور عالي التأثير من إلقاء الشاعر، حصد آلاف المشاهدات والتفاعلات عبر صفحات التواصل الأدبية.",
     fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos",
     quote: "داويني بي لمسة عطف تمسح سواد هذا الزمان.. وترجع لقلبي الحزين كل المودة والأمان."
@@ -868,6 +871,7 @@ const VIDEOS_DATA = [
     categoryName: "برامج ولقاءات",
     duration: "٠٦:١٠",
     thumb: "assets/images/poetry_book_cover.jpg",
+    videoSrc: "assets/videos/video_daftar_mashaer.mp4",
     desc: "تسجيل صوتي ومرئي لحلقة الشاعر ذوالنون نايل في البرنامج الثقافي الشهير 'دفتر مشاعر' للحديث عن أدب الغربة والحنين.",
     fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos",
     quote: "في كل غربة حنين يشد الوتر على نغمة بلادنا.. ونفرش خطاوينا أمل يجمع شتات ميعادنا."
@@ -879,6 +883,7 @@ const VIDEOS_DATA = [
     categoryName: "إلقاء شعري",
     duration: "٠٣:٠٥",
     thumb: "assets/images/poet_portrait.jpg",
+    videoSrc: "assets/videos/video_hasi_qula.mp4",
     desc: "إلقاء شعري مفعم بالحنين من أرشيف منشورات الفيديو للشاعر ذوالنون حول ألم الفراق وأشواق السفر.",
     fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos",
     quote: "بالله كيف وسط المنام العين يصحي اشواقا طيف.. ينزل حنينك في المكان ويغني ضل الفرقة ضيف!"
@@ -890,6 +895,7 @@ const VIDEOS_DATA = [
     categoryName: "أعمال غنائية",
     duration: "٠٣:٥٠",
     thumb: "assets/images/poetic_night_bg.jpg",
+    videoSrc: "assets/videos/video_shino_alraid.mp4",
     desc: "تسجيل غنائي واعد مهدى للأمل والوطن؛ من كلمات الشاعر وألحان الملحن منتصر دونتاي.",
     fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos",
     quote: "يا بكره يا واعد بشارة خير تفوت في كل درب.. تغسل عيون الخوف وترسم فرحة جوة القلب!"
@@ -988,16 +994,10 @@ window.openVideoPlayer = function(id) {
 
   const playerContainer = document.getElementById('video-player-container');
   playerContainer.innerHTML = `
-    <div class="video-simulated-player" style="background-image: url('${vid.thumb}');">
-      <div class="video-simulated-overlay"></div>
-      <div class="video-simulated-content">
-        <div class="audio-soundwave-anim">
-          <span></span><span></span><span></span><span></span><span></span>
-        </div>
-        <h4 style="color: #fff; font-size: 1.4rem; font-family: var(--font-poetry); margin-bottom: 4px;">${vid.title}</h4>
-        <p style="color: var(--sand-accent); font-size: 0.95rem;">تسجيل وإلقاء الشاعر ذوالنون أحمد نايل (الدرويش)</p>
-      </div>
-    </div>
+    <video id="active-html5-video" controls autoplay playsinline style="width: 100%; height: 100%; max-height: 480px; object-fit: contain; background: #000; border-radius: var(--radius-md);" poster="${vid.thumb}">
+      <source src="${vid.videoSrc}" type="video/mp4">
+      متصفحك لا يدعم تشغيل هذا المقطع.
+    </video>
   `;
 
   const modal = document.getElementById('video-modal');
@@ -1011,6 +1011,10 @@ function initVideoModalEvents() {
   const shareBtn = document.getElementById('video-modal-share-btn');
 
   function closeVideoModal() {
+    const activeVidEl = document.getElementById('active-html5-video');
+    if (activeVidEl) {
+      activeVidEl.pause();
+    }
     modal.classList.remove('active');
     document.body.style.overflow = '';
   }
@@ -1035,7 +1039,7 @@ function initVideoModalEvents() {
         navigator.share({
           title: activeVideo.title,
           text: `شاهد مقطع: ${activeVideo.title} للشاعر ذوالنون نايل`,
-          url: activeVideo.fbUrl
+          url: window.location.origin + window.location.pathname + "#videos"
         }).catch(() => {});
       } else {
         navigator.clipboard.writeText(`${activeVideo.title}\n${activeVideo.fbUrl}`).then(() => {
