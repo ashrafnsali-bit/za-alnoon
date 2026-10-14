@@ -14,7 +14,7 @@ const POEMS_DATA = [
     year: "منشور فيسبوك",
     fbPublishDate: "١٥ أغسطس ٢٠٢٦",
     fbPublishTime: "٠٨:٤٠ م",
-    baseLikes: 2450,
+    baseLikes: 114,
     fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/1750358119379369/",
     excerpt: `قدر ما طيبتك تحاول ترضي اوقاتي وفضولا ياخ احبك ..\nقدر ما دي العين تشوفك وتنسجن ما بين ذهولا ياخ احبك ..\nوقدر ما إتنفستا ريحتك ودقت الاشواق طِبولا ياخ احبك ..`,
     fullText: `قدر ما طيبتك تحاول ترضي اوقاتي وفضولا
@@ -43,7 +43,7 @@ const POEMS_DATA = [
     year: "منشور فيسبوك",
     fbPublishDate: "١٢ أكتوبر ٢٠٢٦",
     fbPublishTime: "١٠:١٥ م",
-    baseLikes: 1120,
+    baseLikes: 97,
     fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/1750358119379369/",
     excerpt: `تعِب حيل خطاي العلي حال حفافهن مشيتن معاك..\nما أكف وين الغناوي السقيتن محنة ورويتن صفاك..\nوين المواعيد البتبدد وحشة خطانا؟`,
     fullText: `تعِب حيل خطاي العلي حال حفافهن مشيتن معاك
@@ -63,7 +63,7 @@ const POEMS_DATA = [
     year: "منشور فيسبوك",
     fbPublishDate: "١ أكتوبر ٢٠٢٦",
     fbPublishTime: "٠٨:٣٧ م",
-    baseLikes: 1890,
+    baseLikes: 40,
     fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/1068284412492430/",
     excerpt: `هاك رعشتك يا تنفلت .. يا تجمعا ..\nوين ما يقيف فيك إندهاش غوص في الحواس وإتسمعا\nلملم خطاك من كل طريق حلَّق اذا شوقك سعى..`,
     fullText: `هاك رعشتك يا تنفلت .. يا تجمعا ..
@@ -84,7 +84,7 @@ const POEMS_DATA = [
     year: "منشور فيسبوك",
     fbPublishDate: "٢٥ سبتمبر ٢٠٢٦",
     fbPublishTime: "١١:٢٠ م",
-    baseLikes: 1340,
+    baseLikes: 62,
     fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/1617538373418049/",
     excerpt: `بالله كيف وسط المنام .. العين يِصحي اشواقا طيف\nوزمن مخيف يدفر سحاب فوق طين هواك يجلب خريف\nبالله كيف ؟`,
     fullText: `بالله كيف وسط المنام .. العين يِصحي اشواقا طيف
@@ -106,7 +106,7 @@ const POEMS_DATA = [
     year: "منشور فيسبوك",
     fbPublishDate: "١٣ سبتمبر ٢٠٢٦",
     fbPublishTime: "٠٦:٢٠ م",
-    baseLikes: 980,
+    baseLikes: 78,
     fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/2926968804333646/",
     excerpt: `ما تكسرك إيد الظروف لا يسجنك ضيق المكان..\nإمتد حَدْ ما لآمسك مشوار فرح وأداك أمان..\nخليك صامد في الوجع!`,
     fullText: `ما تكسرك إيد الظروف لا يسجنك ضيق المكان
@@ -125,7 +125,7 @@ const POEMS_DATA = [
     year: "منشور فيسبوك",
     fbPublishDate: "١ سبتمبر ٢٠٢٦",
     fbPublishTime: "٠٩:١٠ م",
-    baseLikes: 890,
+    baseLikes: 52,
     fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/1617538373418049/",
     excerpt: `كفّاني ليلك ياحزن كتّفني شيلك يا اساي..\nكَبَر مواعيدي الوصول وإتراوح الصبر المعاي..\nيا غربة شديتي الوتر!`,
     fullText: `كفّاني ليلك ياحزن كتّفني شيلك يا اساي
@@ -144,7 +144,7 @@ const POEMS_DATA = [
     year: "منشور فيسبوك",
     fbPublishDate: "٢٢ سبتمبر ٢٠٢٦",
     fbPublishTime: "٠٨:٥٠ م",
-    baseLikes: 1150,
+    baseLikes: 33,
     fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/1539458277866715/",
     excerpt: `لا تحِن يا السُّقا وتندسا..\nبين أنغامي كضابات رعودا وبرقها المِترامي..\nبِت زمن الغناوي النضاحة بالشوق!`,
     fullText: `لا تحِن يا السُّقا وتندسا
@@ -163,7 +163,7 @@ const POEMS_DATA = [
     year: "منشور فيسبوك",
     fbPublishDate: "١٨ يوليو ٢٠٢٦",
     fbPublishTime: "٠٧:٣٠ م",
-    baseLikes: 760,
+    baseLikes: 46,
     fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/1028918633305035/",
     excerpt: `باعنم الأرق ونفتني كلمة فضحتها..\nوقصيت حكايتا للورق بين حق وحق ما تُهنا في مَينْ..\nوالحرف شاهد على البوح!`,
     fullText: `باعنم الأرق ونفتني كلمة فضحتها
@@ -182,7 +182,7 @@ const POEMS_DATA = [
     year: "منشور فيسبوك",
     fbPublishDate: "٢٨ يوليو ٢٠٢٦",
     fbPublishTime: "٠٧:١٥ م",
-    baseLikes: 1640,
+    baseLikes: 86,
     fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/1539458277866715/",
     excerpt: `شنو الريد ؟\nالبجيب لي سيدو بدل افراحو هم وجروح\nشنو الريد ؟\nالبزيد في غيااابو لا ميعاااد ولا طيف الرجوع بيلوح..\nألحان: أبوبكر الأنصاري | أداء: مؤمن أبو العزائم`,
     fullText: `شنو الريد ؟
@@ -216,7 +216,7 @@ const POEMS_DATA = [
     year: "منشور فيسبوك",
     fbPublishDate: "٥ يونيو ٢٠٢٦",
     fbPublishTime: "١٠:٠٠ م",
-    baseLikes: 1420,
+    baseLikes: 58,
     fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/2926968804333646/",
     excerpt: `ضاريتك من عين الهوى ومن قسوة الليل الطويل\nشايلك مودة وريد ندي مسكون بي أنفاس النخيل\nوكَفّي الممدود في العتمة راجي صفاك بديل..`,
     fullText: `ضاريتك من عين الهوى ومن قسوة الليل الطويل
@@ -235,7 +235,7 @@ const POEMS_DATA = [
     year: "منشور فيسبوك",
     fbPublishDate: "٢ مايو ٢٠٢٦",
     fbPublishTime: "١١:٠٠ م",
-    baseLikes: 1280,
+    baseLikes: 67,
     fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/1068284412492430/",
     excerpt: `ضاريني بي طرحت زفافك من اساي\nغطيني من قسوة زماني ومن شقاي\nوتعالي جاي ..\nندخل ضريح آخر دراويش الزمان تعالي جاي`,
     fullText: `ضاريني بي طرحت زفافك من اساي
@@ -255,7 +255,7 @@ const POEMS_DATA = [
     year: "منشور فيسبوك",
     fbPublishDate: "١٤ أبريل ٢٠٢٦",
     fbPublishTime: "٠٥:٤٥ م",
-    baseLikes: 930,
+    baseLikes: 42,
     fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/1028918633305035/",
     excerpt: `يا بكره يا واعد بشارة خير تفوت في كل درب\nتغسل عيون الخوف وترسم فرحة جوّة القلب..\nألحان: منتصر دونتاي`,
     fullText: `يا بكره يا واعد بشارة خير تفوت في كل درب
@@ -471,7 +471,7 @@ function getPoemLikes(id) {
   if (!poem) return 0;
   const isLiked = isPoemLiked(id);
   const extraLikes = parseInt(localStorage.getItem('za_alnoon_extra_likes_' + id) || '0', 10);
-  return (poem.baseLikes || 1000) + extraLikes + (isLiked ? 1 : 0);
+  return (poem.baseLikes || 40) + extraLikes + (isLiked ? 1 : 0);
 }
 
 function isPoemLiked(id) {
@@ -1199,8 +1199,8 @@ const DEFAULT_FB_POSTS = [
 قدر ما غنينا بي لهفة واشتياق
 بنلقى الصبر في دربنا مشوار طويل..
 وما بننكسر لو طال ليل الغياب وعزّ الدليل!`,
-    likes: "١,١٢٠",
-    comments: "١٨٤",
+    likes: "٩٧",
+    comments: "٤٨",
     url: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/1750358119379369/",
     sampleComment: {
       author: "صديق إسماعيل",
@@ -1220,8 +1220,8 @@ const DEFAULT_FB_POSTS = [
 وين ما يقيف فيك إندهاش غوص في الحواس وإتسمعا!
 لملم خطاك من كل طريق حلَّق اذا شوقك سعى..
 يا ابهى شوف مين الفتح زاوية رؤاك واهدى الحقيقة مشارعا..`,
-    likes: "٨٩٠",
-    comments: "١٣٢",
+    likes: "٤٠",
+    comments: "٢٥",
     url: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/1068284412492430/",
     sampleComment: {
       author: "معاوية علي",
@@ -1247,8 +1247,8 @@ const DEFAULT_FB_POSTS = [
 اذا شاااخت حروف ونساااها شغف البوح ..
 ما الغنوات ؟
 اذا صوت الكلام مبحوح!`,
-    likes: "١,٥٢٠",
-    comments: "٢١٥",
+    likes: "٨٦",
+    comments: "٥٣",
     url: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/1539458277866715/",
     sampleComment: {
       author: "عمر الطيب",
@@ -1269,8 +1269,8 @@ const DEFAULT_FB_POSTS = [
 وقدر ما إتنفستا ريحتك ودقت الاشواق طِبولا ياخ احبك ..
 والبحسها ما بيحتاج من يقولا..
 هسي قُولا! ❤️`,
-    likes: "٢,٤٥٠",
-    comments: "٣٤٠",
+    likes: "١١٤",
+    comments: "٧٢",
     url: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/1750358119379369/",
     sampleComment: {
       author: "سارة ميرغني",
@@ -1422,7 +1422,7 @@ function initFacebookLiveSync() {
   if (!container) return;
 
   const posts = DEFAULT_FB_POSTS;
-  localStorage.setItem('za_alnoon_fb_posts_v2', JSON.stringify(posts));
+  localStorage.setItem('za_alnoon_fb_posts_v3', JSON.stringify(posts));
   renderFbCards(posts);
   console.log("Facebook Live Sync Engine initialized for https://www.facebook.com/dhwalnwn.ahmd.nayl/");
 }
