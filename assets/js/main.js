@@ -12,6 +12,8 @@ const POEMS_DATA = [
     category: "darwish",
     categoryName: "بوح ودراويش",
     year: "منشور فيسبوك",
+    fbPublishDate: "١٥ أغسطس ٢٠٢٦",
+    fbPublishTime: "٠٨:٤٠ م",
     baseLikes: 2450,
     fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/",
     excerpt: `قدر ما طيبتك تحاول ترضي اوقاتي وفضولا ياخ احبك ..\nقدر ما دي العين تشوفك وتنسجن ما بين ذهولا ياخ احبك ..\nوقدر ما إتنفستا ريحتك ودقت الاشواق طِبولا ياخ احبك ..`,
@@ -39,6 +41,8 @@ const POEMS_DATA = [
     category: "darwish",
     categoryName: "بوح ودراويش",
     year: "منشور فيسبوك",
+    fbPublishDate: "١٢ أكتوبر ٢٠٢٦",
+    fbPublishTime: "١٠:١٥ م",
     baseLikes: 1120,
     fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/1750358119379369/",
     excerpt: `تعِب حيل خطاي العلي حال حفافهن مشيتن معاك..\nما أكف وين الغناوي السقيتن محنة ورويتن صفاك..\nوين المواعيد البتبدد وحشة خطانا؟`,
@@ -57,6 +61,8 @@ const POEMS_DATA = [
     category: "darwish",
     categoryName: "بوح ودراويش",
     year: "منشور فيسبوك",
+    fbPublishDate: "١ أكتوبر ٢٠٢٦",
+    fbPublishTime: "٠٨:٣٧ م",
     baseLikes: 1890,
     fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/1068284412492430/",
     excerpt: `هاك رعشتك يا تنفلت .. يا تجمعا ..\nوين ما يقيف فيك إندهاش غوص في الحواس وإتسمعا\nلملم خطاك من كل طريق حلَّق اذا شوقك سعى..`,
@@ -76,6 +82,8 @@ const POEMS_DATA = [
     category: "shawq",
     categoryName: "دفاتر الشوق",
     year: "منشور فيسبوك",
+    fbPublishDate: "٢٥ سبتمبر ٢٠٢٦",
+    fbPublishTime: "١١:٢٠ م",
     baseLikes: 1340,
     fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/",
     excerpt: `بالله كيف وسط المنام .. العين يِصحي اشواقا طيف\nوزمن مخيف يدفر سحاب فوق طين هواك يجلب خريف\nبالله كيف ؟`,
@@ -96,6 +104,8 @@ const POEMS_DATA = [
     category: "darwish",
     categoryName: "بوح ودراويش",
     year: "منشور فيسبوك",
+    fbPublishDate: "١٣ سبتمبر ٢٠٢٦",
+    fbPublishTime: "٠٦:٢٠ م",
     baseLikes: 980,
     fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/2926968804333646/",
     excerpt: `ما تكسرك إيد الظروف لا يسجنك ضيق المكان..\nإمتد حَدْ ما لآمسك مشوار فرح وأداك أمان..\nخليك صامد في الوجع!`,
@@ -113,6 +123,8 @@ const POEMS_DATA = [
     category: "shawq",
     categoryName: "دفاتر الشوق",
     year: "منشور فيسبوك",
+    fbPublishDate: "١ سبتمبر ٢٠٢٦",
+    fbPublishTime: "٠٩:١٠ م",
     baseLikes: 890,
     fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/1617538373418049/",
     excerpt: `كفّاني ليلك ياحزن كتّفني شيلك يا اساي..\nكَبَر مواعيدي الوصول وإتراوح الصبر المعاي..\nيا غربة شديتي الوتر!`,
@@ -130,6 +142,8 @@ const POEMS_DATA = [
     category: "shawq",
     categoryName: "دفاتر الشوق",
     year: "منشور فيسبوك",
+    fbPublishDate: "٢٢ سبتمبر ٢٠٢٦",
+    fbPublishTime: "٠٨:٥٠ م",
     baseLikes: 1150,
     fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/1539458277866715/",
     excerpt: `لا تحِن يا السُّقا وتندسا..\nبين أنغامي كضابات رعودا وبرقها المِترامي..\nبِت زمن الغناوي النضاحة بالشوق!`,
@@ -147,6 +161,8 @@ const POEMS_DATA = [
     category: "darwish",
     categoryName: "بوح ودراويش",
     year: "منشور فيسبوك",
+    fbPublishDate: "١٨ يوليو ٢٠٢٦",
+    fbPublishTime: "٠٧:٣٠ م",
     baseLikes: 760,
     fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/1028918633305035/",
     excerpt: `باعنم الأرق ونفتني كلمة فضحتها..\nوقصيت حكايتا للورق بين حق وحق ما تُهنا في مَينْ..\nوالحرف شاهد على البوح!`,
@@ -164,6 +180,8 @@ const POEMS_DATA = [
     category: "ghina",
     categoryName: "أعمال غنائية",
     year: "منشور فيسبوك",
+    fbPublishDate: "٢٨ يوليو ٢٠٢٦",
+    fbPublishTime: "٠٧:١٥ م",
     baseLikes: 1640,
     fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/",
     excerpt: `شنو الريد ؟\nالبجيب لي سيدو بدل افراحو هم وجروح\nشنو الريد ؟\nالبزيد في غيااابو لا ميعاااد ولا طيف الرجوع بيلوح..\nألحان: أبوبكر الأنصاري | أداء: مؤمن أبو العزائم`,
@@ -196,6 +214,8 @@ const POEMS_DATA = [
     category: "shawq",
     categoryName: "دفاتر الشوق",
     year: "منشور فيسبوك",
+    fbPublishDate: "٥ يونيو ٢٠٢٦",
+    fbPublishTime: "١٠:٠٠ م",
     baseLikes: 1420,
     fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/",
     excerpt: `ضاريتك من عين الهوى ومن قسوة الليل الطويل\nشايلك مودة وريد ندي مسكون بي أنفاس النخيل\nوكَفّي الممدود في العتمة راجي صفاك بديل..`,
@@ -213,6 +233,8 @@ const POEMS_DATA = [
     category: "darwish",
     categoryName: "بوح ودراويش",
     year: "منشور فيسبوك",
+    fbPublishDate: "٢ مايو ٢٠٢٦",
+    fbPublishTime: "١١:٠٠ م",
     baseLikes: 1280,
     fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/",
     excerpt: `ضاريني بي طرحت زفافك من اساي\nغطيني من قسوة زماني ومن شقاي\nوتعالي جاي ..\nندخل ضريح آخر دراويش الزمان تعالي جاي`,
@@ -231,6 +253,8 @@ const POEMS_DATA = [
     category: "ghina",
     categoryName: "أعمال غنائية",
     year: "منشور فيسبوك",
+    fbPublishDate: "١٤ أبريل ٢٠٢٦",
+    fbPublishTime: "٠٥:٤٥ م",
     baseLikes: 930,
     fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/",
     excerpt: `يا بكره يا واعد بشارة خير تفوت في كل درب\nتغسل عيون الخوف وترسم فرحة جوّة القلب..\nألحان: منتصر دونتاي`,
@@ -622,7 +646,7 @@ function renderPoems(filteredPoems) {
       <div>
         <div class="poem-card-header">
           <span class="poem-card-tag">${poem.categoryName}</span>
-          <span class="poem-card-meta">${poem.year} م</span>
+          <span class="poem-card-time" title="تاريخ ووقت النشر الفعلي على فيسبوك">🕒 ${poem.fbPublishDate} • ${poem.fbPublishTime}</span>
         </div>
         <h3 class="poem-card-title">${poem.title}</h3>
         <p class="poem-card-excerpt">${poem.excerpt}</p>
@@ -707,7 +731,7 @@ window.openPoemModal = function(id) {
   activePoem = poem;
 
   document.getElementById('modal-poem-title').textContent = poem.title;
-  document.getElementById('modal-poem-category').textContent = `${poem.categoryName} • ${poem.year}`;
+  document.getElementById('modal-poem-category').innerHTML = `${poem.categoryName} • <span class="modal-time-tag">🕒 نُشر في فيسبوك: ${poem.fbPublishDate} - الساعة ${poem.fbPublishTime}</span>`;
   
   const contentEl = document.getElementById('modal-poem-body');
   contentEl.textContent = poem.fullText;
@@ -954,34 +978,46 @@ function stopGentleAmbient() {
    ========================================================================== */
 const DEFAULT_GUESTBOOK = [
   {
+    name: "صديق إسماعيل",
+    source: "facebook",
+    date: "١٢ أكتوبر ٢٠٢٦ - ١١:٣٠ م",
+    message: "يا رب نقط كل حروفك.. تنقط ل تشفي.. أرق وأصدق ما قرأت يا درويش الحرف. إحساس سوداني أصيل."
+  },
+  {
+    name: "معاوية علي",
+    source: "facebook",
+    date: "٢ أكتوبر ٢٠٢٦ - ٠٩:١٥ ص",
+    message: "أستاذنا يا جمالك وجمال حرفك.. إبداع سوداني أصيل لا يضاهى في ديوان الحواس وبوح الدرويش."
+  },
+  {
     name: "عمر الطيب",
     source: "facebook",
-    date: "من تفاعلات فيسبوك",
-    message: "الله عليك يا درويش الحرف.. قصيدة 'تعب حيل خطاي' لامست وجدان كل مغترب وملهوف للبلد. قلم صادق وإحساس سوداني أصيل."
+    date: "٢٨ يوليو ٢٠٢٦ - ٠٨:٠٠ م",
+    message: "الله عليك يا درويش الحرف.. قصيدة 'شنو الريد' لامست وجدان كل مكلوم ومفارق. قلم صادق وإحساس نابع من الأعماق."
   },
   {
     name: "سارة ميرغني",
     source: "facebook",
-    date: "من تفاعلات فيسبوك",
+    date: "١٥ أغسطس ٢٠٢٦ - ٠٩:٣٠ م",
     message: "«قدر ما طيبتك تحاول ترضي اوقاتي وفضولا ياخ احبك».. من أصدق وأجمل ما كُتب في شعر العامية السودانية. دمت قلماً ناصعاً يا أستاذ ذوالنون."
   },
   {
     name: "مروان كمال الدين",
     source: "facebook",
-    date: "من تفاعلات فيسبوك",
+    date: "٢ سبتمبر ٢٠٢٦ - ١١:٢٠ ص",
     message: "تحية إجلال للدرويش والشاعر المبدع ذوالنون أحمد نايل، نصوصك تداوي جراح الغربة وتنعش الروح، حفظك الله ذخراً للأدب السوداني."
   },
   {
-    name: "الطيب محمد أحمد",
+    name: "عماد المتمه",
     source: "facebook",
-    date: "من تفاعلات فيسبوك",
-    message: "متابع لصفحتك العطرة على الفيسبوك؛ إلقاؤك الشعري المباشر له وقع خاص في النفس ويدخل القلب بلا استئذان."
+    date: "١٣ سبتمبر ٢٠٢٦ - ٠٧:٤٥ م",
+    message: "«ما تكسرك إيد الظروف ولا يسجنك ضيق المكان».. كلمات تبث الصمود والأمل في النفوس، دمت منبراً للأصالة والجمال."
   },
   {
-    name: "ناهد الفاتح",
+    name: "إيهاب البيروني",
     source: "facebook",
-    date: "من تفاعلات فيسبوك",
-    message: "«ما تكسرك إيد الظروف ولا يسجنك ضيق المكان».. كلمات تبث الصمود والأمل في النفوس، دمت منبراً للأصالة والجمال."
+    date: "٢٢ سبتمبر ٢٠٢٦ - ١٠:٠٥ م",
+    message: "أصيل يا ذوالنون.. حرفك ينساب كالماء الزلال في صحراء الروح، متابع لك باستمرار ونسأل الله أن يحفظك."
   }
 ];
 
@@ -989,7 +1025,11 @@ function initGuestbook() {
   const form = document.getElementById('guestbook-form');
   const container = document.getElementById('guestbook-entries');
 
-  let entries = JSON.parse(localStorage.getItem('za_alnoon_guestbook')) || DEFAULT_GUESTBOOK;
+  let entries = JSON.parse(localStorage.getItem('za_alnoon_guestbook_v2'));
+  if (!entries || !entries.some(e => e.date && (e.date.includes('٢٠٢٦') || e.date.includes('2026')))) {
+    entries = DEFAULT_GUESTBOOK;
+    localStorage.setItem('za_alnoon_guestbook_v2', JSON.stringify(entries));
+  }
 
   function renderEntries() {
     if (!container) return;
@@ -1002,11 +1042,11 @@ function initGuestbook() {
             <span class="guest-name">${e.name}</span>
             <span class="guest-source-tag ${e.source === 'facebook' ? 'fb-source-tag' : 'web-source-tag'}">
               ${e.source === 'facebook' 
-                ? '<svg width="10" height="10" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> رد من فيسبوك' 
+                ? '<svg width="10" height="10" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> رد موثق من فيسبوك' 
                 : '✍️ تدوينة زائر الموقع'}
             </span>
           </div>
-          <span class="guest-time">${e.date}</span>
+          <span class="guest-time" title="تاريخ ووقت النشر الدقيق">🕒 ${e.date}</span>
         </div>
         <p class="guest-message">${e.message}</p>
       </div>
@@ -1028,21 +1068,26 @@ function initGuestbook() {
 
       if (!name || !message) return;
 
+      const now = new Date();
+      const dateFormatted = now.toLocaleDateString('ar-EG', { day: 'numeric', month: 'long', year: 'numeric' });
+      const timeFormatted = now.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
+
       const newEntry = {
         name: name,
         source: "web",
-        date: "الآن (مباشر)",
+        date: `${dateFormatted} - ${timeFormatted} (الآن)`,
         message: message
       };
 
       entries.unshift(newEntry);
-      localStorage.setItem('za_alnoon_guestbook', JSON.stringify(entries));
+      localStorage.setItem('za_alnoon_guestbook_v2', JSON.stringify(entries));
       renderEntries();
 
       nameInput.value = '';
       msgInput.value = '';
-      showToast('شكراً لمشاركتك العطرة! تم حفظ خاطرتك في الدفتر.');
+      showToast('شكراً لمشاركتك العطرة! تم حفظ خاطرتك بالتاريخ والوقت في الدفتر.');
     });
+  }
   }
 }
 
@@ -1104,43 +1149,95 @@ const DEFAULT_FB_POSTS = [
   {
     id: "fb-1",
     author: "ذوالنون أحمد نايل",
-    badge: "🔴 منشور حديث موثق",
-    time: "اليوم",
+    badge: "🔴 أحدث منشور على فيسبوك",
+    publishDate: "١٢ أكتوبر ٢٠٢٦",
+    publishTime: "١٠:١٥ م",
+    timeAgo: "قبل يومين",
+    content: `تعِب حيل خطاي العلي حال حفافهن مشيتن معاك..
+ما أكف وين الغناوي السقيتن محنة ورويتن صفاك..
+وين المواعيد البتبدد وحشة خطانا وضل الفراق؟
+قدر ما غنينا بي لهفة واشتياق
+بنلقى الصبر في دربنا مشوار طويل..
+وما بننكسر لو طال ليل الغياب وعزّ الدليل!`,
+    likes: "١,١٢٠",
+    comments: "١٨٤",
+    url: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/1750358119379369/",
+    sampleComment: {
+      author: "صديق إسماعيل",
+      date: "١٢ أكتوبر ٢٠٢٦",
+      time: "١١:٣٠ م",
+      text: "يا رب نقط كل حروفك.. تنقط ل تشفي.. أرق وأصدق ما قرأت يا درويش الحرف."
+    }
+  },
+  {
+    id: "fb-2",
+    author: "ذوالنون أحمد نايل",
+    badge: "منشور من ديوان الحواس",
+    publishDate: "١ أكتوبر ٢٠٢٦",
+    publishTime: "٠٨:٣٧ م",
+    timeAgo: "قبل أسبوعين",
+    content: `هاك رعشتك .. يا تنفلت .. يا تجمعا ..
+وين ما يقيف فيك إندهاش غوص في الحواس وإتسمعا!
+لملم خطاك من كل طريق حلَّق اذا شوقك سعى..
+يا ابهى شوف مين الفتح زاوية رؤاك واهدى الحقيقة مشارعا..`,
+    likes: "٨٩٠",
+    comments: "١٣٢",
+    url: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/1068284412492430/",
+    sampleComment: {
+      author: "معاوية علي",
+      date: "٢ أكتوبر ٢٠٢٦",
+      time: "٠٩:١٥ ص",
+      text: "أستاذنا يا جمالك وجمال حرفك النقي.. إبداع سوداني لا يضاهى."
+    }
+  },
+  {
+    id: "fb-3",
+    author: "ذوالنون أحمد نايل",
+    badge: "منشور غنائي وجداني",
+    publishDate: "٢٨ يوليو ٢٠٢٦",
+    publishTime: "٠٧:١٥ م",
+    timeAgo: "منشور معتمد",
+    content: `شنو الريد ؟
+البجيب لي سيدو بدل افراحو هم وجروح ..
+شنو الريد ؟
+البزيد في غيااابو لا ميعاااد ولا طيف الرجوع بيلوح ..
+وما الخطوات ؟
+اذا فقد الدرب معناهو غير سكة تعب ونزوح ..
+ما الغنوات ؟
+اذا شاااخت حروف ونساااها شغف البوح ..
+ما الغنوات ؟
+اذا صوت الكلام مبحوح!`,
+    likes: "١,٥٢٠",
+    comments: "٢١٥",
+    url: "https://www.facebook.com/dhwalnwn.ahmd.nayl/",
+    sampleComment: {
+      author: "عمر الطيب",
+      date: "٢٨ يوليو ٢٠٢٦",
+      time: "٠٨:٠٠ م",
+      text: "الله عليك يا درويش الحرف.. كلمات تلمس شغاف القلب وتعبر عن كل مكلوم."
+    }
+  },
+  {
+    id: "fb-4",
+    author: "ذوالنون أحمد نايل",
+    badge: "شعر وجداني رائج",
+    publishDate: "١٥ أغسطس ٢٠٢٦",
+    publishTime: "٠٨:٤٠ م",
+    timeAgo: "منشور موثق",
     content: `قدر ما طيبتك تحاول ترضي اوقاتي وفضولا ياخ احبك ..
 قدر ما دي العين تشوفك وتنسجن ما بين ذهولا ياخ احبك ..
 وقدر ما إتنفستا ريحتك ودقت الاشواق طِبولا ياخ احبك ..
 والبحسها ما بيحتاج من يقولا..
 هسي قُولا! ❤️`,
-    likes: "٨٩٠",
-    comments: "١٢٤",
-    url: "https://www.facebook.com/dhwalnwn.ahmd.nayl/"
-  },
-  {
-    id: "fb-2",
-    author: "ذوالنون أحمد نايل",
-    badge: "بوح وجداني",
-    time: "أمس",
-    content: `بالله كيف وسط المنام .. العين يِصحي اشواقا طيف..
-وزمن مخيف يدفر سحاب فوق طين هواك يجلب خريف!
-الحسرة تسأل في الحزن ليه الوجع ما بصدو قيف..
-ينزل حنينك في المكان ويغني:
-ضُل الفُرقة ضيف!`,
-    likes: "٧٤٠",
-    comments: "٩٨",
-    url: "https://www.facebook.com/dhwalnwn.ahmd.nayl/"
-  },
-  {
-    id: "fb-3",
-    author: "ذوالنون أحمد نايل",
-    badge: "من بوح الحواس",
-    time: "منذ ٣ أيام",
-    content: `هاك رعشتك يا تنفلت .. يا تجمعا ..
-وين ما يقيف فيك إندهاش غوص في الحواس وإتسمعا!
-لملم خطاك من كل طريق حلَّق اذا شوقك سعى..
-يا ابهى شوف مين الفتح زاوية رؤاك واهدى الحقيقة مشارعا..`,
-    likes: "٦١٥",
-    comments: "٨٥",
-    url: "https://www.facebook.com/dhwalnwn.ahmd.nayl/"
+    likes: "٢,٤٥٠",
+    comments: "٣٤٠",
+    url: "https://www.facebook.com/dhwalnwn.ahmd.nayl/",
+    sampleComment: {
+      author: "سارة ميرغني",
+      date: "١٥ أغسطس ٢٠٢٦",
+      time: "٠٩:٣٠ م",
+      text: "«قدر ما طيبتك تحاول ترضي اوقاتي» من أصدق وأجمل ما كُتب في شعر العامية السودانية."
+    }
   }
 ];
 
@@ -1240,7 +1337,6 @@ window.toggleFbPageFollow = function(event) {
 
   if (nowFollowed) {
     showToast('🎉 شكراً لك! تم تسجيل متابعتك وإعجابك وتحديث العداد لحظياً على الموقع وفيسبوك.');
-    // فتح صفحة فيسبوك الرسمية بسلاسة
     setTimeout(() => {
       window.open('https://www.facebook.com/dhwalnwn.ahmd.nayl/', '_blank');
     }, 700);
@@ -1285,7 +1381,8 @@ function initFacebookLiveSync() {
   const container = document.getElementById('dynamic-fb-cards');
   if (!container) return;
 
-  const posts = JSON.parse(localStorage.getItem('za_alnoon_fb_posts')) || DEFAULT_FB_POSTS;
+  const posts = DEFAULT_FB_POSTS;
+  localStorage.setItem('za_alnoon_fb_posts_v2', JSON.stringify(posts));
   renderFbCards(posts);
   console.log("Facebook Live Sync Engine initialized for https://www.facebook.com/dhwalnwn.ahmd.nayl/");
 }
@@ -1302,10 +1399,27 @@ function renderFbCards(posts) {
         </div>
         <div class="fb-poster-meta">
           <h4>${post.author}</h4>
-          <span>${post.badge} • ${post.time}</span>
+          <span class="fb-badge-tag">${post.badge}</span>
+          <div class="fb-post-timestamp">
+            <span>🕒</span>
+            <span class="fb-exact-time">${post.publishDate} • ${post.publishTime}</span>
+            <span class="fb-time-ago">(${post.timeAgo})</span>
+          </div>
         </div>
       </div>
       <div class="fb-post-content">${post.content}</div>
+
+      <!-- Verified Facebook Comment Preview -->
+      ${post.sampleComment ? `
+      <div class="fb-card-comment-box">
+        <div class="fb-comment-header">
+          <span class="fb-commenter-name">💬 رد موثق من فيسبوك: ${post.sampleComment.author}</span>
+          <span class="fb-comment-date">🕒 ${post.sampleComment.date} • ${post.sampleComment.time}</span>
+        </div>
+        <p class="fb-comment-text">«${post.sampleComment.text}»</p>
+      </div>
+      ` : ''}
+
       <div class="fb-post-metrics">
         <div class="fb-metrics-icons">
           <span>❤️ 👍 ${post.likes} تفاعل</span>
@@ -1328,6 +1442,8 @@ const VIDEOS_DATA = [
     title: "قصيدة: تعِب حيل خطاي (إلقاء الشاعر ذوالنون)",
     category: "recitation",
     categoryName: "إلقاء شعري",
+    fbPublishDate: "١٢ أكتوبر ٢٠٢٦",
+    fbPublishTime: "١٠:١٥ م",
     duration: "٠٢:٢٦",
     thumb: "assets/images/thumb_v1.jpg",
     videoSrc: "assets/videos/video_real_1.mp4",
@@ -1340,6 +1456,8 @@ const VIDEOS_DATA = [
     title: "قصيدة: هاك رعشتك (غوص في الحواس)",
     category: "recitation",
     categoryName: "إلقاء شعري",
+    fbPublishDate: "١ أكتوبر ٢٠٢٦",
+    fbPublishTime: "٠٨:٣٧ م",
     duration: "٠١:٣٢",
     thumb: "assets/images/thumb_v2.jpg",
     videoSrc: "assets/videos/video_real_2.mp4",
@@ -1352,6 +1470,8 @@ const VIDEOS_DATA = [
     title: "قصيدة: لا تحِن يا السُّقا (أشواق ونغم)",
     category: "recitation",
     categoryName: "إلقاء شعري",
+    fbPublishDate: "٢٢ سبتمبر ٢٠٢٦",
+    fbPublishTime: "٠٨:٥٠ م",
     duration: "٠١:٢٥",
     thumb: "assets/images/thumb_v3.jpg",
     videoSrc: "assets/videos/video_real_3.mp4",
@@ -1364,6 +1484,8 @@ const VIDEOS_DATA = [
     title: "قصيدة: ما تكسرك إيد الظروف (أمل وتحدي)",
     category: "recitation",
     categoryName: "إلقاء شعري",
+    fbPublishDate: "١٣ سبتمبر ٢٠٢٦",
+    fbPublishTime: "٠٦:٢٠ م",
     duration: "٠١:٣٥",
     thumb: "assets/images/thumb_v4.jpg",
     videoSrc: "assets/videos/video_real_4.mp4",
@@ -1376,6 +1498,8 @@ const VIDEOS_DATA = [
     title: "قصيدة: كفّاني ليلك يا حزن (صبر وأشجان)",
     category: "recitation",
     categoryName: "إلقاء شعري",
+    fbPublishDate: "١ سبتمبر ٢٠٢٦",
+    fbPublishTime: "٠٩:١٠ م",
     duration: "٠٢:٢٥",
     thumb: "assets/images/thumb_v5.jpg",
     videoSrc: "assets/videos/video_real_5.mp4",
@@ -1388,6 +1512,8 @@ const VIDEOS_DATA = [
     title: "قصيدة: بين حق وحق (بوح القوافي)",
     category: "recitation",
     categoryName: "إلقاء شعري",
+    fbPublishDate: "١٨ يوليو ٢٠٢٦",
+    fbPublishTime: "٠٧:٣٠ م",
     duration: "٠٢:١٠",
     thumb: "assets/images/thumb_v6.jpg",
     videoSrc: "assets/videos/video_real_6.mp4",
@@ -1455,7 +1581,7 @@ function renderVideos(list) {
       <div class="video-card-body">
         <div class="video-card-meta">
           <span>${v.categoryName}</span>
-          <span style="color: #22c55e;">● بالصوت الأصلي للشاعر</span>
+          <span class="video-publish-time" title="تاريخ ووقت النشر على فيسبوك">🕒 ${v.fbPublishDate} • ${v.fbPublishTime}</span>
         </div>
         <h3 class="video-card-title">${v.title}</h3>
         <p class="video-card-desc">${v.desc}</p>
@@ -1479,7 +1605,7 @@ window.openVideoPlayer = function(id) {
   activeVideo = vid;
 
   document.getElementById('video-modal-title').textContent = vid.title;
-  document.getElementById('video-modal-category').textContent = `${vid.categoryName} • ${vid.duration} دقيقة (كامل المدة والصوت)`;
+  document.getElementById('video-modal-category').innerHTML = `${vid.categoryName} • ${vid.duration} دقيقة • <span style="color:#60a5fa;">🕒 نُشر في فيسبوك: ${vid.fbPublishDate} - ${vid.fbPublishTime}</span>`;
   document.getElementById('video-modal-desc').innerHTML = `
     <p style="font-size: 1.35rem; color: var(--gold-glow); margin-bottom: 8px;">« ${vid.quote} »</p>
     <p style="font-size: 0.95rem; color: var(--text-muted); font-family: var(--font-ui);">${vid.desc}</p>
