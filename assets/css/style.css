@@ -1020,6 +1020,296 @@ section {
 }
 
 /* ==========================================================================
+   Videos Showcase Section (مكتبة المرئيات والفيديوهات)
+   ========================================================================== */
+.videos-section {
+  position: relative;
+  background: linear-gradient(180deg, rgba(8, 10, 15, 0.9) 0%, rgba(13, 17, 26, 0.95) 50%, rgba(8, 10, 15, 0.9) 100%);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.video-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  background: var(--bg-card);
+  padding: 1rem 1.5rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+}
+
+.video-filter-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.v-tab-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-muted);
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-ui);
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.v-tab-btn:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.v-tab-btn.active {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.25), rgba(24, 119, 242, 0.25));
+  border-color: var(--gold-border);
+  color: var(--gold-glow);
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+}
+
+.videos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 2.2rem;
+}
+
+.video-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition-smooth);
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+.video-card:hover {
+  transform: translateY(-7px);
+  border-color: var(--gold-border);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(212, 175, 55, 0.15);
+}
+
+.video-thumb-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  cursor: pointer;
+  background: #000;
+}
+
+.video-thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0.88;
+}
+
+.video-card:hover .video-thumb-img {
+  transform: scale(1.06);
+  opacity: 1;
+}
+
+.video-play-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(8, 10, 15, 0.35);
+  transition: var(--transition-smooth);
+}
+
+.video-card:hover .video-play-overlay {
+  background: rgba(8, 10, 15, 0.15);
+}
+
+.play-circle-btn {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(18, 22, 33, 0.85);
+  border: 2px solid var(--gold-primary);
+  color: var(--gold-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  box-shadow: 0 0 25px rgba(212, 175, 55, 0.4);
+  transition: var(--transition-smooth);
+}
+
+.video-card:hover .play-circle-btn {
+  transform: scale(1.15);
+  background: var(--gold-primary);
+  color: #080a0f;
+  box-shadow: 0 0 35px rgba(212, 175, 55, 0.8);
+}
+
+.video-duration-tag {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  font-size: 0.78rem;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  backdrop-filter: blur(4px);
+}
+
+.video-badge-source {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(24, 119, 242, 0.85);
+  color: #fff;
+  font-size: 0.76rem;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.video-card-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.video-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 0.82rem;
+  color: var(--gold-primary);
+}
+
+.video-card-title {
+  font-family: var(--font-poetry);
+  font-size: 1.45rem;
+  color: #fff;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.video-card-desc {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.video-card-footer {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 1rem;
+}
+
+.btn-watch-now {
+  background: transparent;
+  border: none;
+  color: var(--gold-glow);
+  font-weight: 700;
+  font-size: 0.92rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-ui);
+  transition: var(--transition-smooth);
+}
+
+.btn-watch-now:hover {
+  color: #fff;
+  transform: translateX(-4px);
+}
+
+/* Video Player Screen inside Modal */
+.video-player-screen {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--gold-border);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-simulated-player {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2rem;
+}
+
+.video-simulated-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(8, 10, 15, 0.2) 0%, rgba(8, 10, 15, 0.85) 100%);
+}
+
+.video-simulated-content {
+  position: relative;
+  z-index: 2;
+  text-align: right;
+}
+
+.audio-soundwave-anim {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 24px;
+  margin-bottom: 12px;
+}
+
+.audio-soundwave-anim span {
+  width: 4px;
+  height: 8px;
+  background: var(--gold-primary);
+  border-radius: 2px;
+  animation: waveHeight 0.8s infinite alternate ease-in-out;
+}
+
+.audio-soundwave-anim span:nth-child(2) { animation-delay: 0.15s; }
+.audio-soundwave-anim span:nth-child(3) { animation-delay: 0.3s; }
+.audio-soundwave-anim span:nth-child(4) { animation-delay: 0.45s; }
+.audio-soundwave-anim span:nth-child(5) { animation-delay: 0.6s; }
+
+@keyframes waveHeight {
+  from { height: 6px; }
+  to { height: 24px; }
+}
+
+/* ==========================================================================
    Biography & Journey (عن الشاعر والدرويش)
    ========================================================================== */
 .about-section {

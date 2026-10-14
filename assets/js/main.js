@@ -175,6 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initAmbientCanvas();
   initHeaderScroll();
   initPoetryGrid();
+  initVideosShowcase();
   initFiltersAndSearch();
   initDailyVerse();
   initModalEvents();
@@ -822,4 +823,227 @@ function renderFbCards(posts) {
     </article>
   `).join('');
 }
+
+/* ==========================================================================
+   10. مكتبة الفيديوهات والمرئيات من فيسبوك (Videos Showcase)
+   ========================================================================== */
+const VIDEOS_DATA = [
+  {
+    id: "vid-1",
+    title: "إلقاء قصيدة: هسي قُولا (تسجيل مرئي خاص)",
+    category: "recitation",
+    categoryName: "إلقاء شعري",
+    duration: "٠٣:٢٠",
+    thumb: "assets/images/poet_portrait.jpg",
+    desc: "تسجيل مرئي للشاعر ذوالنون أحمد نايل يلقي رائعته الوجدانية 'هسي قولا'، مقتطف من مقاطع صفحته الرسمية على فيسبوك.",
+    fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos",
+    quote: "قدر ما طيبتك تحاول ترضي اوقاتي وفضولا ياخ احبك .. والبحسها ما بيحتاج من يقولا!"
+  },
+  {
+    id: "vid-2",
+    title: "العمل الغنائي: شنو الريد؟! (الموسيقى والكلمات)",
+    category: "musical",
+    categoryName: "أعمال غنائية",
+    duration: "٠٤:١٥",
+    thumb: "assets/images/poetic_night_bg.jpg",
+    desc: "فيديو مصور للعمل الغنائي 'شنو الريد'؛ كلمات الشاعر ذوالنون نايل وألحان الموسيقار أبوبكر الأنصاري.",
+    fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos",
+    quote: "شنو الريد غير عيون ترتاح في شوفة زول حنين وطيب؟ شنو الريد غير مشاعر تصدق الإحساس وتهوانا قريب؟"
+  },
+  {
+    id: "vid-3",
+    title: "إلقاء قصيدة: داويني وحرقة الشوق",
+    category: "recitation",
+    categoryName: "إلقاء شعري",
+    duration: "٠٢:٤٥",
+    thumb: "assets/images/poet_real_portrait.jpg",
+    desc: "مقطع مصور عالي التأثير من إلقاء الشاعر، حصد آلاف المشاهدات والتفاعلات عبر صفحات التواصل الأدبية.",
+    fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos",
+    quote: "داويني بي لمسة عطف تمسح سواد هذا الزمان.. وترجع لقلبي الحزين كل المودة والأمان."
+  },
+  {
+    id: "vid-4",
+    title: "مشاركة الشاعر في برنامج: دفتر مشاعر",
+    category: "programs",
+    categoryName: "برامج ولقاءات",
+    duration: "٠٦:١٠",
+    thumb: "assets/images/poetry_book_cover.jpg",
+    desc: "تسجيل صوتي ومرئي لحلقة الشاعر ذوالنون نايل في البرنامج الثقافي الشهير 'دفتر مشاعر' للحديث عن أدب الغربة والحنين.",
+    fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos",
+    quote: "في كل غربة حنين يشد الوتر على نغمة بلادنا.. ونفرش خطاوينا أمل يجمع شتات ميعادنا."
+  },
+  {
+    id: "vid-5",
+    title: "إلقاء قصيدة: بالله كيف (مقتطف فيسبوك)",
+    category: "recitation",
+    categoryName: "إلقاء شعري",
+    duration: "٠٣:٠٥",
+    thumb: "assets/images/poet_portrait.jpg",
+    desc: "إلقاء شعري مفعم بالحنين من أرشيف منشورات الفيديو للشاعر ذوالنون حول ألم الفراق وأشواق السفر.",
+    fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos",
+    quote: "بالله كيف وسط المنام العين يصحي اشواقا طيف.. ينزل حنينك في المكان ويغني ضل الفرقة ضيف!"
+  },
+  {
+    id: "vid-6",
+    title: "العمل الغنائي: يا بكره يا واعد",
+    category: "musical",
+    categoryName: "أعمال غنائية",
+    duration: "٠٣:٥٠",
+    thumb: "assets/images/poetic_night_bg.jpg",
+    desc: "تسجيل غنائي واعد مهدى للأمل والوطن؛ من كلمات الشاعر وألحان الملحن منتصر دونتاي.",
+    fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos",
+    quote: "يا بكره يا واعد بشارة خير تفوت في كل درب.. تغسل عيون الخوف وترسم فرحة جوة القلب!"
+  }
+];
+
+let activeVideo = null;
+let currentVideoFilter = "all";
+
+function initVideosShowcase() {
+  const container = document.getElementById('videos-container');
+  if (!container) return;
+
+  renderVideos(VIDEOS_DATA);
+
+  // تهيئة أزرار التصفية
+  const vTabs = document.querySelectorAll('.v-tab-btn');
+  vTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      vTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      currentVideoFilter = tab.getAttribute('data-vfilter');
+      
+      const filtered = currentVideoFilter === 'all' 
+        ? VIDEOS_DATA 
+        : VIDEOS_DATA.filter(v => v.category === currentVideoFilter);
+      
+      renderVideos(filtered);
+    });
+  });
+
+  initVideoModalEvents();
+}
+
+function renderVideos(list) {
+  const container = document.getElementById('videos-container');
+  if (!container) return;
+
+  if (list.length === 0) {
+    container.innerHTML = `
+      <div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--text-muted);">
+        <p style="font-size: 1.2rem; font-family: var(--font-poetry);">لا توجد مقاطع فيديو في هذا التصنيف حالياً..</p>
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = list.map(v => `
+    <article class="video-card" data-vid="${v.id}">
+      <div class="video-thumb-container" onclick="openVideoPlayer('${v.id}')">
+        <img src="${v.thumb}" alt="${v.title}" class="video-thumb-img">
+        <div class="video-badge-source">
+          <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          فيديو فيسبوك
+        </div>
+        <div class="video-duration-tag">⏱ ${v.duration}</div>
+        <div class="video-play-overlay">
+          <div class="play-circle-btn">▶</div>
+        </div>
+      </div>
+
+      <div class="video-card-body">
+        <div class="video-card-meta">
+          <span>${v.categoryName}</span>
+          <span>من صفحة الشاعر</span>
+        </div>
+        <h3 class="video-card-title">${v.title}</h3>
+        <p class="video-card-desc">${v.desc}</p>
+        
+        <div class="video-card-footer">
+          <button class="btn-watch-now" onclick="openVideoPlayer('${v.id}')">
+            تشغيل المقطع المرئي ▶
+          </button>
+          <a href="${v.fbUrl}" target="_blank" rel="noopener noreferrer" style="color: #60a5fa; text-decoration: none; font-size: 0.85rem; font-weight: 600;">
+            شاهد على فيسبوك ↗
+          </a>
+        </div>
+      </div>
+    </article>
+  `).join('');
+}
+
+window.openVideoPlayer = function(id) {
+  const vid = VIDEOS_DATA.find(v => v.id === id);
+  if (!vid) return;
+  activeVideo = vid;
+
+  document.getElementById('video-modal-title').textContent = vid.title;
+  document.getElementById('video-modal-category').textContent = `${vid.categoryName} • ${vid.duration} دقيقة`;
+  document.getElementById('video-modal-desc').innerHTML = `
+    <p style="font-size: 1.35rem; color: var(--gold-glow); margin-bottom: 8px;">« ${vid.quote} »</p>
+    <p style="font-size: 0.95rem; color: var(--text-muted); font-family: var(--font-ui);">${vid.desc}</p>
+  `;
+
+  document.getElementById('video-modal-fb-link').href = vid.fbUrl;
+
+  const playerContainer = document.getElementById('video-player-container');
+  playerContainer.innerHTML = `
+    <div class="video-simulated-player" style="background-image: url('${vid.thumb}');">
+      <div class="video-simulated-overlay"></div>
+      <div class="video-simulated-content">
+        <div class="audio-soundwave-anim">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <h4 style="color: #fff; font-size: 1.4rem; font-family: var(--font-poetry); margin-bottom: 4px;">${vid.title}</h4>
+        <p style="color: var(--sand-accent); font-size: 0.95rem;">تسجيل وإلقاء الشاعر ذوالنون أحمد نايل (الدرويش)</p>
+      </div>
+    </div>
+  `;
+
+  const modal = document.getElementById('video-modal');
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+};
+
+function initVideoModalEvents() {
+  const modal = document.getElementById('video-modal');
+  const closeBtn = document.getElementById('close-video-modal-btn');
+  const shareBtn = document.getElementById('video-modal-share-btn');
+
+  function closeVideoModal() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  if (closeBtn) closeBtn.addEventListener('click', closeVideoModal);
+  if (modal) {
+    modal.addEventListener('click', e => {
+      if (e.target === modal) closeVideoModal();
+    });
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
+      closeVideoModal();
+    }
+  });
+
+  if (shareBtn) {
+    shareBtn.addEventListener('click', () => {
+      if (!activeVideo) return;
+      if (navigator.share) {
+        navigator.share({
+          title: activeVideo.title,
+          text: `شاهد مقطع: ${activeVideo.title} للشاعر ذوالنون نايل`,
+          url: activeVideo.fbUrl
+        }).catch(() => {});
+      } else {
+        navigator.clipboard.writeText(`${activeVideo.title}\n${activeVideo.fbUrl}`).then(() => {
+          showToast('تم نسخ رابط الفيديو للمشاركة!');
+        });
+      }
+    });
+  }
+}
+
 

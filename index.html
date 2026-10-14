@@ -76,6 +76,7 @@
         <ul class="nav-links">
           <li><a href="#hero" class="active">الرئيسية</a></li>
           <li><a href="#poems">ديوان القصائد</a></li>
+          <li><a href="#videos">المرئيات والفيديوهات</a></li>
           <li><a href="#about">عن الشاعر</a></li>
           <li><a href="#facebook-feed">مقتطفات فيسبوك</a></li>
           <li><a href="#guestbook">دفتر الخواطر</a></li>
@@ -214,6 +215,42 @@
 
       <!-- Poems Grid Container -->
       <div id="poems-container" class="poems-grid">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Showcase Section (مرئيات وفيديوهات من فيسبوك) -->
+  <section id="videos" class="videos-section">
+    <div class="container">
+      <div class="section-head">
+        <div class="live-pulse-badge" style="background: rgba(212, 175, 55, 0.12); border-color: var(--gold-border); color: var(--gold-glow);">
+          <span>🎥</span>
+          <span>مقاطع وفيديوهات مستمدة من فيسبوك</span>
+        </div>
+        <h2 class="section-title">المكتبة المرئية والإلقاء الصوتي</h2>
+        <p class="section-desc">
+          شاهد واستمع إلى تسجيلات إلقاء الشاعر ذوالنون أحمد نايل، ومشاركاته في البرامج، وأعماله الغنائية المصورة المأخوذة من صفحته الرسمية.
+        </p>
+      </div>
+
+      <!-- Video Filter Controls -->
+      <div class="video-controls">
+        <div class="video-filter-tabs">
+          <button class="v-tab-btn active" data-vfilter="all">جميع المرئيات</button>
+          <button class="v-tab-btn" data-vfilter="recitation">إلقاء شعري</button>
+          <button class="v-tab-btn" data-vfilter="musical">أعمال غنائية</button>
+          <button class="v-tab-btn" data-vfilter="programs">برامج ولقاءات</button>
+        </div>
+
+        <a href="https://www.facebook.com/dhwalnwn.ahmd.nayl/videos" target="_blank" rel="noopener noreferrer" class="btn-facebook" style="padding: 9px 20px; font-size: 0.9rem;">
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          فيديوهات صفحة فيسبوك ↗
+        </a>
+      </div>
+
+      <!-- Videos Grid -->
+      <div id="videos-container" class="videos-grid">
         <!-- Rendered by JS -->
       </div>
     </div>
@@ -455,6 +492,36 @@
         </button>
         <button id="modal-share-btn" class="icon-btn">
           🔗 مشاركة القصيدة
+        </button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Modal Video Player Lightbox -->
+  <div id="video-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-container" style="max-width: 840px;">
+      <header class="modal-header">
+        <div class="modal-title-wrap">
+          <h3 id="video-modal-title">عنوان الفيديو</h3>
+          <span id="video-modal-category">إلقاء شعري من فيسبوك</span>
+        </div>
+        <button id="close-video-modal-btn" class="modal-close-btn" aria-label="إغلاق النافذة">×</button>
+      </header>
+
+      <div class="modal-body" style="padding: 1.5rem;">
+        <div id="video-player-container" class="video-player-screen">
+          <!-- Video element / Embed player -->
+        </div>
+        <div id="video-modal-desc" class="video-modal-description" style="margin-top: 1.25rem; text-align: right; color: var(--sand-accent); font-family: var(--font-poetry); font-size: 1.2rem; line-height: 1.9;">
+        </div>
+      </div>
+
+      <footer class="modal-footer">
+        <a id="video-modal-fb-link" href="https://www.facebook.com/dhwalnwn.ahmd.nayl/videos" target="_blank" rel="noopener noreferrer" class="btn-facebook">
+          مشاهدة الفيديو على فيسبوك ↗
+        </a>
+        <button id="video-modal-share-btn" class="icon-btn">
+          🔗 مشاركة المقطع
         </button>
       </footer>
     </div>
