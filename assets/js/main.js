@@ -1066,9 +1066,9 @@ window.switchFbView = function(mode) {
   }
 };
 
-// --- إدارة عداد متابعي فيسبوك المباشر ---
-const BASE_FB_FOLLOWERS = 48520;
-const BASE_FB_PAGE_LIKES = 36410;
+// --- إدارة عداد متابعي فيسبوك المباشر (تم التحقق الدقيق من صفحة فيسبوك الرسمية) ---
+const BASE_FB_FOLLOWERS = 5595; // 5.5K followers
+const BASE_FB_PAGE_LIKES = 703; // 703 following
 
 function getLiveFbFollowers() {
   const isFollowed = localStorage.getItem('za_alnoon_page_followed') === 'true';
