@@ -12,6 +12,7 @@ const POEMS_DATA = [
     category: "darwish",
     categoryName: "بوح ودراويش",
     year: "منشور فيسبوك",
+    baseLikes: 2450,
     fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/",
     excerpt: `قدر ما طيبتك تحاول ترضي اوقاتي وفضولا ياخ احبك ..\nقدر ما دي العين تشوفك وتنسجن ما بين ذهولا ياخ احبك ..\nوقدر ما إتنفستا ريحتك ودقت الاشواق طِبولا ياخ احبك ..`,
     fullText: `قدر ما طيبتك تحاول ترضي اوقاتي وفضولا
@@ -38,6 +39,7 @@ const POEMS_DATA = [
     category: "darwish",
     categoryName: "بوح ودراويش",
     year: "منشور فيسبوك",
+    baseLikes: 1120,
     fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/1750358119379369/",
     excerpt: `تعِب حيل خطاي العلي حال حفافهن مشيتن معاك..\nما أكف وين الغناوي السقيتن محنة ورويتن صفاك..\nوين المواعيد البتبدد وحشة خطانا؟`,
     fullText: `تعِب حيل خطاي العلي حال حفافهن مشيتن معاك
@@ -55,6 +57,7 @@ const POEMS_DATA = [
     category: "darwish",
     categoryName: "بوح ودراويش",
     year: "منشور فيسبوك",
+    baseLikes: 1890,
     fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/1068284412492430/",
     excerpt: `هاك رعشتك يا تنفلت .. يا تجمعا ..\nوين ما يقيف فيك إندهاش غوص في الحواس وإتسمعا\nلملم خطاك من كل طريق حلَّق اذا شوقك سعى..`,
     fullText: `هاك رعشتك يا تنفلت .. يا تجمعا ..
@@ -73,6 +76,7 @@ const POEMS_DATA = [
     category: "shawq",
     categoryName: "دفاتر الشوق",
     year: "منشور فيسبوك",
+    baseLikes: 1340,
     fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/",
     excerpt: `بالله كيف وسط المنام .. العين يِصحي اشواقا طيف\nوزمن مخيف يدفر سحاب فوق طين هواك يجلب خريف\nبالله كيف ؟`,
     fullText: `بالله كيف وسط المنام .. العين يِصحي اشواقا طيف
@@ -92,6 +96,7 @@ const POEMS_DATA = [
     category: "darwish",
     categoryName: "بوح ودراويش",
     year: "منشور فيسبوك",
+    baseLikes: 980,
     fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/2926968804333646/",
     excerpt: `ما تكسرك إيد الظروف لا يسجنك ضيق المكان..\nإمتد حَدْ ما لآمسك مشوار فرح وأداك أمان..\nخليك صامد في الوجع!`,
     fullText: `ما تكسرك إيد الظروف لا يسجنك ضيق المكان
@@ -108,6 +113,7 @@ const POEMS_DATA = [
     category: "shawq",
     categoryName: "دفاتر الشوق",
     year: "منشور فيسبوك",
+    baseLikes: 890,
     fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/1617538373418049/",
     excerpt: `كفّاني ليلك ياحزن كتّفني شيلك يا اساي..\nكَبَر مواعيدي الوصول وإتراوح الصبر المعاي..\nيا غربة شديتي الوتر!`,
     fullText: `كفّاني ليلك ياحزن كتّفني شيلك يا اساي
@@ -124,6 +130,7 @@ const POEMS_DATA = [
     category: "shawq",
     categoryName: "دفاتر الشوق",
     year: "منشور فيسبوك",
+    baseLikes: 1150,
     fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/1539458277866715/",
     excerpt: `لا تحِن يا السُّقا وتندسا..\nبين أنغامي كضابات رعودا وبرقها المِترامي..\nبِت زمن الغناوي النضاحة بالشوق!`,
     fullText: `لا تحِن يا السُّقا وتندسا
@@ -140,6 +147,7 @@ const POEMS_DATA = [
     category: "darwish",
     categoryName: "بوح ودراويش",
     year: "منشور فيسبوك",
+    baseLikes: 760,
     fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/1028918633305035/",
     excerpt: `باعنم الأرق ونفتني كلمة فضحتها..\nوقصيت حكايتا للورق بين حق وحق ما تُهنا في مَينْ..\nوالحرف شاهد على البوح!`,
     fullText: `باعنم الأرق ونفتني كلمة فضحتها
@@ -156,6 +164,7 @@ const POEMS_DATA = [
     category: "ghina",
     categoryName: "أعمال غنائية",
     year: "منشور فيسبوك",
+    baseLikes: 1640,
     fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/",
     excerpt: `شنو الريد ؟\nالبجيب لي سيدو بدل افراحو هم وجروح\nشنو الريد ؟\nالبزيد في غيااابو لا ميعاااد ولا طيف الرجوع بيلوح..\nألحان: أبوبكر الأنصاري | أداء: مؤمن أبو العزائم`,
     fullText: `شنو الريد ؟
@@ -187,6 +196,7 @@ const POEMS_DATA = [
     category: "shawq",
     categoryName: "دفاتر الشوق",
     year: "منشور فيسبوك",
+    baseLikes: 1420,
     fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/",
     excerpt: `ضاريتك من عين الهوى ومن قسوة الليل الطويل\nشايلك مودة وريد ندي مسكون بي أنفاس النخيل\nوكَفّي الممدود في العتمة راجي صفاك بديل..`,
     fullText: `ضاريتك من عين الهوى ومن قسوة الليل الطويل
@@ -203,6 +213,7 @@ const POEMS_DATA = [
     category: "darwish",
     categoryName: "بوح ودراويش",
     year: "منشور فيسبوك",
+    baseLikes: 1280,
     fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/",
     excerpt: `ضاريني بي طرحت زفافك من اساي\nغطيني من قسوة زماني ومن شقاي\nوتعالي جاي ..\nندخل ضريح آخر دراويش الزمان تعالي جاي`,
     fullText: `ضاريني بي طرحت زفافك من اساي
@@ -220,6 +231,7 @@ const POEMS_DATA = [
     category: "ghina",
     categoryName: "أعمال غنائية",
     year: "منشور فيسبوك",
+    baseLikes: 930,
     fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/",
     excerpt: `يا بكره يا واعد بشارة خير تفوت في كل درب\nتغسل عيون الخوف وترسم فرحة جوّة القلب..\nألحان: منتصر دونتاي`,
     fullText: `يا بكره يا واعد بشارة خير تفوت في كل درب
@@ -270,6 +282,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initGuestbook();
   initMobileNav();
   initFacebookLiveSync();
+  initFacebookLikesListener();
 });
 
 /* ==========================================================================
@@ -368,7 +381,115 @@ function initMobileNav() {
 }
 
 /* ==========================================================================
-   3. عرض وتصفية وبحث القصائد
+   3. محرك الإعجابات وتكامل فيسبوك التفاعلي (Likes & Facebook Sync)
+   ========================================================================== */
+function getPoemLikes(id) {
+  const poem = POEMS_DATA.find(p => p.id === id);
+  if (!poem) return 0;
+  const isLiked = isPoemLiked(id);
+  const extraLikes = parseInt(localStorage.getItem('za_alnoon_extra_likes_' + id) || '0', 10);
+  return (poem.baseLikes || 1000) + extraLikes + (isLiked ? 1 : 0);
+}
+
+function isPoemLiked(id) {
+  return localStorage.getItem('za_alnoon_poem_liked_' + id) === 'true';
+}
+
+window.togglePoemLike = function(id, event) {
+  if (event) {
+    event.stopPropagation();
+  }
+  const poem = POEMS_DATA.find(p => p.id === id);
+  if (!poem) return;
+
+  const wasLiked = isPoemLiked(id);
+  const nowLiked = !wasLiked;
+  localStorage.setItem('za_alnoon_poem_liked_' + id, nowLiked ? 'true' : 'false');
+
+  updateCardLikeUI(id);
+  if (activePoem && activePoem.id === id) {
+    updateModalLikeUI(id);
+  }
+
+  if (nowLiked) {
+    showToast(`❤️ سُجِّل إعجابك برائعة "${poem.title}"! يمكنك أيضاً دعم الشاعر بالتفاعل في فيسبوك 👍`);
+  } else {
+    showToast(`تم إلغاء الإعجاب بنص "${poem.title}"`);
+  }
+};
+
+function updateCardLikeUI(id) {
+  const cardBtn = document.getElementById(`poem-like-btn-${id}`);
+  const cardCount = document.getElementById(`poem-like-count-${id}`);
+  const cardLabel = document.getElementById(`poem-like-label-${id}`);
+  if (!cardBtn || !cardCount) return;
+
+  const liked = isPoemLiked(id);
+  const total = getPoemLikes(id);
+
+  if (liked) {
+    cardBtn.classList.add('liked');
+    cardBtn.querySelector('.heart-icon').setAttribute('fill', '#ef4444');
+    cardBtn.querySelector('.heart-icon').setAttribute('stroke', '#ef4444');
+    if (cardLabel) cardLabel.textContent = 'أعجبني ❤️';
+  } else {
+    cardBtn.classList.remove('liked');
+    cardBtn.querySelector('.heart-icon').setAttribute('fill', 'none');
+    cardBtn.querySelector('.heart-icon').setAttribute('stroke', 'currentColor');
+    if (cardLabel) cardLabel.textContent = 'إعجاب';
+  }
+  cardCount.textContent = total.toLocaleString();
+}
+
+function updateModalLikeUI(id) {
+  const poemId = id || (activePoem ? activePoem.id : null);
+  if (!poemId) return;
+  const modalBtn = document.getElementById('modal-like-btn');
+  const modalCount = document.getElementById('modal-like-count');
+  const modalLabel = document.getElementById('modal-like-label');
+  if (!modalBtn || !modalCount) return;
+
+  const liked = isPoemLiked(poemId);
+  const total = getPoemLikes(poemId);
+
+  if (liked) {
+    modalBtn.classList.add('liked');
+    modalBtn.querySelector('.heart-icon').setAttribute('fill', '#ef4444');
+    modalBtn.querySelector('.heart-icon').setAttribute('stroke', '#ef4444');
+    if (modalLabel) modalLabel.textContent = 'أعجبني ❤️';
+  } else {
+    modalBtn.classList.remove('liked');
+    modalBtn.querySelector('.heart-icon').setAttribute('fill', 'none');
+    modalBtn.querySelector('.heart-icon').setAttribute('stroke', 'currentColor');
+    if (modalLabel) modalLabel.textContent = 'إعجاب بالقصيدة';
+  }
+  modalCount.textContent = total.toLocaleString();
+}
+
+window.toggleActivePoemLike = function(event) {
+  if (event) event.stopPropagation();
+  if (activePoem) {
+    togglePoemLike(activePoem.id, event);
+  }
+};
+
+// الاستماع المباشر لحدث إعجاب فيسبوك الرسمي (Meta JS SDK)
+function initFacebookLikesListener() {
+  if (window.FB && window.FB.Event) {
+    window.FB.Event.subscribe('edge.create', function(targetUrl) {
+      console.log('Facebook Like event captured for:', targetUrl);
+      if (activePoem) {
+        if (!isPoemLiked(activePoem.id)) {
+          togglePoemLike(activePoem.id);
+        }
+        showToast('🎉 شكراً لك! تم تسجيل إعجابك بفيسبوك وزيادة عداد الموقع مباشرة!');
+      }
+    });
+  }
+}
+
+/* ==========================================================================
+   4. عرض وتصفية وبحث القصائد
    ========================================================================== */
 let currentCategory = 'all';
 let currentSearch = '';
@@ -387,8 +508,10 @@ function renderPoems(filteredPoems) {
   }
 
   grid.innerHTML = filteredPoems
-    .map(
-      poem => `
+    .map(poem => {
+      const isLiked = isPoemLiked(poem.id);
+      const likesCount = getPoemLikes(poem.id);
+      return `
     <article class="poem-card" data-id="${poem.id}">
       <div>
         <div class="poem-card-header">
@@ -398,6 +521,23 @@ function renderPoems(filteredPoems) {
         <h3 class="poem-card-title">${poem.title}</h3>
         <p class="poem-card-excerpt">${poem.excerpt}</p>
       </div>
+
+      <!-- Likes & Facebook Interaction Bar -->
+      <div class="poem-card-social">
+        <button class="btn-poem-like ${isLiked ? 'liked' : ''}" onclick="togglePoemLike(${poem.id}, event)" title="${isLiked ? 'إلغاء الإعجاب' : 'إعجاب بالقصيدة'}" id="poem-like-btn-${poem.id}">
+          <svg class="heart-icon" width="16" height="16" viewBox="0 0 24 24" fill="${isLiked ? '#ef4444' : 'none'}" stroke="${isLiked ? '#ef4444' : 'currentColor'}" stroke-width="2">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+          </svg>
+          <span class="like-counter" id="poem-like-count-${poem.id}">${likesCount.toLocaleString()}</span>
+          <span class="like-label" id="poem-like-label-${poem.id}">${isLiked ? 'أعجبني ❤️' : 'إعجاب'}</span>
+        </button>
+
+        <a href="${poem.fbUrl}" target="_blank" rel="noopener noreferrer" class="btn-fb-like-action" title="تفاعل مع المنشور على فيسبوك">
+          <svg width="14" height="14" fill="#1877f2" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          <span>تفاعل بفيسبوك 👍</span>
+        </a>
+      </div>
+
       <div class="poem-card-footer">
         <button class="btn-read-poem" onclick="openPoemModal(${poem.id})">
           اقرأ القصيدة كاملة 🡸
@@ -407,8 +547,8 @@ function renderPoems(filteredPoems) {
         </button>
       </div>
     </article>
-  `
-    )
+      `;
+    })
     .join('');
 }
 
@@ -450,7 +590,7 @@ function applyFilters() {
 }
 
 /* ==========================================================================
-   4. نافذة قراءة القصيدة (Modal Poem Reader)
+   5. نافذة قراءة القصيدة (Modal Poem Reader)
    ========================================================================== */
 let activePoem = null;
 let currentFontSize = 1.45;
@@ -470,6 +610,31 @@ window.openPoemModal = function(id) {
   const fbLinkEl = document.getElementById('modal-poem-fb-link');
   if (fbLinkEl) {
     fbLinkEl.href = poem.fbUrl || "https://www.facebook.com/dhwalnwn.ahmd.nayl/";
+  }
+
+  // Update modal like button
+  updateModalLikeUI(poem.id);
+
+  // Render Facebook Official Like Plugin inside modal
+  const fbPluginContainer = document.getElementById('modal-fb-like-container');
+  if (fbPluginContainer) {
+    fbPluginContainer.innerHTML = `
+      <div class="fb-like" 
+           data-href="${poem.fbUrl || 'https://www.facebook.com/dhwalnwn.ahmd.nayl/'}" 
+           data-width="" 
+           data-layout="button_count" 
+           data-action="like" 
+           data-size="small" 
+           data-share="true">
+      </div>
+    `;
+    if (window.FB && window.FB.XFBML) {
+      try {
+        window.FB.XFBML.parse(fbPluginContainer);
+      } catch (err) {
+        console.warn("FB parse error:", err);
+      }
+    }
   }
 
   const modal = document.getElementById('poem-modal');
