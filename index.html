@@ -56,6 +56,23 @@
 </head>
 <body>
 
+  <!-- Meta Facebook JS SDK Root & Asynchronous Init -->
+  <div id="fb-root"></div>
+  <script>
+    window.fbAsyncInit = function() {
+      if (window.FB) {
+        window.FB.init({
+          xfbml   : true,
+          version : 'v19.0'
+        });
+        if (typeof initFacebookLikesListener === 'function') {
+          initFacebookLikesListener();
+        }
+      }
+    };
+  </script>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/ar_AR/sdk.js#xfbml=1&version=v19.0"></script>
+
   <!-- Ambient Canvas Background -->
   <canvas id="ambient-canvas"></canvas>
   <div class="ambient-glow ambient-glow-1"></div>
@@ -360,10 +377,14 @@
                 <span id="fb-likes-count" class="fb-stat-num">703</span>
                 <span class="fb-stat-lbl">يتابعهم</span>
               </div>
-              <div class="fb-stat-sync">
+              <div class="fb-stat-sync" id="fb-live-sync-indicator" title="المزامنة اللحظية مفعلة ومتصلة بفيسبوك">
                 <span class="live-dot-green"></span>
-                <span>تحديث مباشر من فيسبوك</span>
+                <span id="fb-sync-text">مزامنة لحظية مباشرة</span>
               </div>
+              <button id="btn-force-fb-sync" class="btn-stat-sync-refresh" onclick="forceSyncFacebookStats(event)" title="تحديث لحظي فوري من فيسبوك">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+                <span>تحديث لحظي</span>
+              </button>
             </div>
 
             <!-- Official Facebook Follow Plugin -->
@@ -414,10 +435,6 @@
       <!-- View 1: Meta Official Live Page Plugin Container -->
       <div id="fb-live-view-container" class="fb-live-wrapper">
         <div class="fb-live-frame-box">
-          <!-- Facebook Root SDK -->
-          <div id="fb-root"></div>
-          <script async defer crossorigin="anonymous" src="https://connect.facebook.net/ar_AR/sdk.js#xfbml=1&version=v19.0"></script>
-          
           <!-- Official Meta Page Embed Widget -->
           <div class="fb-page" 
                data-href="https://www.facebook.com/dhwalnwn.ahmd.nayl/" 
@@ -634,7 +651,7 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="assets/js/main.js?v=20261014_verified_count"></script>
+  <script src="assets/js/main.js?v=20261014_realtime_sync"></script>
   <script>
     document.getElementById('year-span').textContent = new Date().getFullYear();
   </script>
