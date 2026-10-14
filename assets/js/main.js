@@ -830,75 +830,75 @@ function renderFbCards(posts) {
 const VIDEOS_DATA = [
   {
     id: "vid-1",
-    title: "إلقاء قصيدة: هسي قُولا (تسجيل مرئي خاص)",
+    title: "قصيدة: تعِب حيل خطاي (إلقاء الشاعر ذوالنون)",
     category: "recitation",
     categoryName: "إلقاء شعري",
-    duration: "٠٣:٢٠",
-    thumb: "assets/images/poet_portrait.jpg",
-    videoSrc: "assets/videos/video_hasi_qula.mp4",
-    desc: "تسجيل مرئي للشاعر ذوالنون أحمد نايل يلقي رائعته الوجدانية 'هسي قولا'، مقتطف من مقاطع صفحته الرسمية على فيسبوك.",
-    fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos",
-    quote: "قدر ما طيبتك تحاول ترضي اوقاتي وفضولا ياخ احبك .. والبحسها ما بيحتاج من يقولا!"
+    duration: "٠٢:٢٦",
+    thumb: "assets/images/thumb_v1.jpg",
+    videoSrc: "assets/videos/video_real_1.mp4",
+    desc: "تسجيل مرئي وإلقاء حي للشاعر ذوالنون أحمد نايل من صفحته الرسمية، بصوته الأصلي وكامل إحساسه الوجداني.",
+    fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/1750358119379369/",
+    quote: "تعِب حيل خطاي العلي حال حفافهن مشين.. ما أكف وين الغناوي السقيتن محنة ورويتن صفاك!"
   },
   {
     id: "vid-2",
-    title: "العمل الغنائي: شنو الريد؟! (الموسيقى والكلمات)",
-    category: "musical",
-    categoryName: "أعمال غنائية",
-    duration: "٠٤:١٥",
-    thumb: "assets/images/poetic_night_bg.jpg",
-    videoSrc: "assets/videos/video_shino_alraid.mp4",
-    desc: "فيديو مصور للعمل الغنائي 'شنو الريد'؛ كلمات الشاعر ذوالنون نايل وألحان الموسيقار أبوبكر الأنصاري.",
-    fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos",
-    quote: "شنو الريد غير عيون ترتاح في شوفة زول حنين وطيب؟ شنو الريد غير مشاعر تصدق الإحساس وتهوانا قريب؟"
+    title: "قصيدة: هاك رعشتك (غوص في الحواس)",
+    category: "recitation",
+    categoryName: "إلقاء شعري",
+    duration: "٠١:٣٢",
+    thumb: "assets/images/thumb_v2.jpg",
+    videoSrc: "assets/videos/video_real_2.mp4",
+    desc: "مقطع شعري مميز من ديوان الحواس وإلقاء الشاعر ذوالنون، مسجل بالصوت والصورة الحية من فيسبوك.",
+    fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/1068284412492430/",
+    quote: "هاك رعشتك يا تنفلت يا جمعا.. وين ما يقيف فيك إندهاش غوص في الحواس وإتسمعا!"
   },
   {
     id: "vid-3",
-    title: "إلقاء قصيدة: داويني وحرقة الشوق",
+    title: "قصيدة: لا تحِن يا السُّقا (أشواق ونغم)",
     category: "recitation",
     categoryName: "إلقاء شعري",
-    duration: "٠٢:٤٥",
-    thumb: "assets/images/poet_real_portrait.jpg",
-    videoSrc: "assets/videos/video_dawini.mp4",
-    desc: "مقطع مصور عالي التأثير من إلقاء الشاعر، حصد آلاف المشاهدات والتفاعلات عبر صفحات التواصل الأدبية.",
-    fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos",
-    quote: "داويني بي لمسة عطف تمسح سواد هذا الزمان.. وترجع لقلبي الحزين كل المودة والأمان."
+    duration: "٠١:٢٥",
+    thumb: "assets/images/thumb_v3.jpg",
+    videoSrc: "assets/videos/video_real_3.mp4",
+    desc: "إلقاء نغمي مؤثر مسحوب مباشرة من فيسبوك الشاعر، مع الصوت الأصلي النقي والكامل.",
+    fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/1539458277866715/",
+    quote: "لا تحِن يا السُّقا وتندسا.. بين أنغامي كضابات رعودا وبرقها المِترامي!"
   },
   {
     id: "vid-4",
-    title: "مشاركة الشاعر في برنامج: دفتر مشاعر",
-    category: "programs",
-    categoryName: "برامج ولقاءات",
-    duration: "٠٦:١٠",
-    thumb: "assets/images/poetry_book_cover.jpg",
-    videoSrc: "assets/videos/video_daftar_mashaer.mp4",
-    desc: "تسجيل صوتي ومرئي لحلقة الشاعر ذوالنون نايل في البرنامج الثقافي الشهير 'دفتر مشاعر' للحديث عن أدب الغربة والحنين.",
-    fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos",
-    quote: "في كل غربة حنين يشد الوتر على نغمة بلادنا.. ونفرش خطاوينا أمل يجمع شتات ميعادنا."
+    title: "قصيدة: ما تكسرك إيد الظروف (أمل وتحدي)",
+    category: "recitation",
+    categoryName: "إلقاء شعري",
+    duration: "٠١:٣٥",
+    thumb: "assets/images/thumb_v4.jpg",
+    videoSrc: "assets/videos/video_real_4.mp4",
+    desc: "تسجيل مرئي ملهم يحث على الصبر والأمل، متداول بإعجاب وتفاعل واسع على فيسبوك.",
+    fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/2926968804333646/",
+    quote: "ما تكسرك إيد الظروف لا يسجنك ضيق المكان.. إمتد حَدْ ما لآمسك مشوار فرح وأداك أمان!"
   },
   {
     id: "vid-5",
-    title: "إلقاء قصيدة: بالله كيف (مقتطف فيسبوك)",
+    title: "قصيدة: كفّاني ليلك يا حزن (صبر وأشجان)",
     category: "recitation",
     categoryName: "إلقاء شعري",
-    duration: "٠٣:٠٥",
-    thumb: "assets/images/poet_portrait.jpg",
-    videoSrc: "assets/videos/video_hasi_qula.mp4",
-    desc: "إلقاء شعري مفعم بالحنين من أرشيف منشورات الفيديو للشاعر ذوالنون حول ألم الفراق وأشواق السفر.",
-    fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos",
-    quote: "بالله كيف وسط المنام العين يصحي اشواقا طيف.. ينزل حنينك في المكان ويغني ضل الفرقة ضيف!"
+    duration: "٠٢:٢٥",
+    thumb: "assets/images/thumb_v5.jpg",
+    videoSrc: "assets/videos/video_real_5.mp4",
+    desc: "مرثية وجدانية عميقة وإلقاء رخيم بصوت الشاعر الدرويش، مسجلة بالكامل مع الصوت الأصلي.",
+    fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/1617538373418049/",
+    quote: "كفّاني ليلك ياحزن كتّفني شيلك يا اساي.. كَبَر مواعيدي الوصول وإتراوح الصبر المعاي!"
   },
   {
     id: "vid-6",
-    title: "العمل الغنائي: يا بكره يا واعد",
-    category: "musical",
-    categoryName: "أعمال غنائية",
-    duration: "٠٣:٥٠",
-    thumb: "assets/images/poetic_night_bg.jpg",
-    videoSrc: "assets/videos/video_shino_alraid.mp4",
-    desc: "تسجيل غنائي واعد مهدى للأمل والوطن؛ من كلمات الشاعر وألحان الملحن منتصر دونتاي.",
-    fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos",
-    quote: "يا بكره يا واعد بشارة خير تفوت في كل درب.. تغسل عيون الخوف وترسم فرحة جوة القلب!"
+    title: "قصيدة: بين حق وحق (بوح القوافي)",
+    category: "recitation",
+    categoryName: "إلقاء شعري",
+    duration: "٠٢:١٠",
+    thumb: "assets/images/thumb_v6.jpg",
+    videoSrc: "assets/videos/video_real_6.mp4",
+    desc: "نص شعري رصين من أرشيف مقاطع الشاعر على فيسبوك بصوته المباشر وصورته الأصلية.",
+    fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/1028918633305035/",
+    quote: "باعنم الأرق ونفتني كلمة فضحتها.. وقصيت حكايتا للورق بين حق وحق ما تُهنا في مَينْ!"
   }
 ];
 
@@ -949,7 +949,7 @@ function renderVideos(list) {
         <img src="${v.thumb}" alt="${v.title}" class="video-thumb-img">
         <div class="video-badge-source">
           <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-          فيديو فيسبوك
+          فيديو فيسبوك الأصلي
         </div>
         <div class="video-duration-tag">⏱ ${v.duration}</div>
         <div class="video-play-overlay">
@@ -960,7 +960,7 @@ function renderVideos(list) {
       <div class="video-card-body">
         <div class="video-card-meta">
           <span>${v.categoryName}</span>
-          <span>من صفحة الشاعر</span>
+          <span style="color: #22c55e;">● بالصوت الأصلي للشاعر</span>
         </div>
         <h3 class="video-card-title">${v.title}</h3>
         <p class="video-card-desc">${v.desc}</p>
@@ -970,7 +970,7 @@ function renderVideos(list) {
             تشغيل المقطع المرئي ▶
           </button>
           <a href="${v.fbUrl}" target="_blank" rel="noopener noreferrer" style="color: #60a5fa; text-decoration: none; font-size: 0.85rem; font-weight: 600;">
-            شاهد على فيسبوك ↗
+            منشور فيسبوك ↗
           </a>
         </div>
       </div>
@@ -984,40 +984,30 @@ window.openVideoPlayer = function(id) {
   activeVideo = vid;
 
   document.getElementById('video-modal-title').textContent = vid.title;
-  document.getElementById('video-modal-category').textContent = `${vid.categoryName} • ${vid.duration} دقيقة`;
+  document.getElementById('video-modal-category').textContent = `${vid.categoryName} • ${vid.duration} دقيقة (كامل المدة والصوت)`;
   document.getElementById('video-modal-desc').innerHTML = `
     <p style="font-size: 1.35rem; color: var(--gold-glow); margin-bottom: 8px;">« ${vid.quote} »</p>
     <p style="font-size: 0.95rem; color: var(--text-muted); font-family: var(--font-ui);">${vid.desc}</p>
   `;
 
-  const fbLink = vid.fbVideoUrl || vid.fbUrl || "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos";
-  document.getElementById('video-modal-fb-link').href = fbLink;
+  document.getElementById('video-modal-fb-link').href = vid.fbUrl;
 
   const playerContainer = document.getElementById('video-player-container');
-  const encodedFbUrl = encodeURIComponent(fbLink);
   
   playerContainer.innerHTML = `
-    <div class="fb-embed-container" style="position: relative; width: 100%; aspect-ratio: 16/9; background: #000; border-radius: var(--radius-md); overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-      <iframe 
-        src="https://www.facebook.com/plugins/video.php?href=${encodedFbUrl}&show_text=0&width=720&autoplay=1" 
-        width="100%" 
-        height="100%" 
-        style="border:none; overflow:hidden; width:100%; height:100%; position:absolute; top:0; left:0;" 
-        scrolling="no" 
-        frameborder="0" 
-        allowfullscreen="true" 
-        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" 
-        allowFullScreen="true"
-        title="${vid.title}">
-      </iframe>
+    <div style="position: relative; width: 100%; background: #000; border-radius: var(--radius-md); overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.7); display: flex; justify-content: center; align-items: center;">
+      <video id="active-html5-video" controls autoplay playsinline style="width: 100%; max-height: 520px; object-fit: contain; background: #000;" poster="${vid.thumb}">
+        <source src="${vid.videoSrc}" type="video/mp4">
+        متصفحك لا يدعم تشغيل هذا المقطع.
+      </video>
     </div>
-    <div style="margin-top: 10px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
-      <span style="font-size: 0.85rem; color: var(--sand-accent); display: flex; align-items: center; gap: 6px;">
-        <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #22c55e;"></span>
-        مشغل فيسبوك الرسمي المباشر (كامل الصوت والمدة الأصلية)
+    <div style="margin-top: 12px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+      <span style="font-size: 0.85rem; color: #22c55e; display: flex; align-items: center; gap: 6px;">
+        <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 8px #22c55e;"></span>
+        تسجيل مرئي كامل بالصوت الأصلي للشاعر (مقتطف مباشر من فيسبوك)
       </span>
-      <a href="${fbLink}" target="_blank" rel="noopener noreferrer" style="font-size: 0.85rem; color: #60a5fa; text-decoration: none; font-weight: 600;">
-        إذا تعذر التحميل، شاهد المقطع مباشرة على فيسبوك ↗
+      <a href="${vid.fbUrl}" target="_blank" rel="noopener noreferrer" style="font-size: 0.85rem; color: #60a5fa; text-decoration: none; font-weight: 600;">
+        مشاهدة المنشور الأصلي والتفاعلات على فيسبوك ↗
       </a>
     </div>
   `;
@@ -1033,9 +1023,12 @@ function initVideoModalEvents() {
   const shareBtn = document.getElementById('video-modal-share-btn');
 
   function closeVideoModal() {
+    const activeVidEl = document.getElementById('active-html5-video');
+    if (activeVidEl) {
+      activeVidEl.pause();
+    }
     const playerContainer = document.getElementById('video-player-container');
     if (playerContainer) {
-      // إيقاف تشغيل الفيديو نهائياً وإزالة الـ iframe فور الإغلاق
       playerContainer.innerHTML = '';
     }
     modal.classList.remove('active');
