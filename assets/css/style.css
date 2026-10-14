@@ -1927,13 +1927,15 @@ section {
   .nav-links {
     display: none;
     position: absolute;
-    top: 80px;
+    top: 76px;
     left: 0;
     right: 0;
     background: rgba(8, 10, 15, 0.98);
     flex-direction: column;
-    padding: 2rem;
+    padding: 1.5rem 2rem;
     border-bottom: 1px solid var(--gold-border);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.8);
   }
   .nav-links.open {
     display: flex;
@@ -1941,17 +1943,95 @@ section {
   .mobile-toggle {
     display: block;
   }
-  .poems-grid {
-    grid-template-columns: 1fr;
+  .poems-grid,
+  .videos-grid {
+    grid-template-columns: 1fr !important;
   }
   .portrait-frame img {
-    height: 400px;
+    height: 380px;
+    max-width: 100%;
   }
   .fb-hero-card {
     flex-direction: column;
     text-align: center;
+    gap: 1.25rem;
   }
   .fb-profile-info {
     flex-direction: column;
+    align-items: center;
+  }
+  .video-modal .modal-container {
+    width: 95% !important;
+    max-width: 95% !important;
+    margin: 10px auto;
   }
 }
+
+@media (max-width: 480px) {
+  .container {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+  .logo-text h1 {
+    font-size: 1.15rem;
+  }
+  .logo-text span {
+    font-size: 0.72rem;
+  }
+  .btn-ambient-audio {
+    padding: 6px 12px;
+  }
+  .btn-ambient-audio .audio-text {
+    display: none;
+  }
+  .hero-title {
+    font-size: 2.2rem;
+    line-height: 1.4;
+  }
+  .hero-quote-box p {
+    font-size: 1.25rem;
+    line-height: 1.8;
+  }
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+  }
+  .hero-cta-group .btn-gold,
+  .hero-cta-group .btn-glass {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+  .daily-verse-banner {
+    padding: 1.5rem;
+  }
+  #daily-verse-quote {
+    font-size: 1.3rem;
+  }
+  .video-card-body {
+    padding: 1.25rem;
+  }
+  .video-card-title {
+    font-size: 1.25rem;
+  }
+  .modal-container {
+    width: 96% !important;
+    padding: 0 !important;
+  }
+  .modal-header {
+    padding: 1rem 1.25rem;
+  }
+  .modal-body {
+    padding: 1rem !important;
+  }
+  .modal-footer {
+    padding: 0.75rem 1rem;
+    flex-direction: column;
+  }
+  .modal-footer a,
+  .modal-footer button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
