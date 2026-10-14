@@ -990,14 +990,36 @@ window.openVideoPlayer = function(id) {
     <p style="font-size: 0.95rem; color: var(--text-muted); font-family: var(--font-ui);">${vid.desc}</p>
   `;
 
-  document.getElementById('video-modal-fb-link').href = vid.fbUrl;
+  const fbLink = vid.fbVideoUrl || vid.fbUrl || "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos";
+  document.getElementById('video-modal-fb-link').href = fbLink;
 
   const playerContainer = document.getElementById('video-player-container');
+  const encodedFbUrl = encodeURIComponent(fbLink);
+  
   playerContainer.innerHTML = `
-    <video id="active-html5-video" controls autoplay playsinline style="width: 100%; height: 100%; max-height: 480px; object-fit: contain; background: #000; border-radius: var(--radius-md);" poster="${vid.thumb}">
-      <source src="${vid.videoSrc}" type="video/mp4">
-      متصفحك لا يدعم تشغيل هذا المقطع.
-    </video>
+    <div class="fb-embed-container" style="position: relative; width: 100%; aspect-ratio: 16/9; background: #000; border-radius: var(--radius-md); overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+      <iframe 
+        src="https://www.facebook.com/plugins/video.php?href=${encodedFbUrl}&show_text=0&width=720&autoplay=1" 
+        width="100%" 
+        height="100%" 
+        style="border:none; overflow:hidden; width:100%; height:100%; position:absolute; top:0; left:0;" 
+        scrolling="no" 
+        frameborder="0" 
+        allowfullscreen="true" 
+        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" 
+        allowFullScreen="true"
+        title="${vid.title}">
+      </iframe>
+    </div>
+    <div style="margin-top: 10px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+      <span style="font-size: 0.85rem; color: var(--sand-accent); display: flex; align-items: center; gap: 6px;">
+        <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #22c55e;"></span>
+        مشغل فيسبوك الرسمي المباشر (كامل الصوت والمدة الأصلية)
+      </span>
+      <a href="${fbLink}" target="_blank" rel="noopener noreferrer" style="font-size: 0.85rem; color: #60a5fa; text-decoration: none; font-weight: 600;">
+        إذا تعذر التحميل، شاهد المقطع مباشرة على فيسبوك ↗
+      </a>
+    </div>
   `;
 
   const modal = document.getElementById('video-modal');
@@ -1011,9 +1033,10 @@ function initVideoModalEvents() {
   const shareBtn = document.getElementById('video-modal-share-btn');
 
   function closeVideoModal() {
-    const activeVidEl = document.getElementById('active-html5-video');
-    if (activeVidEl) {
-      activeVidEl.pause();
+    const playerContainer = document.getElementById('video-player-container');
+    if (playerContainer) {
+      // إيقاف تشغيل الفيديو نهائياً وإزالة الـ iframe فور الإغلاق
+      playerContainer.innerHTML = '';
     }
     modal.classList.remove('active');
     document.body.style.overflow = '';
