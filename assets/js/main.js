@@ -1640,46 +1640,126 @@ window.toggleFbPageFollow = function(event) {
   }
 };
 
-window.forceSyncFacebookStats = function(event) {
+// --- محرك التغذية الاجتماعية الحية والمزامنة اللحظية (Facebook & TikTok Live Sync Engine) ---
+let CURRENT_FB_POSTS = typeof DEFAULT_FB_POSTS !== 'undefined' ? DEFAULT_FB_POSTS : [];
+let CURRENT_TIKTOK_DATA = typeof TIKTOK_DATA !== 'undefined' ? TIKTOK_DATA : [];
+
+async function fetchSocialFeed(forceRefresh = false) {
+  try {
+    const url = `assets/data/social_feed.json?t=${Date.now()}`;
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const data = await response.json();
+
+    // 1. تحديث منشورات فيسبوك ديناميكياً
+    if (data.facebookPosts && Array.isArray(data.facebookPosts) && data.facebookPosts.length > 0) {
+      CURRENT_FB_POSTS = data.facebookPosts;
+      renderFbCards(CURRENT_FB_POSTS);
+    }
+
+    // 2. تحديث مرئيات تيك توك ديناميكياً
+    if (data.tiktokVideos && Array.isArray(data.tiktokVideos) && data.tiktokVideos.length > 0) {
+      CURRENT_TIKTOK_DATA = data.tiktokVideos;
+      if (typeof renderTikTokGrid === 'function') {
+        renderTikTokGrid(CURRENT_TIKTOK_DATA);
+      }
+    }
+
+    // 3. تحديث إحصائيات المتابعين الحية
+    if (data.poetStats) {
+      if (data.poetStats.facebook) {
+        const fbFollowers = document.getElementById('fb-followers-count');
+        const fbLikes = document.getElementById('fb-likes-count');
+        if (fbFollowers && data.poetStats.facebook.followers) fbFollowers.textContent = data.poetStats.facebook.followers;
+        if (fbLikes && data.poetStats.facebook.following) fbLikes.textContent = data.poetStats.facebook.following;
+      }
+    }
+
+    // 4. إدراج أي قصيدة جديدة تم مزامنتها تلقائياً في ديوان الموقع
+    if (data.syncedPoems && Array.isArray(data.syncedPoems) && data.syncedPoems.length > 0) {
+      let newPoemsAdded = false;
+      data.syncedPoems.forEach(sPoem => {
+        const alreadyExists = POEMS_DATA.some(p => p.id === sPoem.id || p.title === sPoem.title);
+        if (!alreadyExists) {
+          const diwanPoem = {
+            id: sPoem.id || ('sync-' + Date.now()),
+            title: sPoem.title,
+            category: sPoem.category || "darwish",
+            categoryName: sPoem.categoryName || "جديد فيسبوك وتيك توك",
+            year: sPoem.year || "منشور حديث",
+            fbPublishDate: sPoem.publishDate || "محدث الآن",
+            fbPublishTime: sPoem.publishTime || "",
+            baseLikes: 75,
+            fbUrl: sPoem.sourceUrl || "https://www.facebook.com/dhwalnwn.ahmd.nayl/",
+            excerpt: sPoem.excerpt || (Array.isArray(sPoem.verses) ? sPoem.verses.slice(0, 3).join('\n') : (sPoem.quote || sPoem.title)),
+            fullText: Array.isArray(sPoem.verses) ? sPoem.verses.join('\n\n') : (sPoem.content || sPoem.title)
+          };
+          POEMS_DATA.unshift(diwanPoem);
+          newPoemsAdded = true;
+        }
+      });
+      if (newPoemsAdded && typeof applyFilters === 'function') {
+        applyFilters();
+      }
+    }
+
+    // حفظ كاش محلي
+    try {
+      localStorage.setItem('za_alnoon_social_feed_cached', JSON.stringify(data));
+    } catch(e) {}
+
+    if (forceRefresh) {
+      showToast('🟢 تم تحديث البث اللحظي: أحدث منشورات فيسبوك وتيك توك متزامنة الآن!');
+    }
+  } catch (err) {
+    console.log('[Live Feed Engine] استمرار العمل بالقاعدة المدمجة:', err.message);
+  }
+}
+
+window.forceSyncSocialFeeds = async function(event) {
   if (event) event.stopPropagation();
-  const btn = document.getElementById('btn-force-fb-sync');
-  const syncText = document.getElementById('fb-sync-text');
+  const btns = document.querySelectorAll('.btn-stat-sync-refresh, .btn-radar-sync');
+  btns.forEach(b => b.classList.add('syncing'));
 
-  if (btn) btn.classList.add('syncing');
-  if (syncText) syncText.textContent = 'جاري الاتصال بفيسبوك...';
+  const fbSyncText = document.getElementById('fb-sync-text');
+  const ttSyncText = document.getElementById('tt-sync-text');
+  if (fbSyncText) fbSyncText.textContent = 'جاري المزامنة...';
+  if (ttSyncText) ttSyncText.textContent = 'جاري المزامنة...';
 
+  // إعادة فحص محتوى Meta Facebook SDK اللحظي
   if (window.FB && window.FB.XFBML) {
     try {
       window.FB.XFBML.parse();
     } catch(err) {}
   }
 
+  await fetchSocialFeed(true);
+
   setTimeout(() => {
-    updateFbFollowersUI(true);
-    if (btn) btn.classList.remove('syncing');
-    if (syncText) syncText.textContent = 'مزامنة لحظية مباشرة';
-    showToast('🟢 تم تحديث المزامنة اللحظية مع صفحة الشاعر: 5,595 متابع!');
-  }, 700);
+    btns.forEach(b => b.classList.remove('syncing'));
+    if (fbSyncText) fbSyncText.textContent = 'مزامنة لحظية مباشرة';
+    if (ttSyncText) ttSyncText.textContent = 'مزامنة تيك توك لحظية';
+  }, 600);
 };
+
+window.forceSyncFacebookStats = window.forceSyncSocialFeeds;
 
 function initFacebookLiveSync() {
   updateFbFollowersUI();
 
-  // تفعيل التحديث التلقائي الدوري (نبض المزامنة الحي)
+  // فحص وجلب التغذية الاجتماعية فورياً عند تحميل الصفحة
+  fetchSocialFeed(false);
+
+  // نبض المزامنة الحي الدوري كل 35 ثانية
   setInterval(() => {
-    const syncText = document.getElementById('fb-sync-text');
-    if (syncText && !document.getElementById('btn-force-fb-sync')?.classList.contains('syncing')) {
-      syncText.textContent = 'مزامنة لحظية مباشرة';
-    }
-  }, 25000);
+    fetchSocialFeed(false);
+  }, 35000);
 
   const container = document.getElementById('dynamic-fb-cards');
   if (!container) return;
 
-  const posts = DEFAULT_FB_POSTS;
-  localStorage.setItem('za_alnoon_fb_posts_v3', JSON.stringify(posts));
-  renderFbCards(posts);
-  console.log("Facebook Live Sync Engine initialized for https://www.facebook.com/dhwalnwn.ahmd.nayl/");
+  renderFbCards(CURRENT_FB_POSTS.length ? CURRENT_FB_POSTS : DEFAULT_FB_POSTS);
+  console.log("Facebook & TikTok Live Sync Engine initialized successfully.");
 }
 
 function renderFbCards(posts) {
@@ -2129,7 +2209,7 @@ function initTikTokShowcase() {
   const container = document.getElementById('tiktok-container');
   if (!container) return;
 
-  renderTikTokGrid(TIKTOK_DATA);
+  renderTikTokGrid(CURRENT_TIKTOK_DATA.length ? CURRENT_TIKTOK_DATA : TIKTOK_DATA);
   initTikTokModalEvents();
 }
 
@@ -2181,7 +2261,7 @@ function renderTikTokGrid(items) {
 }
 
 window.openTikTokModal = function(id) {
-  const item = TIKTOK_DATA.find(t => t.id === id);
+  const item = (CURRENT_TIKTOK_DATA && CURRENT_TIKTOK_DATA.length ? CURRENT_TIKTOK_DATA : TIKTOK_DATA).find(t => t.id === id);
   if (!item) return;
 
   activeTikTokVideo = item;

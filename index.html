@@ -343,6 +343,21 @@
   <!-- Facebook Social Hub Section -->
   <section id="facebook-feed" class="facebook-hub-section">
     <div class="container">
+      <!-- Live Social Radar Banner (Facebook & TikTok Direct Stream) -->
+      <div class="social-radar-strip">
+        <div class="radar-content">
+          <span class="radar-dot"></span>
+          <div>
+            <strong>رادار التحديث اللحظي المباشر (Meta & TikTok):</strong>
+            <span>الموقع مربوط حياً ومباشراً بصفحة الشاعر في فيسبوك وحسابه على تيك توك. أي منشور أو قصيدة أو مقطع مرئي ينشره الشاعر يظهر فورياً هنا وفي ديوان الموقع.</span>
+          </div>
+        </div>
+        <button class="btn-radar-sync" onclick="forceSyncSocialFeeds(event)" title="فحص وتحديث التغذية الحية الآن">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+          <span>تحديث البث الآن</span>
+        </button>
+      </div>
+
       <div class="section-head">
         <div class="live-pulse-badge">
           <span class="pulse-dot"></span>
@@ -523,6 +538,14 @@
                 <span>🎬 الفيديوهات:</span>
                 <strong>7 مقاطع حصرية</strong>
               </div>
+              <div class="fb-stat-sync" id="tt-live-sync-indicator" title="المزامنة اللحظية مفعلة ومتصلة بـ TikTok" style="border-color: rgba(0, 242, 254, 0.4); background: rgba(0, 242, 254, 0.08); color: #00f2fe;">
+                <span class="live-dot-green"></span>
+                <span id="tt-sync-text">مزامنة تيك توك لحظية</span>
+              </div>
+              <button id="btn-force-tt-sync" class="btn-stat-sync-refresh" onclick="forceSyncSocialFeeds(event)" title="تحديث لحظي فوري من تيك توك وفيسبوك" style="border-color: rgba(0, 242, 254, 0.4); background: rgba(0, 242, 254, 0.12); color: #00f2fe;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+                <span>تحديث تيك توك</span>
+              </button>
             </div>
           </div>
         </div>

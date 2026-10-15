@@ -1,0 +1,74 @@
+name: Dynamic Social Feed Sync (Facebook & TikTok)
+
+on:
+  schedule:
+    # يعمل تلقائياً كل 6 ساعات لتفقد المنشورات وتحديث الختم الزمني
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+    inputs:
+      platform:
+        description: 'المنصة (facebook أو tiktok)'
+        required: true
+        default: 'facebook'
+        type: choice
+        options:
+          - facebook
+          - tiktok
+      post_content:
+        description: 'نص المنشور أو عنوان القصيدة'
+        required: false
+        type: string
+      post_url:
+        description: 'رابط المنشور على فيسبوك أو تيك توك'
+        required: false
+        type: string
+  repository_dispatch:
+    # استقبال فوري من خلال Webhook (مثل Zapier أو Make أو IFTTT) بمجرد النشر
+    types: [new_social_post, sync_feed]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: "social-sync"
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run Social Sync Engine
+        env:
+          CLIENT_PAYLOAD: ${{ toJson(github.event.client_payload) }}
+          INPUT_PLATFORM: ${{ github.event.inputs.platform }}
+          INPUT_CONTENT: ${{ github.event.inputs.post_content }}
+          INPUT_URL: ${{ github.event.inputs.post_url }}
+        run: |
+          if [ -n "$INPUT_PLATFORM" ]; then
+            node scripts/sync-social.js "{\"platform\":\"$INPUT_PLATFORM\",\"content\":\"$INPUT_CONTENT\",\"url\":\"$INPUT_URL\"}"
+          else
+            node scripts/sync-social.js
+          fi
+
+      - name: Commit & Push Updates
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action [Social Sync Bot]"
+          git add assets/data/social_feed.json
+          if git diff --staged --quiet; then
+            echo "لا توجد تعديلات جديدة للرفع."
+          else
+            git commit -m "Auto-sync: update social feed (Facebook & TikTok) [skip ci]"
+            git push origin main
+            echo "تم رفع التحديثات الجديدة بنجاح إلى المستودع."
+          fi

@@ -1538,6 +1538,98 @@ section {
   color: var(--text-dim);
 }
 
+/* Live Social Radar Banner (Meta & TikTok) */
+.social-radar-strip {
+  background: linear-gradient(90deg, rgba(212, 175, 55, 0.12), rgba(24, 119, 242, 0.14), rgba(0, 242, 254, 0.08));
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: var(--radius-lg, 16px);
+  padding: 14px 22px;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(12px);
+  position: relative;
+  overflow: hidden;
+}
+
+.social-radar-strip::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(to bottom, #d4af37, #1877f2, #00f2fe);
+}
+
+.social-radar-strip .radar-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.92rem;
+  color: #e2e8f0;
+  line-height: 1.6;
+}
+
+.social-radar-strip .radar-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 12px #22c55e;
+  animation: pulseGreen 1.6s infinite;
+  flex-shrink: 0;
+}
+
+.social-radar-strip strong {
+  color: var(--color-gold, #d4af37);
+  display: inline-block;
+  margin-left: 6px;
+}
+
+.btn-radar-sync {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.25), rgba(24, 119, 242, 0.3));
+  border: 1px solid rgba(212, 175, 55, 0.55);
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: var(--radius-full, 999px);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: var(--font-ui, sans-serif);
+}
+
+.btn-radar-sync:hover {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.45), rgba(24, 119, 242, 0.55));
+  border-color: #d4af37;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 18px rgba(212, 175, 55, 0.35);
+}
+
+.btn-radar-sync.syncing svg {
+  animation: spinSync 0.7s linear infinite;
+}
+
+@media (max-width: 820px) {
+  .social-radar-strip {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 14px 16px;
+  }
+  .btn-radar-sync {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 /* ==========================================================================
    Facebook Social & Community Hub (المقتطفات من فيسبوك والبث المباشر)
    ========================================================================== */
