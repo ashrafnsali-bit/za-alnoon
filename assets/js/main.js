@@ -2010,7 +2010,8 @@ const TIKTOK_DATA = [
     url: "https://www.tiktok.com/@drwesh22/video/7696358256222031125",
     badge: "عمل غنائي مشترك",
     category: "music",
-    thumb: "assets/images/thumb_v3.jpg"
+    videoSrc: "assets/videos/tiktok_1.mp4",
+    thumb: "assets/images/tiktok_1.jpg"
   },
   {
     id: "tt-2",
@@ -2027,7 +2028,8 @@ const TIKTOK_DATA = [
     url: "https://www.tiktok.com/@drwesh22/video/7695492300868177172",
     badge: "قصيدة خفف خطاك",
     category: "recitation",
-    thumb: "assets/images/thumb_v1.jpg"
+    videoSrc: "assets/videos/tiktok_2.mp4",
+    thumb: "assets/images/tiktok_2.jpg"
   },
   {
     id: "tt-3",
@@ -2044,7 +2046,8 @@ const TIKTOK_DATA = [
     url: "https://www.tiktok.com/@drwesh22/video/7694075214056951060",
     badge: "كواليس وإطلالة فنية",
     category: "art",
-    thumb: "assets/images/thumb_v4.jpg"
+    videoSrc: "assets/videos/tiktok_3.mp4",
+    thumb: "assets/images/tiktok_3.jpg"
   },
   {
     id: "tt-4",
@@ -2061,7 +2064,8 @@ const TIKTOK_DATA = [
     url: "https://www.tiktok.com/@drwesh22/video/7691755438961904917",
     badge: "ديوان الحواس",
     category: "recitation",
-    thumb: "assets/images/thumb_v2.jpg"
+    videoSrc: "assets/videos/tiktok_4.mp4",
+    thumb: "assets/images/tiktok_4.jpg"
   },
   {
     id: "tt-5",
@@ -2078,7 +2082,8 @@ const TIKTOK_DATA = [
     url: "https://www.tiktok.com/@drwesh22/video/7688419609950817556",
     badge: "قصيدة ضجيج",
     category: "recitation",
-    thumb: "assets/images/thumb_v3.jpg"
+    videoSrc: "assets/videos/tiktok_5.mp4",
+    thumb: "assets/images/tiktok_5.jpg"
   },
   {
     id: "tt-6",
@@ -2095,7 +2100,8 @@ const TIKTOK_DATA = [
     url: "https://www.tiktok.com/@drwesh22/video/7685060833055083796",
     badge: "قصيدة رهان",
     category: "recitation",
-    thumb: "assets/images/thumb_v4.jpg"
+    videoSrc: "assets/videos/tiktok_6.mp4",
+    thumb: "assets/images/tiktok_6.jpg"
   },
   {
     id: "tt-7",
@@ -2112,7 +2118,8 @@ const TIKTOK_DATA = [
     url: "https://www.tiktok.com/@drwesh22/video/7680619000958635285",
     badge: "إلقاء وجداني",
     category: "recitation",
-    thumb: "assets/images/thumb_v5.jpg"
+    videoSrc: "assets/videos/tiktok_7.mp4",
+    thumb: "assets/images/tiktok_7.jpg"
   }
 ];
 
@@ -2140,7 +2147,7 @@ function renderTikTokGrid(items) {
         </div>
       </div>
 
-      <div class="tiktok-card-preview" onclick="openTikTokModal('${item.id}')" title="انقر لتشغيل المقطع">
+      <div class="tiktok-card-preview" onclick="openTikTokModal('${item.id}')" title="انقر لتشغيل المقطع مباشرة">
         <img src="${item.thumb}" alt="${item.title}" class="tt-poster-bg" loading="lazy">
         <div class="tiktok-play-overlay">
           <span>▶</span>
@@ -2183,16 +2190,28 @@ window.openTikTokModal = function(id) {
   const bodyEl = document.getElementById('tiktok-modal-body');
   const linkEl = document.getElementById('tiktok-modal-link');
 
-  if (titleEl) titleEl.textContent = item.title;
+  if (titleEl) {
+    titleEl.innerHTML = `
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="#00f2fe"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 3 15.68 6.34 6.34 0 0 0 9.35 22a6.33 6.33 0 0 0 6.32-6.32V8.92a8.28 8.28 0 0 0 4.84 1.57v-3.8z"/></svg>
+      <span>${item.title}</span>
+    `;
+  }
   if (linkEl) linkEl.href = item.url;
 
   if (bodyEl) {
     bodyEl.innerHTML = `
-      <iframe src="https://www.tiktok.com/embed/v2/${item.videoId}" 
-              style="width: 100%; height: 100%; border: none;" 
-              allowfullscreen 
-              allow="autoplay; encrypted-media">
-      </iframe>
+      <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #000; position: relative;">
+        <video id="active-tiktok-video" 
+               controls 
+               autoplay 
+               playsinline 
+               preload="auto" 
+               poster="${item.thumb}" 
+               style="width: 100%; height: 100%; max-height: 560px; object-fit: contain; outline: none; background: #000;">
+          <source src="${item.videoSrc}" type="video/mp4">
+          عذراً، متصفحك لا يدعم تشغيل هذا المقطع مباشرة.
+        </video>
+      </div>
     `;
   }
 
@@ -2208,6 +2227,10 @@ function initTikTokModalEvents() {
 
   function closeTikTokModal() {
     if (!modal) return;
+    const activeVid = document.getElementById('active-tiktok-video');
+    if (activeVid) {
+      activeVid.pause();
+    }
     const bodyEl = document.getElementById('tiktok-modal-body');
     if (bodyEl) {
       bodyEl.innerHTML = '';
