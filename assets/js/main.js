@@ -551,6 +551,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileNav();
   initFacebookLiveSync();
   initFacebookLikesListener();
+  initTikTokShowcase();
 });
 
 /* ==========================================================================
@@ -1988,6 +1989,245 @@ function initVideoModalEvents() {
       }
     });
   }
+}
+
+/* ==========================================================================
+   11. قسم تيك توك الحصري من حساب الشاعر @drwesh22
+   ========================================================================== */
+const TIKTOK_DATA = [
+  {
+    id: "tt-1",
+    videoId: "7696358256222031125",
+    account: "@drwesh22",
+    author: "ذوالنون احمد نايل",
+    title: "تجربة فنية غنائية: عادي نتفارق (مع ZooZ)",
+    caption: "#ZooZ 🎤🎸 تجربة جمعني بي #عادي_نتفارق🎵تلاقي رضاكم والمحبة",
+    views: "192",
+    likes: "27",
+    comments: "18",
+    duration: "00:45",
+    audio: "الصوت الأصلي - ذوالنون احمد نايل",
+    url: "https://www.tiktok.com/@drwesh22/video/7696358256222031125",
+    badge: "عمل غنائي مشترك",
+    category: "music",
+    thumb: "assets/images/thumb_v3.jpg"
+  },
+  {
+    id: "tt-2",
+    videoId: "7695492300868177172",
+    account: "@drwesh22",
+    author: "ذوالنون احمد نايل",
+    title: "إلقاء شعري: خفف خطاك (تعِب حيل خطاي)",
+    caption: "#سودان_مشاهير_تيك_توك #شعر #explore #خفف_خطاك",
+    views: "379",
+    likes: "49",
+    comments: "20",
+    duration: "01:15",
+    audio: "الصوت الأصلي - ذوالنون احمد نايل",
+    url: "https://www.tiktok.com/@drwesh22/video/7695492300868177172",
+    badge: "قصيدة خفف خطاك",
+    category: "recitation",
+    thumb: "assets/images/thumb_v1.jpg"
+  },
+  {
+    id: "tt-3",
+    videoId: "7694075214056951060",
+    account: "@drwesh22",
+    author: "ذوالنون احمد نايل",
+    title: "لمحة فنية قادمة مع ZooZ ومحمد خوجلي",
+    caption: "@ZooZ 🎤🎸 انا و محمد خوجلي .. انتظارونا بس .. جايتكم .. ودي لمحة عايتو .. وهاكم المحبة",
+    views: "556",
+    likes: "56",
+    comments: "80",
+    duration: "00:50",
+    audio: "الصوت الأصلي - ذوالنون احمد نايل",
+    url: "https://www.tiktok.com/@drwesh22/video/7694075214056951060",
+    badge: "كواليس وإطلالة فنية",
+    category: "art",
+    thumb: "assets/images/thumb_v4.jpg"
+  },
+  {
+    id: "tt-4",
+    videoId: "7691755438961904917",
+    account: "@drwesh22",
+    author: "ذوالنون احمد نايل",
+    title: "إلقاء شعري: حواس (هاك رعشتك)",
+    caption: "#شعر #explore #السودان_مشاهير_تيك_توك #حواس",
+    views: "352",
+    likes: "36",
+    comments: "10",
+    duration: "01:05",
+    audio: "الصوت الأصلي - ذوالنون احمد نايل",
+    url: "https://www.tiktok.com/@drwesh22/video/7691755438961904917",
+    badge: "ديوان الحواس",
+    category: "recitation",
+    thumb: "assets/images/thumb_v2.jpg"
+  },
+  {
+    id: "tt-5",
+    videoId: "7688419609950817556",
+    account: "@drwesh22",
+    author: "ذوالنون احمد نايل",
+    title: "إلقاء شعري: ضجيج (لا تحِن يا السُّقا)",
+    caption: "#السودان_مشاهير_تيك_توك #explore #شعر #ضجيج",
+    views: "571",
+    likes: "63",
+    comments: "21",
+    duration: "01:20",
+    audio: "الصوت الأصلي - ذوالنون احمد نايل",
+    url: "https://www.tiktok.com/@drwesh22/video/7688419609950817556",
+    badge: "قصيدة ضجيج",
+    category: "recitation",
+    thumb: "assets/images/thumb_v3.jpg"
+  },
+  {
+    id: "tt-6",
+    videoId: "7685060833055083796",
+    account: "@drwesh22",
+    author: "ذوالنون احمد نايل",
+    title: "إلقاء شعري: رهان (ما تكسرك إيد الظروف)",
+    caption: "#سودان_مشاهير_تيك_توك #explore #شعر #مشاهير #رهان",
+    views: "577",
+    likes: "67",
+    comments: "24",
+    duration: "01:10",
+    audio: "الصوت الأصلي - ذوالنون احمد نايل",
+    url: "https://www.tiktok.com/@drwesh22/video/7685060833055083796",
+    badge: "قصيدة رهان",
+    category: "recitation",
+    thumb: "assets/images/thumb_v4.jpg"
+  },
+  {
+    id: "tt-7",
+    videoId: "7680619000958635285",
+    account: "@drwesh22",
+    author: "ذوالنون احمد نايل",
+    title: "بوح شعري وجداني وإلقاء حي",
+    caption: "#شعر #السودان_مشاهير_تيك_توك مقطع شعري وإلقاء وجداني بصوت الشاعر ذوالنون أحمد نايل",
+    views: "650",
+    likes: "52",
+    comments: "16",
+    duration: "01:30",
+    audio: "الصوت الأصلي - ذوالنون احمد نايل",
+    url: "https://www.tiktok.com/@drwesh22/video/7680619000958635285",
+    badge: "إلقاء وجداني",
+    category: "recitation",
+    thumb: "assets/images/thumb_v5.jpg"
+  }
+];
+
+let activeTikTokVideo = null;
+
+function initTikTokShowcase() {
+  const container = document.getElementById('tiktok-container');
+  if (!container) return;
+
+  renderTikTokGrid(TIKTOK_DATA);
+  initTikTokModalEvents();
+}
+
+function renderTikTokGrid(items) {
+  const container = document.getElementById('tiktok-container');
+  if (!container) return;
+
+  container.innerHTML = items.map(item => `
+    <article class="tiktok-card" data-ttid="${item.id}">
+      <div class="tiktok-card-header">
+        <span class="tt-card-badge">${item.badge}</span>
+        <div class="tt-card-user">
+          <span class="verified">✓</span>
+          <span>${item.account}</span>
+        </div>
+      </div>
+
+      <div class="tiktok-card-preview" onclick="openTikTokModal('${item.id}')" title="انقر لتشغيل المقطع">
+        <img src="${item.thumb}" alt="${item.title}" class="tt-poster-bg" loading="lazy">
+        <div class="tiktok-play-overlay">
+          <span>▶</span>
+        </div>
+        <div class="tt-overlay-stats">
+          <span class="tt-stat-pill">👁️ ${item.views}</span>
+          <span class="tt-stat-pill">❤️ ${item.likes}</span>
+          <span class="tt-stat-pill">⏱️ ${item.duration}</span>
+        </div>
+      </div>
+
+      <div class="tiktok-card-content">
+        <h4 class="tiktok-card-title">${item.title}</h4>
+        <p class="tiktok-card-caption">${item.caption}</p>
+        <div class="tt-audio-pill">
+          <span>🎵</span>
+          <span>${item.audio}</span>
+        </div>
+        <div class="tiktok-card-actions">
+          <button class="btn-tt-watch" onclick="openTikTokModal('${item.id}')">
+            <span>تشغيل المقطع</span>
+            <span>▷</span>
+          </button>
+          <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="btn-tt-external" title="فتح الفيديو مباشرة في تيك توك">
+            <span>تيك توك ↗</span>
+          </a>
+        </div>
+      </div>
+    </article>
+  `).join('');
+}
+
+window.openTikTokModal = function(id) {
+  const item = TIKTOK_DATA.find(t => t.id === id);
+  if (!item) return;
+
+  activeTikTokVideo = item;
+  const modal = document.getElementById('tiktok-modal');
+  const titleEl = document.getElementById('tiktok-modal-title');
+  const bodyEl = document.getElementById('tiktok-modal-body');
+  const linkEl = document.getElementById('tiktok-modal-link');
+
+  if (titleEl) titleEl.textContent = item.title;
+  if (linkEl) linkEl.href = item.url;
+
+  if (bodyEl) {
+    bodyEl.innerHTML = `
+      <iframe src="https://www.tiktok.com/embed/v2/${item.videoId}" 
+              style="width: 100%; height: 100%; border: none;" 
+              allowfullscreen 
+              allow="autoplay; encrypted-media">
+      </iframe>
+    `;
+  }
+
+  if (modal) {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+};
+
+function initTikTokModalEvents() {
+  const modal = document.getElementById('tiktok-modal');
+  const closeBtn = document.getElementById('close-tiktok-modal-btn');
+
+  function closeTikTokModal() {
+    if (!modal) return;
+    const bodyEl = document.getElementById('tiktok-modal-body');
+    if (bodyEl) {
+      bodyEl.innerHTML = '';
+    }
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  if (closeBtn) closeBtn.addEventListener('click', closeTikTokModal);
+  if (modal) {
+    modal.addEventListener('click', e => {
+      if (e.target === modal) closeTikTokModal();
+    });
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
+      closeTikTokModal();
+    }
+  });
 }
 
 
