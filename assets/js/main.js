@@ -2203,7 +2203,6 @@ window.openTikTokModal = function(id) {
       <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #000; position: relative;">
         <video id="active-tiktok-video" 
                controls 
-               autoplay 
                playsinline 
                preload="auto" 
                poster="${item.thumb}" 
@@ -2211,6 +2210,12 @@ window.openTikTokModal = function(id) {
           <source src="${item.videoSrc}" type="video/mp4">
           عذراً، متصفحك لا يدعم تشغيل هذا المقطع مباشرة.
         </video>
+        <button id="tiktok-play-center-btn" style="position: absolute; width: 68px; height: 68px; border-radius: 50%; background: linear-gradient(135deg, #00f2fe, #fe2c55); border: none; color: #fff; font-size: 1.8rem; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 0 25px rgba(254,44,85,0.7); z-index: 4; transition: transform 0.2s ease;">
+          ▶
+        </button>
+        <div id="tiktok-unmute-notice" style="display: none; position: absolute; top: 14px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); color: #00f2fe; border: 1px solid rgba(0,242,254,0.5); padding: 6px 16px; border-radius: 20px; font-size: 0.82rem; cursor: pointer; z-index: 6; box-shadow: 0 4px 15px rgba(0,0,0,0.6);">
+          🔊 انقر لتشغيل الصوت
+        </div>
       </div>
     `;
   }
@@ -2219,6 +2224,54 @@ window.openTikTokModal = function(id) {
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
   }
+
+  // Play video logic
+  setTimeout(() => {
+    const vid = document.getElementById('active-tiktok-video');
+    const playBtn = document.getElementById('tiktok-play-center-btn');
+    const unmuteBanner = document.getElementById('tiktok-unmute-notice');
+    if (!vid) return;
+
+    function triggerPlay() {
+      const p = vid.play();
+      if (p !== undefined) {
+        p.then(() => {
+          if (playBtn) playBtn.style.display = 'none';
+        }).catch(() => {
+          // Fallback: browser requires muted autoplay
+          vid.muted = true;
+          vid.play().then(() => {
+            if (playBtn) playBtn.style.display = 'none';
+            if (unmuteBanner) {
+              unmuteBanner.style.display = 'block';
+              unmuteBanner.onclick = () => {
+                vid.muted = false;
+                unmuteBanner.style.display = 'none';
+              };
+            }
+          }).catch(() => {
+            if (playBtn) playBtn.style.display = 'flex';
+          });
+        });
+      }
+    }
+
+    if (playBtn) {
+      playBtn.onclick = () => {
+        vid.muted = false;
+        triggerPlay();
+      };
+    }
+
+    vid.addEventListener('play', () => {
+      if (playBtn) playBtn.style.display = 'none';
+    });
+    vid.addEventListener('pause', () => {
+      if (playBtn && !vid.seeking) playBtn.style.display = 'flex';
+    });
+
+    triggerPlay();
+  }, 100);
 };
 
 function initTikTokModalEvents() {
