@@ -1197,8 +1197,10 @@ function renderPoems(filteredPoems) {
     <article class="poem-card" data-id="${poem.id}">
       <div>
         <div class="poem-card-header">
-          <span class="poem-card-tag">${poem.categoryName}</span>
-          <span class="poem-source-pill ${platform.platform}">${platform.badgeText}</span>
+          <div class="poem-header-badges">
+            <span class="poem-card-tag">${poem.categoryName}</span>
+            <span class="poem-source-pill ${platform.platform}">${platform.badgeText}</span>
+          </div>
           <span class="poem-card-time" title="تاريخ ووقت النشر الفعلي على ${platform.name}">🕒 ${poem.fbPublishDate} • ${poem.fbPublishTime}</span>
         </div>
         <h3 class="poem-card-title">${poem.title}</h3>

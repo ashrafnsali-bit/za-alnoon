@@ -875,16 +875,32 @@ section {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 10px;
   margin-bottom: 1.25rem;
 }
 
+.poem-header-badges {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
 .poem-card-tag {
-  font-size: 0.78rem;
-  padding: 4px 12px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  line-height: 1.2;
+  padding: 5px 14px;
   border-radius: var(--radius-full);
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--gold-primary);
-  border: 1px solid rgba(212, 175, 55, 0.2);
+  background: rgba(212, 175, 55, 0.08);
+  color: var(--gold-glow);
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .poem-card-meta {
@@ -1122,14 +1138,18 @@ section {
 
 /* شارة مصدر المنشور في ترويسة بطاقة القصيدة */
 .poem-source-pill {
-  font-size: 0.72rem;
-  padding: 2px 8px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  line-height: 1.2;
+  padding: 5px 12px;
   border-radius: var(--radius-full);
   font-family: var(--font-ui);
-  font-weight: 600;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  justify-content: center;
+  text-align: center;
+  white-space: nowrap;
+  gap: 5px;
 }
 
 .poem-source-pill.tiktok {
@@ -2297,12 +2317,17 @@ section {
 .poem-card-time {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  font-size: 0.75rem;
+  justify-content: center;
+  text-align: center;
+  white-space: nowrap;
+  gap: 5px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  line-height: 1.2;
   color: #93c5fd;
-  background: rgba(24, 119, 242, 0.1);
+  background: rgba(24, 119, 242, 0.08);
   border: 1px solid rgba(24, 119, 242, 0.25);
-  padding: 2px 8px;
+  padding: 5px 12px;
   border-radius: var(--radius-full);
   font-family: var(--font-ui);
 }
