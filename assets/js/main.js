@@ -1140,15 +1140,13 @@ window.openFbPostLink = function(url, event) {
     ? url.trim() 
     : (platform.platform === 'tiktok' ? 'https://www.tiktok.com/@drwesh22' : 'https://www.facebook.com/dhwalnwn.ahmd.nayl/');
     
-  showToast(`جاري نقلك مباشرة إلى المنشور على ${platform.name} للتفاعل.. ↗`);
+  showToast(`جاري فتح المنشور في نافذة جديدة على ${platform.name}.. ↗`);
 
-  try {
-    const newWindow = window.open(targetUrl, '_blank', 'noopener,noreferrer');
-    if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
-      window.location.assign(targetUrl);
-    }
-  } catch (err) {
-    window.location.assign(targetUrl);
+  // نكتفي بفتح الرابط حصراً في نافذة جديدة (New Tab) مع بقاء الصفحة الحالية ثابتة على الموقع
+  if (!event || !event.currentTarget || event.currentTarget.tagName !== 'A') {
+    try {
+      window.open(targetUrl, '_blank', 'noopener,noreferrer');
+    } catch (e) {}
   }
 };
 
