@@ -1150,8 +1150,6 @@ const ARABIC_MONTHS_MAP = {
 function parseArabicDateToTimestamp(dateStr) {
   if (!dateStr) return 0;
   const normalized = String(dateStr).replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d));
-  const standardDate = new Date(normalized);
-  if (!isNaN(standardDate.getTime())) return standardDate.getTime();
 
   const match = normalized.match(/(\d+)\s+([^\s\d]+)\s+(\d{4})/);
   if (match) {
@@ -1159,8 +1157,22 @@ function parseArabicDateToTimestamp(dateStr) {
     const monthName = match[2].trim();
     const year = parseInt(match[3], 10);
     const month = ARABIC_MONTHS_MAP[monthName] !== undefined ? ARABIC_MONTHS_MAP[monthName] : 0;
-    return new Date(year, month, day).getTime();
+
+    let hours = 0, minutes = 0;
+    const timeMatch = normalized.match(/(\d{1,2}):(\d{2})\s*(ص|م)/);
+    if (timeMatch) {
+      hours = parseInt(timeMatch[1], 10);
+      minutes = parseInt(timeMatch[2], 10);
+      const ampm = timeMatch[3];
+      if (ampm === 'م' && hours < 12) hours += 12;
+      if (ampm === 'ص' && hours === 12) hours = 0;
+    }
+    return new Date(year, month, day, hours, minutes).getTime();
   }
+
+  const standardDate = new Date(normalized);
+  if (!isNaN(standardDate.getTime()) && !/^\d{4}$/.test(normalized.trim())) return standardDate.getTime();
+
   const yearMatch = normalized.match(/(\d{4})/);
   if (yearMatch) return new Date(parseInt(yearMatch[1], 10), 0, 1).getTime();
   return 0;
@@ -1500,57 +1512,154 @@ function stopGentleAmbient() {
    ========================================================================== */
 const DEFAULT_GUESTBOOK = [
   {
+    name: "محمد عثمان",
+    source: "facebook",
+    postTag: "قصيدة تعب الوجع",
+    date: "١٦ أكتوبر ٢٠٢٦ - ٠١:٢٠ ص",
+    message: "«تعب الوجع وبيوتنا طوبا شكا ورطن».. أوجعت القلوب بروعة وصفك لحال البلاد والعباد يا درويش الحرف."
+  },
+  {
+    name: "إيناس إبراهيم",
+    source: "facebook",
+    postTag: "عمل عادي نتفارق",
+    date: "١٥ أكتوبر ٢٠٢٦ - ١١:٠٠ ص",
+    message: "عمل غنائي استثنائي وكلمات ذو النون فخامة لحناً وأداءً.. إبداع فوق الوصف ومحبة لا تنتهي."
+  },
+  {
     name: "صديق إسماعيل",
     source: "facebook",
+    postTag: "قصيدة خفف خطاك",
     date: "١٢ أكتوبر ٢٠٢٦ - ١١:٣٠ م",
     message: "يا رب نقط كل حروفك.. تنقط ل تشفي.. أرق وأصدق ما قرأت يا درويش الحرف. إحساس سوداني أصيل."
   },
   {
     name: "معاوية علي",
     source: "facebook",
+    postTag: "ديوان الحواس",
     date: "٢ أكتوبر ٢٠٢٦ - ٠٩:١٥ ص",
     message: "أستاذنا يا جمالك وجمال حرفك.. إبداع سوداني أصيل لا يضاهى في ديوان الحواس وبوح الدرويش."
   },
   {
-    name: "عمر الطيب",
+    name: "خالد عبد الرحيم",
     source: "facebook",
-    date: "٢٨ يوليو ٢٠٢٦ - ٠٨:٠٠ م",
-    message: "الله عليك يا درويش الحرف.. قصيدة 'شنو الريد' لامست وجدان كل مكلوم ومفارق. قلم صادق وإحساس نابع من الأعماق."
-  },
-  {
-    name: "سارة ميرغني",
-    source: "facebook",
-    date: "١٥ أغسطس ٢٠٢٦ - ٠٩:٣٠ م",
-    message: "«قدر ما طيبتك تحاول ترضي اوقاتي وفضولا ياخ احبك».. من أصدق وأجمل ما كُتب في شعر العامية السودانية. دمت قلماً ناصعاً يا أستاذ ذوالنون."
-  },
-  {
-    name: "مروان كمال الدين",
-    source: "facebook",
-    date: "٢ سبتمبر ٢٠٢٦ - ١١:٢٠ ص",
-    message: "تحية إجلال للدرويش والشاعر المبدع ذوالنون أحمد نايل، نصوصك تداوي جراح الغربة وتنعش الروح، حفظك الله ذخراً للأدب السوداني."
-  },
-  {
-    name: "عماد المتمه",
-    source: "facebook",
-    date: "١٣ سبتمبر ٢٠٢٦ - ٠٧:٤٥ م",
-    message: "«ما تكسرك إيد الظروف ولا يسجنك ضيق المكان».. كلمات تبث الصمود والأمل في النفوس، دمت منبراً للأصالة والجمال."
+    postTag: "قصيدة ضجيج",
+    date: "٢٣ سبتمبر ٢٠٢٦ - ١٠:١٠ م",
+    message: "يا بحر الحروف كيف تنسى موج هدامي.. درويش متفرد وأصيل وقصيدتك ردت الروح."
   },
   {
     name: "إيهاب البيروني",
     source: "facebook",
-    date: "٢٢ سبتمبر ٢٠٢٦ - ١٠:٠٥ م",
+    postTag: "قصيدة ضجيج",
+    date: "٢٢ سبتمبر ٢٠٢٦ - ٠٩:٠٥ م",
     message: "أصيل يا ذوالنون.. حرفك ينساب كالماء الزلال في صحراء الروح، متابع لك باستمرار ونسأل الله أن يحفظك."
+  },
+  {
+    name: "ياسر كمال",
+    source: "facebook",
+    postTag: "قصيدة رهان",
+    date: "١٤ سبتمبر ٢٠٢٦ - ٠٣:٣٠ م",
+    message: "جرعة أمل وبوح يشفي الروح المنهكة.. كلمات تزرع فينا الصبر في هذا الزمن الصعب، شكراً نايل."
+  },
+  {
+    name: "عماد المتمه",
+    source: "facebook",
+    postTag: "قصيدة رهان",
+    date: "١٣ سبتمبر ٢٠٢٦ - ٠٧:٤٥ م",
+    message: "«ما تكسرك إيد الظروف ولا يسجنك ضيق المكان».. كلمات تبث الصمود والأمل في النفوس، دمت منبراً للأصالة والجمال."
+  },
+  {
+    name: "مروان كمال الدين",
+    source: "facebook",
+    postTag: "قصيدة داويني",
+    date: "٢ سبتمبر ٢٠٢٦ - ١١:٢٠ ص",
+    message: "تحية إجلال للدرويش والشاعر المبدع ذوالنون أحمد نايل، نصوصك تداوي جراح الغربة وتنعش الروح، حفظك الله ذخراً للأدب السوداني."
+  },
+  {
+    name: "أحمد الفاتح",
+    source: "facebook",
+    postTag: "قصيدة داويني",
+    date: "١ سبتمبر ٢٠٢٦ - ٠٩:٤٥ م",
+    message: "داويني لو تعرف دواي.. صرخة شاعر تلخص كل آلام المغتربين وأهل الوطن.. أبدعت وتألقت."
+  },
+  {
+    name: "نزار حسن",
+    source: "facebook",
+    postTag: "قصيدة أرق",
+    date: "١٨ أغسطس ٢٠٢٦ - ٠٨:٤٥ م",
+    message: "عمق المسافة وأسباب الغرق.. شعر ذو طابع فلسفي ووجداني ساحر ينفذ إلى أعمق ثنايا القلب."
+  },
+  {
+    name: "سارة ميرغني",
+    source: "facebook",
+    postTag: "قصيدة هسي قولا",
+    date: "١٥ أغسطس ٢٠٢٦ - ٠٩:٣٠ م",
+    message: "«قدر ما طيبتك تحاول ترضي اوقاتي وفضولا ياخ احبك».. من أصدق وأجمل ما كُتب في شعر العامية السودانية. دمت قلماً ناصعاً يا أستاذ ذوالنون."
+  },
+  {
+    name: "عمر الطيب",
+    source: "facebook",
+    postTag: "عمل شنو الريد",
+    date: "٢٨ يوليو ٢٠٢٦ - ٠٨:٠٠ م",
+    message: "الله عليك يا درويش الحرف.. قصيدة 'شنو الريد' لامست وجدان كل مكلوم ومفارق. قلم صادق وإحساس نابع من الأعماق."
+  },
+  {
+    name: "رشا مبارك",
+    source: "facebook",
+    postTag: "قصيدة بالله كيف",
+    date: "١٨ يوليو ٢٠٢٦ - ٠٩:٢٠ ص",
+    message: "«ما ينكسر مجداف هواك خليك على الامواج حريف».. درر وجدانية وحروف تشبه النيل في عنفوانه ورقته."
   }
 ];
+
+function sortGuestbookNewestFirst(entriesList) {
+  if (!Array.isArray(entriesList)) return entriesList;
+  return entriesList.sort((a, b) => {
+    const timeA = a.timestamp || parseArabicDateToTimestamp(a.date);
+    const timeB = b.timestamp || parseArabicDateToTimestamp(b.date);
+    return timeB - timeA;
+  });
+}
+
+function syncSocialCommentsIntoGuestbook(existingEntries) {
+  const merged = Array.isArray(existingEntries) ? [...existingEntries] : [];
+
+  const feedPosts = (Array.isArray(CURRENT_FB_POSTS) && CURRENT_FB_POSTS.length)
+    ? CURRENT_FB_POSTS
+    : (Array.isArray(DEFAULT_FB_POSTS) ? DEFAULT_FB_POSTS : []);
+
+  feedPosts.forEach(p => {
+    if (p.sampleComment && p.sampleComment.author && p.sampleComment.text) {
+      const c = p.sampleComment;
+      const dateCombined = `${c.date} - ${c.time}`;
+      const alreadyExists = merged.some(e =>
+        (e.name === c.author && e.message === c.text) ||
+        (e.message && e.message.includes(c.text.substring(0, 25)))
+      );
+      if (!alreadyExists) {
+        merged.push({
+          name: c.author,
+          source: "facebook",
+          postTag: p.badge || "منشور فيسبوك",
+          date: dateCombined,
+          message: c.text
+        });
+      }
+    }
+  });
+
+  return sortGuestbookNewestFirst(merged);
+}
 
 function initGuestbook() {
   const form = document.getElementById('guestbook-form');
   const container = document.getElementById('guestbook-entries');
 
-  let entries = JSON.parse(localStorage.getItem('za_alnoon_guestbook_v2'));
-  if (!entries || !entries.some(e => e.date && (e.date.includes('٢٠٢٦') || e.date.includes('2026')))) {
-    entries = DEFAULT_GUESTBOOK;
-    localStorage.setItem('za_alnoon_guestbook_v2', JSON.stringify(entries));
+  let entries = JSON.parse(localStorage.getItem('za_alnoon_guestbook_v4_sorted'));
+  if (!entries || !Array.isArray(entries) || entries.length < DEFAULT_GUESTBOOK.length) {
+    entries = syncSocialCommentsIntoGuestbook(DEFAULT_GUESTBOOK);
+    localStorage.setItem('za_alnoon_guestbook_v4_sorted', JSON.stringify(entries));
+  } else {
+    entries = syncSocialCommentsIntoGuestbook(entries);
   }
 
   function renderEntries() {
@@ -1567,6 +1676,7 @@ function initGuestbook() {
                 ? '<svg width="10" height="10" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> رد موثق من فيسبوك' 
                 : '✍️ تدوينة زائر الموقع'}
             </span>
+            ${e.postTag ? `<span class="guest-post-tag">🏷️ ${e.postTag}</span>` : ''}
           </div>
           <span class="guest-time" title="تاريخ ووقت النشر الدقيق">🕒 ${e.date}</span>
         </div>
@@ -1597,17 +1707,20 @@ function initGuestbook() {
       const newEntry = {
         name: name,
         source: "web",
+        postTag: "محب للشاعر",
         date: `${dateFormatted} - ${timeFormatted} (الآن)`,
+        timestamp: now.getTime(),
         message: message
       };
 
       entries.unshift(newEntry);
-      localStorage.setItem('za_alnoon_guestbook_v2', JSON.stringify(entries));
+      sortGuestbookNewestFirst(entries);
+      localStorage.setItem('za_alnoon_guestbook_v4_sorted', JSON.stringify(entries));
       renderEntries();
 
       nameInput.value = '';
       msgInput.value = '';
-      showToast('شكراً لمشاركتك العطرة! تم حفظ خاطرتك بالتاريخ والوقت في الدفتر.');
+      showToast('شكراً لمشاركتك العطرة! تم حفظ خاطرتك في صدارة الدفتر حسب الأحدث.');
     });
   }
 }
@@ -1939,13 +2052,18 @@ async function fetchSocialFeed(forceRefresh = false) {
       }
     }
 
+    // 5. مزامنة أحدث تعليقات فيسبوك وترتيبها لحظياً في دفتر الخواطر
+    if (typeof refreshGuestbookFromSocialFeed === 'function') {
+      refreshGuestbookFromSocialFeed();
+    }
+
     // حفظ كاش محلي
     try {
       localStorage.setItem('za_alnoon_social_feed_cached', JSON.stringify(data));
     } catch(e) {}
 
     if (forceRefresh) {
-      showToast('🟢 تم تحديث البث اللحظي: أحدث منشورات فيسبوك وتيك توك متزامنة الآن!');
+      showToast('🟢 تم تحديث البث اللحظي: أحدث منشورات وتعليقات فيسبوك وتيك توك متزامنة الآن!');
     }
   } catch (err) {
     console.log('[Live Feed Engine] استمرار العمل بالقاعدة المدمجة:', err.message);

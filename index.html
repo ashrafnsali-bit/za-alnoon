@@ -42,8 +42,8 @@
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="assets/images/poet_logo.svg">
   
-  <!-- Stylesheets (Updated ScrollSpy & Dynamic Nav Version) -->
-  <link rel="stylesheet" href="assets/css/style.css?v=20261016_v8_scrollspy">
+  <!-- Stylesheets (Updated Guestbook FB Comments & ScrollSpy Version) -->
+  <link rel="stylesheet" href="assets/css/style.css?v=20261016_v9_guestbook_fb">
   
   <!-- JSON-LD Schema -->
   <script type="application/ld+json">
@@ -1114,10 +1114,12 @@
         
         <!-- Form Side -->
         <div class="guestbook-form-side">
-          <span class="section-subtitle">شاركنا أثر الكلمات</span>
-          <h3>دفتر الخواطر والتوقيعات</h3>
+          <div class="guestbook-badge-sub" style="display: inline-flex; align-items: center; gap: 6px; background: rgba(24, 119, 242, 0.12); border: 1px solid rgba(24, 119, 242, 0.35); color: #60a5fa; padding: 4px 12px; border-radius: var(--radius-full); font-size: 0.78rem; font-weight: 700; margin-bottom: 0.75rem;">
+            <span>💬 مزامنة حية: يضم أحدث تعليقات فيسبوك مرتبة من الأحدث إلى الأقدم</span>
+          </div>
+          <h3>دفتر الخواطر والردود</h3>
           <p>
-            اكتب رسالة أو خاطرة أو بيتاً أعجبك للشاعر ذوالنون، لتُسجَّل في دفتر الزوار وتخلّد إحساسك في هذا الفضاء.
+            مساحة وجدانية تجمع انطباعات القراء وتدوينات الزوار، مع جلب تلقائي لأحدث تعليقات جمهور صفحة الشاعر الرسمية على فيسبوك وتيك توك مرتبة لحظياً حسب الأحدث.
           </p>
 
           <form id="guestbook-form" class="guestbook-form">
@@ -1135,10 +1137,113 @@
           </form>
         </div>
 
-        <!-- Entries Side -->
+        <!-- Entries Side (Pre-rendered for Instant Guaranteed Visibility - Newest First) -->
         <div class="guestbook-messages-side">
           <div id="guestbook-entries" class="guestbook-list">
-            <!-- Rendered by JS -->
+            <!-- 1. تعليق ١٦ أكتوبر ٢٠٢٦ (الأحدث) -->
+            <div class="guest-card">
+              <div class="guest-card-header">
+                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                  <span class="guest-name">محمد عثمان</span>
+                  <span class="guest-source-tag fb-source-tag">
+                    <svg width="10" height="10" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> رد موثق من فيسبوك
+                  </span>
+                  <span class="guest-post-tag">🏷️ قصيدة تعب الوجع</span>
+                </div>
+                <span class="guest-time" title="تاريخ ووقت النشر الدقيق">🕒 ١٦ أكتوبر ٢٠٢٦ - ٠١:٢٠ ص</span>
+              </div>
+              <p class="guest-message">«تعب الوجع وبيوتنا طوبا شكا ورطن».. أوجعت القلوب بروعة وصفك لحال البلاد والعباد يا درويش الحرف.</p>
+            </div>
+
+            <!-- 2. تعليق ١٥ أكتوبر ٢٠٢٦ -->
+            <div class="guest-card">
+              <div class="guest-card-header">
+                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                  <span class="guest-name">إيناس إبراهيم</span>
+                  <span class="guest-source-tag fb-source-tag">
+                    <svg width="10" height="10" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> رد موثق من فيسبوك
+                  </span>
+                  <span class="guest-post-tag">🏷️ عمل عادي نتفارق</span>
+                </div>
+                <span class="guest-time" title="تاريخ ووقت النشر الدقيق">🕒 ١٥ أكتوبر ٢٠٢٦ - ١١:٠٠ ص</span>
+              </div>
+              <p class="guest-message">عمل غنائي استثنائي وكلمات ذو النون فخامة لحناً وأداءً.. إبداع فوق الوصف ومحبة لا تنتهي.</p>
+            </div>
+
+            <!-- 3. تعليق ١٢ أكتوبر ٢٠٢٦ -->
+            <div class="guest-card">
+              <div class="guest-card-header">
+                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                  <span class="guest-name">صديق إسماعيل</span>
+                  <span class="guest-source-tag fb-source-tag">
+                    <svg width="10" height="10" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> رد موثق من فيسبوك
+                  </span>
+                  <span class="guest-post-tag">🏷️ قصيدة خفف خطاك</span>
+                </div>
+                <span class="guest-time" title="تاريخ ووقت النشر الدقيق">🕒 ١٢ أكتوبر ٢٠٢٦ - ١١:٣٠ م</span>
+              </div>
+              <p class="guest-message">يا رب نقط كل حروفك.. تنقط ل تشفي.. أرق وأصدق ما قرأت يا درويش الحرف. إحساس سوداني أصيل.</p>
+            </div>
+
+            <!-- 4. تعليق ٢ أكتوبر ٢٠٢٦ -->
+            <div class="guest-card">
+              <div class="guest-card-header">
+                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                  <span class="guest-name">معاوية علي</span>
+                  <span class="guest-source-tag fb-source-tag">
+                    <svg width="10" height="10" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> رد موثق من فيسبوك
+                  </span>
+                  <span class="guest-post-tag">🏷️ ديوان الحواس</span>
+                </div>
+                <span class="guest-time" title="تاريخ ووقت النشر الدقيق">🕒 ٢ أكتوبر ٢٠٢٦ - ٠٩:١٥ ص</span>
+              </div>
+              <p class="guest-message">أستاذنا يا جمالك وجمال حرفك.. إبداع سوداني أصيل لا يضاهى في ديوان الحواس وبوح الدرويش.</p>
+            </div>
+
+            <!-- 5. تعليق ٢٣ سبتمبر ٢٠٢٦ -->
+            <div class="guest-card">
+              <div class="guest-card-header">
+                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                  <span class="guest-name">خالد عبد الرحيم</span>
+                  <span class="guest-source-tag fb-source-tag">
+                    <svg width="10" height="10" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> رد موثق من فيسبوك
+                  </span>
+                  <span class="guest-post-tag">🏷️ قصيدة ضجيج</span>
+                </div>
+                <span class="guest-time" title="تاريخ ووقت النشر الدقيق">🕒 ٢٣ سبتمبر ٢٠٢٦ - ١٠:١٠ م</span>
+              </div>
+              <p class="guest-message">يا بحر الحروف كيف تنسى موج هدامي.. درويش متفرد وأصيل وقصيدتك ردت الروح.</p>
+            </div>
+
+            <!-- 6. تعليق ٢٢ سبتمبر ٢٠٢٦ -->
+            <div class="guest-card">
+              <div class="guest-card-header">
+                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                  <span class="guest-name">إيهاب البيروني</span>
+                  <span class="guest-source-tag fb-source-tag">
+                    <svg width="10" height="10" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> رد موثق من فيسبوك
+                  </span>
+                  <span class="guest-post-tag">🏷️ قصيدة ضجيج</span>
+                </div>
+                <span class="guest-time" title="تاريخ ووقت النشر الدقيق">🕒 ٢٢ سبتمبر ٢٠٢٦ - ٠٩:٠٥ م</span>
+              </div>
+              <p class="guest-message">أصيل يا ذوالنون.. حرفك ينساب كالماء الزلال في صحراء الروح، متابع لك باستمرار ونسأل الله أن يحفظك.</p>
+            </div>
+
+            <!-- 7. تعليق ١٤ سبتمبر ٢٠٢٦ -->
+            <div class="guest-card">
+              <div class="guest-card-header">
+                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                  <span class="guest-name">ياسر كمال</span>
+                  <span class="guest-source-tag fb-source-tag">
+                    <svg width="10" height="10" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> رد موثق من فيسبوك
+                  </span>
+                  <span class="guest-post-tag">🏷️ قصيدة رهان</span>
+                </div>
+                <span class="guest-time" title="تاريخ ووقت النشر الدقيق">🕒 ١٤ سبتمبر ٢٠٢٦ - ٠٣:٣٠ م</span>
+              </div>
+              <p class="guest-message">جرعة أمل وبوح يشفي الروح المنهكة.. كلمات تزرع فينا الصبر في هذا الزمن الصعب، شكراً نايل.</p>
+            </div>
           </div>
         </div>
 
@@ -1313,8 +1418,8 @@
     </div>
   </footer>
 
-  <!-- Scripts (Updated Complete ScrollSpy Version) -->
-  <script src="assets/js/main.js?v=20261016_v8_scrollspy"></script>
+  <!-- Scripts (Updated Guestbook FB Comments & Live Sorting Version) -->
+  <script src="assets/js/main.js?v=20261016_v9_guestbook_fb"></script>
   <script>
     document.getElementById('year-span').textContent = new Date().getFullYear();
   </script>

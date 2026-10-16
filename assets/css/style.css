@@ -2334,6 +2334,19 @@ section {
   color: var(--gold-glow);
 }
 
+.guest-post-tag {
+  font-size: 0.72rem;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  background: rgba(212, 175, 55, 0.08);
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  color: var(--sand-accent);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-ui);
+}
+
 .guest-message {
   font-family: var(--font-poetry);
   font-size: 1.05rem;
