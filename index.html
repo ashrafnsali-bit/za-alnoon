@@ -281,6 +281,37 @@
 
       <!-- Videos Grid (Pre-rendered for Instant Guaranteed Visibility) -->
       <div id="videos-container" class="videos-grid">
+        <!-- Video 0: أحدث مقطع مرئي (أمس) -->
+        <article class="video-card" data-vid="vid-0">
+          <div class="video-thumb-container" onclick="openVideoPlayer('vid-0')" title="انقر لتشغيل المقطع مباشرة">
+            <img src="assets/images/tiktok_latest.jpg" alt="تعب الوجع (وجهتهن للرجعة ليك)" class="video-thumb-img">
+            <div class="video-badge-source" style="background: rgba(239, 68, 68, 0.9); border-color: #ef4444;">
+              🔴 أحدث إلقاء مرئي (أمس)
+            </div>
+            <div class="video-duration-tag">⏱ ٠١:٤٧</div>
+            <div class="video-play-overlay">
+              <div class="play-circle-btn">▶</div>
+            </div>
+          </div>
+          <div class="video-card-body">
+            <div class="video-card-meta">
+              <span>إلقاء شعري</span>
+              <span class="video-publish-time" title="تاريخ ووقت النشر الفعلي">🕒 ١٥ أكتوبر ٢٠٢٦ • ٠٩:١٠ م</span>
+            </div>
+            <h3 class="video-card-title">تعب الوجع (وجهتهن للرجعة ليك)</h3>
+            <p class="video-card-desc">أحدث تسجيل مرئي وإلقاء وجداني مؤثر للشاعر ذوالنون أحمد نايل، بصوته الأصلي وأحدث كلماته المعبرة.</p>
+            <div class="video-card-footer">
+              <button class="btn-watch-now" onclick="openVideoPlayer('vid-0')">
+                تشغيل المقطع المرئي ▶
+              </button>
+              <a href="https://www.tiktok.com/@drwesh22/video/7696954333388197141" target="_blank" rel="noopener noreferrer" class="btn-fb-like-action" onclick="openFbPostLink('https://www.tiktok.com/@drwesh22/video/7696954333388197141', event)" title="مشاهدة والتفاعل على المنصة">
+                <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 3 15.68 6.34 6.34 0 0 0 9.35 22a6.33 6.33 0 0 0 6.32-6.32V8.92a8.28 8.28 0 0 0 4.84 1.57v-3.8z"/></svg>
+                <span>مشاهدة وتفاعل 👍 ↗</span>
+              </a>
+            </div>
+          </div>
+        </article>
+
         <!-- Video 1 -->
         <article class="video-card" data-vid="vid-1">
           <div class="video-thumb-container" onclick="openVideoPlayer('vid-1')" title="انقر لتشغيل المقطع مباشرة">
@@ -760,6 +791,45 @@
 
       <!-- TikTok Videos Grid (Pre-rendered for Instant Guaranteed Visibility) -->
       <div id="tiktok-container" class="tiktok-grid">
+        <!-- TT 0: تعب الوجع (أحدث منشور أمس) -->
+        <article class="tiktok-card" data-ttid="tt-0">
+          <div class="tiktok-card-header">
+            <span class="tt-card-badge" style="background: rgba(239, 68, 68, 0.2); border-color: rgba(239, 68, 68, 0.5); color: #fca5a5;">🔴 أحدث إلقاء شعري (أمس)</span>
+            <div class="tt-card-user">
+              <span class="verified">✓</span>
+              <span>@drwesh22</span>
+            </div>
+          </div>
+          <div class="tiktok-card-preview" onclick="openTikTokModal('tt-0')" title="انقر لتشغيل المقطع مباشرة">
+            <img src="assets/images/tiktok_latest.jpg" alt="إلقاء شعري: تعب الوجع (وجهتهن للرجعة ليك)" class="tt-poster-bg" loading="lazy">
+            <div class="tiktok-play-overlay">
+              <span>▶</span>
+            </div>
+            <div class="tt-overlay-stats">
+              <span class="tt-stat-pill">👁️ 210</span>
+              <span class="tt-stat-pill">❤️ 34</span>
+              <span class="tt-stat-pill">⏱️ 01:47</span>
+            </div>
+          </div>
+          <div class="tiktok-card-content">
+            <h4 class="tiktok-card-title">إلقاء شعري: تعب الوجع (وجهتهن للرجعة ليك)</h4>
+            <p class="tiktok-card-caption">وجهتهن للرجعة ليك .. كجرن وأبن يتوجهن #شعر #السودان_مشاهير_تيك_توك #explore</p>
+            <div class="tt-audio-pill">
+              <span>🎵</span>
+              <span>الصوت الأصلي - ذوالنون احمد نايل</span>
+            </div>
+            <div class="tiktok-card-actions">
+              <button class="btn-tt-watch" onclick="openTikTokModal('tt-0')">
+                <span>تشغيل المقطع</span>
+                <span>▷</span>
+              </button>
+              <a href="https://www.tiktok.com/@drwesh22/video/7696954333388197141" target="_blank" rel="noopener noreferrer" class="btn-tt-external" title="فتح الفيديو مباشرة في تيك توك">
+                <span>تيك توك ↗</span>
+              </a>
+            </div>
+          </div>
+        </article>
+
         <!-- TT 1 -->
         <article class="tiktok-card" data-ttid="tt-1">
           <div class="tiktok-card-header">
@@ -1226,11 +1296,12 @@
         <div class="footer-col">
           <h4>أشهر الأعمال</h4>
           <ul>
-            <li><a href="#poems">هسي قُولا (شعر وجداني)</a></li>
-            <li><a href="#poems">شنو الريد؟! (عمل غنائي)</a></li>
-            <li><a href="#poems">حواس (شعر فكري)</a></li>
-            <li><a href="#poems">بالله كيف (دفاتر الشوق)</a></li>
+            <li><a href="#poems">تعب الوجع (أحدث قصيدة)</a></li>
+            <li><a href="#poems">عادي نتفارق (عمل غنائي)</a></li>
             <li><a href="#poems">خفف خطاك (تعِب حيل خطاي)</a></li>
+            <li><a href="#poems">حواس (شعر فكري)</a></li>
+            <li><a href="#poems">شنو الريد؟! (عمل غنائي)</a></li>
+            <li><a href="#poems">بالله كيف (دفاتر الشوق)</a></li>
           </ul>
         </div>
 
@@ -1242,8 +1313,8 @@
     </div>
   </footer>
 
-  <!-- Scripts (Updated Instant Version) -->
-  <script src="assets/js/main.js?v=20261016_v6_instant"></script>
+  <!-- Scripts (Updated Complete Version) -->
+  <script src="assets/js/main.js?v=20261016_v7_complete"></script>
   <script>
     document.getElementById('year-span').textContent = new Date().getFullYear();
   </script>
