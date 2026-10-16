@@ -2,8 +2,8 @@ name: Dynamic Social Feed Sync (Facebook & TikTok)
 
 on:
   schedule:
-    # يعمل تلقائياً كل ساعتين لجلب أحدث المنشورات ومقاطع تيك توك والإعجابات الحية
-    - cron: '0 */2 * * *'
+    # يعمل تلقائياً وبشكل دوري كل 30 دقيقة لجلب أحدث المنشورات ومقاطع تيك توك والإعجابات الحية أولاً بأول
+    - cron: '*/30 * * * *'
   workflow_dispatch:
     inputs:
       platform:

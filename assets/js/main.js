@@ -2338,10 +2338,21 @@ function initFacebookLiveSync() {
   // فحص وجلب التغذية الاجتماعية فورياً عند تحميل الصفحة
   fetchSocialFeed(false);
 
-  // نبض المزامنة الحي الدوري كل 35 ثانية
+  // نبض المزامنة الحي المباشر أولاً بأول كل 15 ثانية
   setInterval(() => {
     fetchSocialFeed(false);
-  }, 35000);
+  }, 15000);
+
+  // تحديث فوري مباشر بمجرد الرجوع لتبويب الموقع
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) {
+      fetchSocialFeed(false);
+    }
+  });
+
+  window.addEventListener('focus', () => {
+    fetchSocialFeed(false);
+  });
 
   const container = document.getElementById('dynamic-fb-cards');
   if (!container) return;
