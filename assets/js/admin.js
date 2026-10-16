@@ -371,7 +371,7 @@ function initFormEvents() {
       fbPublishDate: dateStr,
       fbPublishTime: timeStr || "حديث",
       timestamp: Date.now(), // يضمن تصدرها كأحدث قصيدة
-      baseLikes: Math.floor(Math.random() * 50) + 90,
+      baseLikes: 0, // يتم تحديثها حصرياً وتلقائياً من مصدر المنشور (فيسبوك أو تيك توك)
       fbUrl: fbUrl || "https://www.facebook.com/dhwalnwn.ahmd.nayl/",
       excerpt: excerpt,
       fullText: fullText,
@@ -442,7 +442,7 @@ function initEditModalEvents() {
         fbPublishDate: dateStr,
         fbPublishTime: timeStr,
         timestamp: parseArabicDateToTimestamp(dateStr),
-        baseLikes: likes,
+        baseLikes: ADMIN_POEMS[poemIndex].baseLikes || 0, // الحفاظ على الرقم الموثق من المصدر
         fbUrl,
         excerpt,
         fullText

@@ -933,12 +933,11 @@ function spawnLiveReactionParticle(text, anchorEl) {
   }, 1200);
 }
 
+// التزام صارم وحصري: لا يتم احتساب أو تعديل رقم الإعجابات إلا من مصدر المنشور (فيسبوك أو تيك توك)
 function getPoemLikes(id) {
   const poem = POEMS_DATA.find(p => p.id === id);
   if (!poem) return 0;
-  const isLiked = isPoemLiked(id);
-  const extraLikes = parseInt(localStorage.getItem('za_alnoon_extra_likes_' + id) || '0', 10);
-  return (poem.baseLikes || 40) + extraLikes + (isLiked ? 1 : 0);
+  return poem.baseLikes || 0;
 }
 
 function isPoemLiked(id) {
@@ -952,34 +951,25 @@ window.togglePoemLike = function(id, event) {
   const poem = POEMS_DATA.find(p => p.id === id);
   if (!poem) return;
 
+  const platform = detectSourcePlatform(poem.fbUrl, poem.year);
   const wasLiked = isPoemLiked(id);
   const nowLiked = !wasLiked;
   localStorage.setItem('za_alnoon_poem_liked_' + id, nowLiked ? 'true' : 'false');
 
-  // إطلاق جسيم التفاعل اللحظي
-  const targetBtn = document.getElementById(`poem-like-btn-${id}`) || (event ? event.currentTarget : null);
-  if (targetBtn) {
-    spawnLiveReactionParticle(nowLiked ? '❤️ +1' : '-1', targetBtn);
-  }
-
-  updateCardLikeUI(id, true);
+  updateCardLikeUI(id, false);
   if (activePoem && activePoem.id === id) {
-    updateModalLikeUI(id, true);
+    updateModalLikeUI(id, false);
   }
-
-  // بث التحديث لجميع التبويبات المفتوحة لحظياً
-  broadcastRealtimeSync({
-    type: 'POEM_LIKE_CHANGE',
-    poemId: id,
-    nowLiked: nowLiked,
-    likesCount: getPoemLikes(id),
-    timestamp: Date.now()
-  });
 
   if (nowLiked) {
-    showToast(`❤️ سُجِّل إعجابك برائعة "${poem.title}" وتَمّ تحديث العداد لحظياً! يمكنك فتح المنشور على فيسبوك للتفاعل أيضاً 👍`);
+    showToast(`❤️ للتفاعل واحتساب إعجابك في العداد الرسمي، جاري توجيهك إلى ${platform.name}...`);
+    setTimeout(() => {
+      if (poem.fbUrl) {
+        window.open(poem.fbUrl, '_blank');
+      }
+    }, 700);
   } else {
-    showToast(`تم إلغاء الإعجاب بنص "${poem.title}"`);
+    showToast(`تم إلغاء التحديد لنص "${poem.title}"`);
   }
 };
 
@@ -1871,15 +1861,15 @@ function toArabicNumbers(num) {
 }
 
 function getLivePostLikes(postId, defaultCount) {
-  const extra = parseInt(localStorage.getItem(`za_alnoon_likes_${postId}`) || '0', 10);
+  // الرقم الموثق حصراً من منشور المصدر الرسمي (فيسبوك أو تيك توك) دون أي زيادة محلية
   const base = parseInt(String(defaultCount).replace(/[^\d]/g, '') || '0', 10);
-  return toArabicNumbers(base + extra);
+  return toArabicNumbers(base);
 }
 
 function getLivePostComments(postId, defaultCount) {
-  const extra = parseInt(localStorage.getItem(`za_alnoon_comments_${postId}`) || '0', 10);
+  // الرقم الموثق حصراً من منشور المصدر الرسمي (فيسبوك أو تيك توك) دون أي زيادة محلية
   const base = parseInt(String(defaultCount).replace(/[^\d]/g, '') || '0', 10);
-  return toArabicNumbers(base + extra);
+  return toArabicNumbers(base);
 }
 
 function hasLikedPost(postId) {
@@ -1893,41 +1883,32 @@ window.togglePostInteraction = function(postId, type, event) {
   }
 
   if (type === 'like') {
+    const post = (CURRENT_FB_POSTS || []).find(p => p.id === postId) || (CURRENT_TIKTOK_DATA || []).find(t => t.id === postId);
+    const postUrl = post ? post.url : 'https://www.facebook.com/dhwalnwn.ahmd.nayl/';
+    const platform = detectSourcePlatform(postUrl, post ? post.badge : '');
+
     const alreadyLiked = hasLikedPost(postId);
-    let extra = parseInt(localStorage.getItem(`za_alnoon_likes_${postId}`) || '0', 10);
-
-    if (alreadyLiked) {
-      extra = Math.max(0, extra - 1);
-      localStorage.setItem(`za_alnoon_likes_${postId}`, extra);
-      localStorage.setItem(`za_alnoon_has_liked_${postId}`, 'false');
-      showToast('تم إلغاء التفاعل');
-    } else {
-      extra += 1;
-      localStorage.setItem(`za_alnoon_likes_${postId}`, extra);
-      localStorage.setItem(`za_alnoon_has_liked_${postId}`, 'true');
-
-      const clickX = event && event.clientX ? event.clientX : window.innerWidth / 2;
-      const clickY = event && event.clientY ? event.clientY : window.innerHeight / 2;
-      spawnFloatingHeart(clickX, clickY);
-      showToast('❤️ شكراً لتفاعلك! تم تسجيل إعجابك وتحديث العداد أولاً بأول.');
-    }
-
-    const likeEls = document.querySelectorAll(`[id="like-count-${postId}"]`);
-    likeEls.forEach(el => {
-      const baseCount = el.getAttribute('data-base') || el.textContent;
-      el.setAttribute('data-base', baseCount);
-      const baseNum = parseInt(String(baseCount).replace(/[^\d]/g, '') || '0', 10);
-      el.textContent = toArabicNumbers(baseNum + (alreadyLiked ? 0 : 1));
-      el.classList.add('stat-bump');
-      setTimeout(() => el.classList.remove('stat-bump'), 500);
-    });
+    const nowLiked = !alreadyLiked;
+    localStorage.setItem(`za_alnoon_has_liked_${postId}`, nowLiked ? 'true' : 'false');
 
     const btns = document.querySelectorAll(`button[onclick*="'${postId}'"]`);
     btns.forEach(b => {
       if (b.classList.contains('btn-live-like')) {
-        b.classList.toggle('has-liked', !alreadyLiked);
+        b.classList.toggle('has-liked', nowLiked);
       }
     });
+
+    if (nowLiked) {
+      const clickX = event && event.clientX ? event.clientX : window.innerWidth / 2;
+      const clickY = event && event.clientY ? event.clientY : window.innerHeight / 2;
+      spawnFloatingHeart(clickX, clickY);
+      showToast(`❤️ لتسجيل إعجابك وتحديث العداد الرسمي، جاري توجيهك إلى ${platform.name}...`);
+      setTimeout(() => {
+        if (postUrl) window.open(postUrl, '_blank');
+      }, 700);
+    } else {
+      showToast('تم إلغاء التحديد');
+    }
   }
 };
 
