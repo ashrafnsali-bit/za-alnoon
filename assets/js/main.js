@@ -181,7 +181,7 @@ const POEMS_DATA = [
     year: "منشور فيسبوك",
     fbPublishDate: "١١ أكتوبر ٢٠٢٦",
     fbPublishTime: "١٠:١٥ م",
-    baseLikes: 102,
+    baseLikes: 105,
     fbUrl: "https://www.facebook.com/dhwalnwn.ahmd.nayl/videos/1750358119379369/",
     excerpt: `تعِب حيل خطاي العلي حال حفاهن مشيتن معاك..\nف وين الغناوي السقيتن محنة ورويتن صفاك..\nوين الاماني القبيل قلت فيهن بواردن صباحن ويراضن رجاك..`,
     fullText: `تعِب حيل خطاي 
@@ -2252,6 +2252,9 @@ async function fetchSocialFeed(forceRefresh = false) {
             matched.baseLikes = pLikes;
             if (typeof updateCardLikeUI === 'function') {
               updateCardLikeUI(matched.id, false);
+            }
+            if (activePoem && activePoem.id === matched.id && typeof updateModalLikeUI === 'function') {
+              updateModalLikeUI(matched.id, false);
             }
           }
         }
