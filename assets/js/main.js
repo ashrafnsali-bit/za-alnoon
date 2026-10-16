@@ -1091,18 +1091,66 @@ function initFacebookLikesListener() {
 let currentCategory = 'all';
 let currentSearch = '';
 
-// دالة التوجيه المباشر لرابط المنشور بصفحة فيسبوك
+// دالة الكشف الذكي عن مصدر المنشور (فيسبوك، تيك توك، يوتيوب) وتوليد الأزرار والشارات المناسبة
+function detectSourcePlatform(url, fallbackText = '') {
+  const u = (url || '').toLowerCase();
+  const f = (fallbackText || '').toLowerCase();
+
+  if (u.includes('tiktok.com') || f.includes('tiktok') || f.includes('تيك توك') || f.includes('تيك')) {
+    return {
+      platform: 'tiktok',
+      name: 'تيك توك',
+      btnClass: 'btn-tiktok-action',
+      badgeText: 'منشور تيك توك 🎵',
+      shortActionText: 'تفاعل بتيك توك 🎵',
+      actionText: 'تفاعل بتيك توك 🎵 ↗',
+      watchText: 'مشاهدة المقطع على تيك توك 🎵 ↗',
+      title: 'الانتقال المباشر للمنشور والتفاعل على تيك توك',
+      iconSvg: `<svg width="13" height="13" fill="#00f2fe" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 3 15.68 6.34 6.34 0 0 0 9.35 22a6.33 6.33 0 0 0 6.32-6.32V8.92a8.28 8.28 0 0 0 4.84 1.57v-3.8z"/></svg>`
+    };
+  }
+
+  if (u.includes('youtube.com') || u.includes('youtu.be') || f.includes('youtube') || f.includes('يوتيوب')) {
+    return {
+      platform: 'youtube',
+      name: 'يوتيوب',
+      btnClass: 'btn-yt-action',
+      badgeText: 'منشور يوتيوب ▶',
+      shortActionText: 'تفاعل بيوتيوب ▶',
+      actionText: 'شاهد بيوتيوب ▶ ↗',
+      watchText: 'مشاهدة المقطع على يوتيوب ▶ ↗',
+      title: 'الانتقال للمقطع والتفاعل على يوتيوب',
+      iconSvg: `<svg width="13" height="13" fill="#ff0000" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>`
+    };
+  }
+
+  // الافتراضي: فيسبوك
+  return {
+    platform: 'facebook',
+    name: 'فيسبوك',
+    btnClass: 'btn-fb-like-action',
+    badgeText: 'منشور فيسبوك',
+    shortActionText: 'تفاعل بفيسبوك 👍',
+    actionText: 'تفاعل بفيسبوك 👍 ↗',
+    watchText: 'مشاهدة الفيديو على فيسبوك 👍 ↗',
+    title: 'الانتقال المباشر للمنشور والتفاعل على فيسبوك',
+    iconSvg: `<svg width="13" height="13" fill="#1877f2" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>`
+  };
+}
+
+// دالة التوجيه المباشر لرابط المنشور حسب مصدره الحقيقي (فيسبوك أو تيك توك)
 window.openFbPostLink = function(url, event) {
   if (event) {
     if (typeof event.stopPropagation === 'function') {
       event.stopPropagation();
     }
   }
+  const platform = detectSourcePlatform(url);
   const targetUrl = (url && typeof url === 'string' && url.trim().startsWith('http')) 
     ? url.trim() 
-    : 'https://www.facebook.com/dhwalnwn.ahmd.nayl/';
+    : (platform.platform === 'tiktok' ? 'https://www.tiktok.com/@drwesh22' : 'https://www.facebook.com/dhwalnwn.ahmd.nayl/');
     
-  showToast('جاري نقلك مباشرة إلى منشور القصيدة بصفحة فيسبوك للتفاعل.. ↗');
+  showToast(`جاري نقلك مباشرة إلى المنشور على ${platform.name} للتفاعل.. ↗`);
 
   try {
     const newWindow = window.open(targetUrl, '_blank', 'noopener,noreferrer');
@@ -1144,18 +1192,20 @@ function renderPoems(filteredPoems) {
     .map(poem => {
       const isLiked = isPoemLiked(poem.id);
       const likesCount = getPoemLikes(poem.id);
+      const platform = detectSourcePlatform(poem.fbUrl, poem.year);
       return `
     <article class="poem-card" data-id="${poem.id}">
       <div>
         <div class="poem-card-header">
           <span class="poem-card-tag">${poem.categoryName}</span>
-          <span class="poem-card-time" title="تاريخ ووقت النشر الفعلي على فيسبوك">🕒 ${poem.fbPublishDate} • ${poem.fbPublishTime}</span>
+          <span class="poem-source-pill ${platform.platform}">${platform.badgeText}</span>
+          <span class="poem-card-time" title="تاريخ ووقت النشر الفعلي على ${platform.name}">🕒 ${poem.fbPublishDate} • ${poem.fbPublishTime}</span>
         </div>
         <h3 class="poem-card-title">${poem.title}</h3>
         <p class="poem-card-excerpt">${poem.excerpt}</p>
       </div>
 
-      <!-- Likes & Facebook Interaction Bar -->
+      <!-- Likes & Platform Interaction Bar -->
       <div class="poem-card-social">
         <button class="btn-poem-like ${isLiked ? 'liked' : ''}" onclick="togglePoemLike(${poem.id}, event)" title="${isLiked ? 'إلغاء الإعجاب' : 'إعجاب بالقصيدة'}" id="poem-like-btn-${poem.id}">
           <svg class="heart-icon" width="16" height="16" viewBox="0 0 24 24" fill="${isLiked ? '#ef4444' : 'none'}" stroke="${isLiked ? '#ef4444' : 'currentColor'}" stroke-width="2">
@@ -1165,9 +1215,9 @@ function renderPoems(filteredPoems) {
           <span class="like-label" id="poem-like-label-${poem.id}">${isLiked ? 'أعجبني ❤️' : 'إعجاب'}</span>
         </button>
 
-        <a href="${poem.fbUrl}" target="_blank" rel="noopener noreferrer" class="btn-fb-like-action" onclick="openFbPostLink('${poem.fbUrl}', event)" title="الانتقال المباشر لمنشور القصيدة والتفاعل على فيسبوك">
-          <svg width="14" height="14" fill="#1877f2" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-          <span>تفاعل بفيسبوك 👍</span>
+        <a href="${poem.fbUrl}" target="_blank" rel="noopener noreferrer" class="${platform.btnClass}" onclick="openFbPostLink('${poem.fbUrl}', event)" title="${platform.title}">
+          ${platform.iconSvg}
+          <span>${platform.shortActionText}</span>
         </a>
       </div>
 
@@ -1302,9 +1352,10 @@ window.openPoemModal = function(id) {
   const poem = POEMS_DATA.find(p => p.id === id);
   if (!poem) return;
   activePoem = poem;
+  const platform = detectSourcePlatform(poem.fbUrl, poem.year);
 
   document.getElementById('modal-poem-title').textContent = poem.title;
-  document.getElementById('modal-poem-category').innerHTML = `${poem.categoryName} • <span class="modal-time-tag">🕒 نُشر في فيسبوك: ${poem.fbPublishDate} - الساعة ${poem.fbPublishTime}</span>`;
+  document.getElementById('modal-poem-category').innerHTML = `${poem.categoryName} • <span class="modal-time-tag">🕒 نُشر في ${platform.name}: ${poem.fbPublishDate} - الساعة ${poem.fbPublishTime}</span>`;
   
   const contentEl = document.getElementById('modal-poem-body');
   contentEl.textContent = poem.fullText;
@@ -1312,36 +1363,67 @@ window.openPoemModal = function(id) {
 
   const fbLinkEl = document.getElementById('modal-poem-fb-link');
   if (fbLinkEl) {
-    fbLinkEl.href = poem.fbUrl || "https://www.facebook.com/dhwalnwn.ahmd.nayl/";
+    fbLinkEl.href = poem.fbUrl || (platform.platform === 'tiktok' ? 'https://www.tiktok.com/@drwesh22' : 'https://www.facebook.com/dhwalnwn.ahmd.nayl/');
+    if (platform.platform === 'tiktok') {
+      fbLinkEl.className = 'btn-tiktok-visit';
+      fbLinkEl.style.cssText = 'font-size: 0.88rem; padding: 9px 18px; text-decoration: none;';
+      fbLinkEl.innerHTML = `
+        ${platform.iconSvg}
+        <span>فتح المنشور والتفاعل على تيك توك ↗</span>
+      `;
+    } else {
+      fbLinkEl.className = 'btn-facebook';
+      fbLinkEl.style.cssText = 'font-size: 0.88rem; padding: 9px 18px; text-decoration: none;';
+      fbLinkEl.innerHTML = `
+        <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        <span>فتح المنشور والتفاعل على فيسبوك ↗</span>
+      `;
+    }
   }
 
   const fbDirectBtn = document.getElementById('modal-fb-direct-action-btn');
   if (fbDirectBtn) {
     fbDirectBtn.href = poem.fbUrl || "https://www.facebook.com/dhwalnwn.ahmd.nayl/";
+    fbDirectBtn.className = platform.btnClass;
+    fbDirectBtn.innerHTML = `
+      ${platform.iconSvg}
+      <span>${platform.shortActionText} على المنشور ↗</span>
+    `;
+    fbDirectBtn.title = platform.title;
   }
 
   // Update modal like button
   updateModalLikeUI(poem.id);
 
-  // Render Facebook Official Like Plugin inside modal
+  // Render Facebook Official Like Plugin inside modal (only if Facebook)
   const fbPluginContainer = document.getElementById('modal-fb-like-container');
   if (fbPluginContainer) {
-    fbPluginContainer.innerHTML = `
-      <div class="fb-like" 
-           data-href="${poem.fbUrl || 'https://www.facebook.com/dhwalnwn.ahmd.nayl/'}" 
-           data-width="" 
-           data-layout="button_count" 
-           data-action="like" 
-           data-size="small" 
-           data-share="true">
-      </div>
-    `;
-    if (window.FB && window.FB.XFBML) {
-      try {
-        window.FB.XFBML.parse(fbPluginContainer);
-      } catch (err) {
-        console.warn("FB parse error:", err);
+    if (platform.platform === 'facebook') {
+      fbPluginContainer.style.display = 'block';
+      fbPluginContainer.innerHTML = `
+        <div class="fb-like" 
+             data-href="${poem.fbUrl || 'https://www.facebook.com/dhwalnwn.ahmd.nayl/'}" 
+             data-width="" 
+             data-layout="button_count" 
+             data-action="like" 
+             data-size="small" 
+             data-share="true">
+        </div>
+      `;
+      if (window.FB && window.FB.XFBML) {
+        try {
+          window.FB.XFBML.parse(fbPluginContainer);
+        } catch (err) {
+          console.warn("FB parse error:", err);
+        }
       }
+    } else {
+      fbPluginContainer.style.display = 'block';
+      fbPluginContainer.innerHTML = `
+        <a href="${poem.fbUrl}" target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; gap:6px; font-size:0.75rem; color:#00f2fe; text-decoration:none; padding:4px 10px; border-radius:12px; background:rgba(0,242,254,0.1); border:1px solid rgba(0,242,254,0.25);">
+          <span>🎵 حساب تيك توك الرسمي (@drwesh22)</span>
+        </a>
+      `;
     }
   }
 
@@ -2164,7 +2246,9 @@ function renderFbCards(posts) {
   const container = document.getElementById('dynamic-fb-cards');
   if (!container) return;
 
-  container.innerHTML = posts.map(post => `
+  container.innerHTML = posts.map(post => {
+    const platform = detectSourcePlatform(post.url, post.badge);
+    return `
     <article class="fb-post-card" id="${post.id}">
       <div class="fb-card-top">
         <div class="fb-mini-avatar">
@@ -2182,11 +2266,11 @@ function renderFbCards(posts) {
       </div>
       <div class="fb-post-content">${post.content}</div>
 
-      <!-- Verified Facebook Comment Preview -->
+      <!-- Verified Comment Preview -->
       ${post.sampleComment ? `
       <div class="fb-card-comment-box">
         <div class="fb-comment-header">
-          <span class="fb-commenter-name">💬 رد موثق من فيسبوك: ${post.sampleComment.author}</span>
+          <span class="fb-commenter-name">💬 رد موثق من ${platform.name}: ${post.sampleComment.author}</span>
           <span class="fb-comment-date">🕒 ${post.sampleComment.date} • ${post.sampleComment.time}</span>
         </div>
         <p class="fb-comment-text">«${post.sampleComment.text}»</p>
@@ -2198,13 +2282,13 @@ function renderFbCards(posts) {
           <span>❤️ 👍 ${post.likes} تفاعل</span>
           <span>💬 ${post.comments} تعليق</span>
         </div>
-        <a href="${post.url}" target="_blank" rel="noopener noreferrer" class="btn-fb-like-action" onclick="openFbPostLink('${post.url}', event)" title="الانتقال المباشر لمنشور فيسبوك والتفاعل">
-          <svg width="13" height="13" fill="#1877f2" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-          <span>تفاعل بفيسبوك على المنشور 👍 ↗</span>
+        <a href="${post.url}" target="_blank" rel="noopener noreferrer" class="${platform.btnClass}" onclick="openFbPostLink('${post.url}', event)" title="${platform.title}">
+          ${platform.iconSvg}
+          <span>${platform.shortActionText} على المنشور ↗</span>
         </a>
       </div>
     </article>
-  `).join('');
+  `}).join('');
 }
 
 /* ==========================================================================
@@ -2366,13 +2450,15 @@ function renderVideos(list) {
     return;
   }
 
-  container.innerHTML = list.map(v => `
+  container.innerHTML = list.map(v => {
+    const platform = detectSourcePlatform(v.fbUrl, v.title);
+    return `
     <article class="video-card" data-vid="${v.id}">
       <div class="video-thumb-container" onclick="openVideoPlayer('${v.id}')">
         <img src="${v.thumb}" alt="${v.title}" class="video-thumb-img">
         <div class="video-badge-source">
-          <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-          فيديو فيسبوك الأصلي
+          ${platform.iconSvg}
+          <span>فيديو ${platform.name} الأصلي</span>
         </div>
         <div class="video-duration-tag">⏱ ${v.duration}</div>
         <div class="video-play-overlay">
@@ -2383,7 +2469,7 @@ function renderVideos(list) {
       <div class="video-card-body">
         <div class="video-card-meta">
           <span>${v.categoryName}</span>
-          <span class="video-publish-time" title="تاريخ ووقت النشر على فيسبوك">🕒 ${v.fbPublishDate} • ${v.fbPublishTime}</span>
+          <span class="video-publish-time" title="تاريخ ووقت النشر على ${platform.name}">🕒 ${v.fbPublishDate} • ${v.fbPublishTime}</span>
         </div>
         <h3 class="video-card-title">${v.title}</h3>
         <p class="video-card-desc">${v.desc}</p>
@@ -2392,23 +2478,24 @@ function renderVideos(list) {
           <button class="btn-watch-now" onclick="openVideoPlayer('${v.id}')">
             تشغيل المقطع المرئي ▶
           </button>
-          <a href="${v.fbUrl}" target="_blank" rel="noopener noreferrer" class="btn-fb-like-action" onclick="openFbPostLink('${v.fbUrl}', event)" title="الانتقال للمنشور والتفاعل على فيسبوك">
-            <svg width="13" height="13" fill="#1877f2" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-            <span>تفاعل بفيسبوك 👍 ↗</span>
+          <a href="${v.fbUrl}" target="_blank" rel="noopener noreferrer" class="${platform.btnClass}" onclick="openFbPostLink('${v.fbUrl}', event)" title="${platform.title}">
+            ${platform.iconSvg}
+            <span>${platform.shortActionText} ↗</span>
           </a>
         </div>
       </div>
     </article>
-  `).join('');
+  `}).join('');
 }
 
 window.openVideoPlayer = function(id) {
   const vid = VIDEOS_DATA.find(v => v.id === id);
   if (!vid) return;
   activeVideo = vid;
+  const platform = detectSourcePlatform(vid.fbUrl, vid.title);
 
   document.getElementById('video-modal-title').textContent = vid.title;
-  document.getElementById('video-modal-category').innerHTML = `${vid.categoryName} • ${vid.duration} دقيقة • <span style="color:#60a5fa;">🕒 نُشر في فيسبوك: ${vid.fbPublishDate} - ${vid.fbPublishTime}</span>`;
+  document.getElementById('video-modal-category').innerHTML = `${vid.categoryName} • ${vid.duration} دقيقة • <span style="color:#60a5fa;">🕒 نُشر في ${platform.name}: ${vid.fbPublishDate} - ${vid.fbPublishTime}</span>`;
   document.getElementById('video-modal-desc').innerHTML = `
     <p style="font-size: 1.35rem; color: var(--gold-glow); margin-bottom: 8px;">« ${vid.quote} »</p>
     <p style="font-size: 0.95rem; color: var(--text-muted); font-family: var(--font-ui);">${vid.desc}</p>
@@ -2417,6 +2504,12 @@ window.openVideoPlayer = function(id) {
   const vFbLink = document.getElementById('video-modal-fb-link');
   if (vFbLink) {
     vFbLink.href = vid.fbUrl;
+    vFbLink.innerHTML = platform.watchText;
+    if (platform.platform === 'tiktok') {
+      vFbLink.className = 'btn-tiktok-visit';
+    } else {
+      vFbLink.className = 'btn-facebook';
+    }
     vFbLink.onclick = function(e) {
       openFbPostLink(vid.fbUrl, e);
     };
@@ -2434,11 +2527,11 @@ window.openVideoPlayer = function(id) {
     <div style="margin-top: 12px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
       <span style="font-size: 0.85rem; color: #22c55e; display: flex; align-items: center; gap: 6px;">
         <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 8px #22c55e;"></span>
-        تسجيل مرئي كامل بالصوت الأصلي للشاعر (مقتطف مباشر من فيسبوك)
+        تسجيل مرئي كامل بالصوت الأصلي للشاعر (مقتطف مباشر من ${platform.name})
       </span>
-      <a href="${vid.fbUrl}" target="_blank" rel="noopener noreferrer" class="btn-fb-like-action" onclick="openFbPostLink('${vid.fbUrl}', event)" title="مشاهدة والتفاعل على فيسبوك">
-        <svg width="13" height="13" fill="#1877f2" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-        <span>مشاهدة المنشور الأصلي والتفاعلات على فيسبوك ↗</span>
+      <a href="${vid.fbUrl}" target="_blank" rel="noopener noreferrer" class="${platform.btnClass}" onclick="openFbPostLink('${vid.fbUrl}', event)" title="${platform.title}">
+        ${platform.iconSvg}
+        <span>مشاهدة والتفاعل على ${platform.name} ↗</span>
       </a>
     </div>
   `;
