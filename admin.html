@@ -20,7 +20,7 @@
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="assets/css/style.css?v=20261016_v11_source_detection">
-  <link rel="stylesheet" href="assets/css/admin.css?v=20261016_admin_v1">
+  <link rel="stylesheet" href="assets/css/admin.css?v=20261016_admin_v3_visitors">
 </head>
 <body>
 
@@ -120,6 +120,23 @@
         <div class="stat-content">
           <h3 id="stat-live-posts">11 منشور ومقطع</h3>
           <p>تغذية فيسبوك وتيك توك المباشرة</p>
+        </div>
+      </div>
+
+      <div class="stat-card" id="card-site-visitors" title="إحصائيات زوار الموقع (خاصة بالإدارة فقط ولا تظهر إطلاقاً في الواجهة الرئيسية)">
+        <div class="stat-icon-wrap stat-icon-purple">👥</div>
+        <div class="stat-content">
+          <div style="display: flex; align-items: baseline; gap: 8px;">
+            <h3 id="stat-total-visitors" style="color: #c084fc;">1,485</h3>
+            <span style="font-size: 0.72rem; color: #c084fc; background: rgba(168,85,247,0.15); border: 1px solid rgba(168,85,247,0.3); border-radius: 20px; padding: 2px 8px; font-weight: 700;">خاص بالإدارة 🔒</span>
+            <button onclick="calibrateAdminVisitors(event)" style="background: none; border: none; cursor: pointer; color: #c084fc; font-size: 0.85rem; padding: 0 4px; opacity: 0.7; transition: opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'" title="معايرة وتعديل العداد يدوياً">⚙️</button>
+          </div>
+          <p>إجمالي زوار الموقع</p>
+          <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px; display: flex; align-items: center; gap: 10px;">
+            <span>📅 اليوم: <strong id="stat-today-visitors" style="color: #fff;">42</strong></span>
+            <span>•</span>
+            <span>👤 فريد: <strong id="stat-unique-visitors" style="color: #fff;">1,120</strong></span>
+          </div>
         </div>
       </div>
 
@@ -408,7 +425,7 @@
   <div id="admin-toast" class="admin-toast"></div>
 
   <!-- Main JavaScript Data & Logic -->
-  <script src="assets/js/main.js?v=20261016_v7_complete"></script>
-  <script src="assets/js/admin.js?v=20261016_admin_v2"></script>
+  <script src="assets/js/main.js?v=20261016_v18_visitors"></script>
+  <script src="assets/js/admin.js?v=20261016_admin_v3_visitors"></script>
 </body>
 </html>
