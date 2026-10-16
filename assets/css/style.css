@@ -230,14 +230,27 @@ body {
   border-radius: 2px;
 }
 
-.nav-links a:hover,
-.nav-links a.active {
-  color: #fff;
+.nav-links a:hover {
+  color: #ffffff;
 }
 
-.nav-links a:hover::after,
-.nav-links a.active::after {
+.nav-links a:hover::after {
   width: 100%;
+  opacity: 0.7;
+}
+
+.nav-links a.active {
+  color: var(--gold-glow, #f5cf68) !important;
+  font-weight: 700;
+  text-shadow: 0 0 14px rgba(245, 207, 104, 0.55);
+}
+
+.nav-links a.active::after {
+  width: 100% !important;
+  opacity: 1 !important;
+  height: 2.5px;
+  background: linear-gradient(to left, var(--gold-primary), var(--gold-glow));
+  box-shadow: 0 0 12px rgba(245, 207, 104, 0.75);
 }
 
 .header-actions {

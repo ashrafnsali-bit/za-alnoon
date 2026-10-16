@@ -735,7 +735,80 @@ function initHeaderScroll() {
     } else {
       header.classList.remove('scrolled');
     }
+  }, { passive: true });
+
+  initNavScrollspy();
+}
+
+function initNavScrollspy() {
+  const header = document.querySelector('.main-header');
+  const navLinks = Array.from(document.querySelectorAll('.nav-links a[href^="#"]'));
+  if (!navLinks.length) return;
+
+  const sectionMap = [];
+  navLinks.forEach(link => {
+    const hash = link.getAttribute('href');
+    if (hash && hash.length > 1) {
+      const section = document.querySelector(hash);
+      if (section) {
+        sectionMap.push({ hash, section, link });
+      }
+    }
+
+    // التحديث الفوري عند النقر على أي قسم بالهيدر
+    link.addEventListener('click', function() {
+      navLinks.forEach(l => l.classList.remove('active'));
+      this.classList.add('active');
+    });
   });
+
+  function updateActiveNavLink() {
+    const headerHeight = header ? header.offsetHeight : 75;
+    // نقطة الكشف الذكية عند ثلث الشاشة العلوي
+    const scrollTrigger = window.scrollY + headerHeight + 100;
+
+    let activeItem = null;
+
+    for (let i = 0; i < sectionMap.length; i++) {
+      const item = sectionMap[i];
+      const top = item.section.offsetTop;
+      const height = item.section.offsetHeight;
+
+      if (scrollTrigger >= top && scrollTrigger < top + height) {
+        activeItem = item;
+        break;
+      }
+    }
+
+    // إذا وصل المستخدم لأسفل الصفحة تماماً (مثل دفتر الخواطر)
+    if ((window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 70)) {
+      if (sectionMap.length > 0) {
+        activeItem = sectionMap[sectionMap.length - 1];
+      }
+    } else if (window.scrollY < 120 && sectionMap.length > 0) {
+      // في أعلى الصفحة: تفعيل الرئيسية
+      activeItem = sectionMap[0];
+    }
+
+    if (activeItem) {
+      navLinks.forEach(l => l.classList.remove('active'));
+      activeItem.link.classList.add('active');
+    }
+  }
+
+  let scrollTicking = false;
+  window.addEventListener('scroll', () => {
+    if (!scrollTicking) {
+      window.requestAnimationFrame(() => {
+        updateActiveNavLink();
+        scrollTicking = false;
+      });
+      scrollTicking = true;
+    }
+  }, { passive: true });
+
+  // فحص أولي عند اكتمال تحميل الصفحة
+  setTimeout(updateActiveNavLink, 150);
 }
 
 function initMobileNav() {
