@@ -816,15 +816,59 @@ function initMobileNav() {
   const navLinks = document.querySelector('.nav-links');
   if (!toggleBtn || !navLinks) return;
 
-  toggleBtn.addEventListener('click', () => {
-    navLinks.classList.toggle('open');
+  function openMenu() {
+    navLinks.classList.add('open');
+    toggleBtn.classList.add('active');
+    toggleBtn.setAttribute('aria-expanded', 'true');
+    toggleBtn.innerHTML = '✕';
+    toggleBtn.setAttribute('aria-label', 'إغلاق القائمة');
+  }
+
+  function closeMenu() {
+    navLinks.classList.remove('open');
+    toggleBtn.classList.remove('active');
+    toggleBtn.setAttribute('aria-expanded', 'false');
+    toggleBtn.innerHTML = '☰';
+    toggleBtn.setAttribute('aria-label', 'فتح القائمة');
+  }
+
+  toggleBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (navLinks.classList.contains('open')) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
   });
 
   navLinks.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
-      navLinks.classList.remove('open');
+      closeMenu();
     });
   });
+
+  // إغلاق القائمة عند النقر في أي مكان خارج الهيدر
+  document.addEventListener('click', (e) => {
+    if (navLinks.classList.contains('open')) {
+      if (!navLinks.contains(e.target) && !toggleBtn.contains(e.target)) {
+        closeMenu();
+      }
+    }
+  });
+
+  // إغلاق القائمة عند الضغط على زر Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && navLinks.classList.contains('open')) {
+      closeMenu();
+    }
+  });
+
+  // إغلاق تلقائي إذا تغير حجم الشاشة لأكثر من 1100px
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 1100 && navLinks.classList.contains('open')) {
+      closeMenu();
+    }
+  }, { passive: true });
 }
 
 /* ==========================================================================
