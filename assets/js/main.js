@@ -2258,6 +2258,25 @@ async function fetchSocialFeed(forceRefresh = false) {
       }
     }
 
+    // 3.5. مزامنة إعجابات وتفاعلات القصائد في ديوان الموقع مع أحدث إحصائيات المنشورات
+    if (data.facebookPosts && Array.isArray(data.facebookPosts)) {
+      data.facebookPosts.forEach(post => {
+        const pLikes = parseInt(String(post.likes).replace(/[^\d]/g, ''), 10);
+        if (pLikes && !isNaN(pLikes)) {
+          const matched = POEMS_DATA.find(p => 
+            (p.fbUrl && post.url && p.fbUrl === post.url) ||
+            (post.content && (post.content.includes(p.title) || p.title.includes(post.content.split('\n')[0].trim())))
+          );
+          if (matched) {
+            matched.baseLikes = pLikes;
+            if (typeof updateCardLikeUI === 'function') {
+              updateCardLikeUI(matched.id, false);
+            }
+          }
+        }
+      });
+    }
+
     // 4. إدراج أي قصيدة جديدة تم مزامنتها تلقائياً في ديوان الموقع
     if (data.syncedPoems && Array.isArray(data.syncedPoems) && data.syncedPoems.length > 0) {
       let newPoemsAdded = false;
