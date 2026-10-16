@@ -537,21 +537,29 @@ const DAILY_VERSES = [
   }
 ];
 
-// --- التهيئة عند تحميل الصفحة ---
+// --- التهيئة عند تحميل الصفحة مع حماية تامة ضد أي تعليق أو أخطاء ---
 document.addEventListener('DOMContentLoaded', () => {
-  initAmbientCanvas();
-  initHeaderScroll();
-  initPoetryGrid();
-  initVideosShowcase();
-  initFiltersAndSearch();
-  initDailyVerse();
-  initModalEvents();
-  initAudioAmbiance();
-  initGuestbook();
-  initMobileNav();
-  initFacebookLiveSync();
-  initFacebookLikesListener();
-  initTikTokShowcase();
+  const safeRun = (fn, name) => {
+    try {
+      if (typeof fn === 'function') fn();
+    } catch (err) {
+      console.warn(`[SafeInit] Note in ${name}:`, err.message);
+    }
+  };
+
+  safeRun(initAmbientCanvas, 'initAmbientCanvas');
+  safeRun(initHeaderScroll, 'initHeaderScroll');
+  safeRun(initPoetryGrid, 'initPoetryGrid');
+  safeRun(initVideosShowcase, 'initVideosShowcase');
+  safeRun(initFiltersAndSearch, 'initFiltersAndSearch');
+  safeRun(initDailyVerse, 'initDailyVerse');
+  safeRun(initModalEvents, 'initModalEvents');
+  safeRun(initAudioAmbiance, 'initAudioAmbiance');
+  safeRun(initGuestbook, 'initGuestbook');
+  safeRun(initMobileNav, 'initMobileNav');
+  safeRun(initFacebookLiveSync, 'initFacebookLiveSync');
+  safeRun(initFacebookLikesListener, 'initFacebookLikesListener');
+  safeRun(initTikTokShowcase, 'initTikTokShowcase');
 });
 
 /* ==========================================================================
