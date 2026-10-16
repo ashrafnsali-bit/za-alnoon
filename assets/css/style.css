@@ -2384,8 +2384,58 @@ section {
 
 .fb-metrics-icons {
   display: flex;
-  gap: 14px;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
 }
+
+.btn-live-like, .btn-live-comment {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #e2e8f0;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  text-decoration: none;
+  font-family: var(--font-ui);
+}
+
+.btn-live-like:hover {
+  background: rgba(239, 68, 68, 0.18);
+  border-color: rgba(239, 68, 68, 0.45);
+  color: #fca5a5;
+  transform: translateY(-2px);
+}
+
+.btn-live-like.has-liked {
+  background: rgba(239, 68, 68, 0.25);
+  border-color: #ef4444;
+  color: #f87171;
+}
+
+.btn-live-like.has-liked .like-heart {
+  animation: heartPump 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes heartPump {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.4); }
+  100% { transform: scale(1); }
+}
+
+.btn-live-comment:hover {
+  background: rgba(96, 165, 250, 0.18);
+  border-color: rgba(96, 165, 250, 0.45);
+  color: #93c5fd;
+  transform: translateY(-2px);
+}
+
 
 /* ==========================================================================
    Guestbook / دفتر التوقيعات والخواطر

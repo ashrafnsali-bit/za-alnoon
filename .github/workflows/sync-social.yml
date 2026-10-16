@@ -2,16 +2,17 @@ name: Dynamic Social Feed Sync (Facebook & TikTok)
 
 on:
   schedule:
-    # يعمل تلقائياً كل 6 ساعات لتفقد المنشورات وتحديث الختم الزمني
-    - cron: '0 */6 * * *'
+    # يعمل تلقائياً كل ساعتين لجلب أحدث المنشورات ومقاطع تيك توك والإعجابات الحية
+    - cron: '0 */2 * * *'
   workflow_dispatch:
     inputs:
       platform:
         description: 'المنصة (facebook أو tiktok)'
-        required: true
-        default: 'facebook'
+        required: false
+        default: 'all'
         type: choice
         options:
+          - all
           - facebook
           - tiktok
       post_content:
@@ -42,22 +43,38 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Scraper Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install yt-dlp
+
+      - name: Run Automated TikTok & Facebook Scraper
+        run: |
+          python scripts/sync_feed.py
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: Run Social Sync Engine
+      - name: Run Webhook & Event Dispatch Processor
         env:
           CLIENT_PAYLOAD: ${{ toJson(github.event.client_payload) }}
           INPUT_PLATFORM: ${{ github.event.inputs.platform }}
           INPUT_CONTENT: ${{ github.event.inputs.post_content }}
           INPUT_URL: ${{ github.event.inputs.post_url }}
         run: |
-          if [ -n "$INPUT_PLATFORM" ]; then
+          if [ -n "$INPUT_PLATFORM" ] && [ "$INPUT_PLATFORM" != "all" ]; then
             node scripts/sync-social.js "{\"platform\":\"$INPUT_PLATFORM\",\"content\":\"$INPUT_CONTENT\",\"url\":\"$INPUT_URL\"}"
-          else
+          elif [ -n "$CLIENT_PAYLOAD" ] && [ "$CLIENT_PAYLOAD" != "null" ]; then
             node scripts/sync-social.js
+          else
+            echo "لا توجد حمولة Webhook إضافية؛ تم إنهاء جلب المزامنة بنجاح."
           fi
 
       - name: Commit & Push Updates

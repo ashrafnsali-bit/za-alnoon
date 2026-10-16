@@ -1851,7 +1851,113 @@ function initGuestbook() {
       showToast('شكراً لمشاركتك العطرة! تم حفظ خاطرتك في صدارة الدفتر حسب الأحدث.');
     });
   }
+
+  // إتاحة دالة التحديث على مستوى النافذة للربط بالمزامنة الدورية
+  window.refreshGuestbookFromSocialFeed = function() {
+    let currentEntries = JSON.parse(localStorage.getItem('za_alnoon_guestbook_v4_sorted'));
+    if (!currentEntries || !Array.isArray(currentEntries)) {
+      currentEntries = DEFAULT_GUESTBOOK;
+    }
+    entries = syncSocialCommentsIntoGuestbook(currentEntries);
+    localStorage.setItem('za_alnoon_guestbook_v4_sorted', JSON.stringify(entries));
+    renderEntries();
+  };
 }
+
+// --- دوال التفاعل اللحظي والإعجابات والتعليقات الحية أولاً بأول ---
+function toArabicNumbers(num) {
+  const arabicDigits = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+  return String(num).replace(/[0-9]/g, w => arabicDigits[+w]);
+}
+
+function getLivePostLikes(postId, defaultCount) {
+  const extra = parseInt(localStorage.getItem(`za_alnoon_likes_${postId}`) || '0', 10);
+  const base = parseInt(String(defaultCount).replace(/[^\d]/g, '') || '0', 10);
+  return toArabicNumbers(base + extra);
+}
+
+function getLivePostComments(postId, defaultCount) {
+  const extra = parseInt(localStorage.getItem(`za_alnoon_comments_${postId}`) || '0', 10);
+  const base = parseInt(String(defaultCount).replace(/[^\d]/g, '') || '0', 10);
+  return toArabicNumbers(base + extra);
+}
+
+function hasLikedPost(postId) {
+  return localStorage.getItem(`za_alnoon_has_liked_${postId}`) === 'true';
+}
+
+window.togglePostInteraction = function(postId, type, event) {
+  if (event) {
+    event.stopPropagation();
+    event.preventDefault();
+  }
+
+  if (type === 'like') {
+    const alreadyLiked = hasLikedPost(postId);
+    let extra = parseInt(localStorage.getItem(`za_alnoon_likes_${postId}`) || '0', 10);
+
+    if (alreadyLiked) {
+      extra = Math.max(0, extra - 1);
+      localStorage.setItem(`za_alnoon_likes_${postId}`, extra);
+      localStorage.setItem(`za_alnoon_has_liked_${postId}`, 'false');
+      showToast('تم إلغاء التفاعل');
+    } else {
+      extra += 1;
+      localStorage.setItem(`za_alnoon_likes_${postId}`, extra);
+      localStorage.setItem(`za_alnoon_has_liked_${postId}`, 'true');
+
+      const clickX = event && event.clientX ? event.clientX : window.innerWidth / 2;
+      const clickY = event && event.clientY ? event.clientY : window.innerHeight / 2;
+      spawnFloatingHeart(clickX, clickY);
+      showToast('❤️ شكراً لتفاعلك! تم تسجيل إعجابك وتحديث العداد أولاً بأول.');
+    }
+
+    const likeEls = document.querySelectorAll(`[id="like-count-${postId}"]`);
+    likeEls.forEach(el => {
+      const baseCount = el.getAttribute('data-base') || el.textContent;
+      el.setAttribute('data-base', baseCount);
+      const baseNum = parseInt(String(baseCount).replace(/[^\d]/g, '') || '0', 10);
+      el.textContent = toArabicNumbers(baseNum + (alreadyLiked ? 0 : 1));
+      el.classList.add('stat-bump');
+      setTimeout(() => el.classList.remove('stat-bump'), 500);
+    });
+
+    const btns = document.querySelectorAll(`button[onclick*="'${postId}'"]`);
+    btns.forEach(b => {
+      if (b.classList.contains('btn-live-like')) {
+        b.classList.toggle('has-liked', !alreadyLiked);
+      }
+    });
+  }
+};
+
+window.focusGuestbookWithPost = function(postTag, event) {
+  if (event) event.preventDefault();
+  const guestbookSection = document.getElementById('guestbook');
+  const msgInput = document.getElementById('guest-message-input');
+  if (guestbookSection) {
+    guestbookSection.scrollIntoView({ behavior: 'smooth' });
+    if (msgInput) {
+      setTimeout(() => {
+        msgInput.focus();
+        if (!msgInput.value.includes(postTag)) {
+          msgInput.value = `[تعليقاً على: ${postTag}]\n` + msgInput.value;
+        }
+      }, 500);
+    }
+  }
+};
+
+function spawnFloatingHeart(x, y) {
+  const particle = document.createElement('div');
+  particle.className = 'live-reaction-particle';
+  particle.innerHTML = '❤️ +1';
+  particle.style.left = `${x}px`;
+  particle.style.top = `${y}px`;
+  document.body.appendChild(particle);
+  setTimeout(() => particle.remove(), 1200);
+}
+
 
 /* ==========================================================================
    8. أدوات مساعدة (Helper Utilities)
@@ -2281,8 +2387,16 @@ function renderFbCards(posts) {
 
       <div class="fb-post-metrics">
         <div class="fb-metrics-icons">
-          <span>❤️ 👍 ${post.likes} تفاعل</span>
-          <span>💬 ${post.comments} تعليق</span>
+          <button class="btn-live-like ${hasLikedPost(post.id) ? 'has-liked' : ''}" onclick="togglePostInteraction('${post.id}', 'like', event)" title="إعجاب وتفاعل فوري">
+            <span class="like-heart">❤️</span>
+            <span class="like-label">تفاعل:</span>
+            <strong class="like-count" id="like-count-${post.id}" data-base="${post.likes}">${getLivePostLikes(post.id, post.likes)}</strong>
+          </button>
+          <a href="#guestbook" class="btn-live-comment" onclick="focusGuestbookWithPost('${post.badge || post.author}', event)" title="أضف تعليقاً في دفتر الخواطر">
+            <span>💬</span>
+            <strong class="comment-count" id="comment-count-${post.id}">${getLivePostComments(post.id, post.comments)}</strong>
+            <span class="comment-label">تعليق</span>
+          </a>
         </div>
         <a href="${post.url}" target="_blank" rel="noopener noreferrer" class="${platform.btnClass}" onclick="openFbPostLink('${post.url}', event)" title="${platform.title}">
           ${platform.iconSvg}
@@ -2773,7 +2887,7 @@ function renderTikTokGrid(items) {
         </div>
         <div class="tt-overlay-stats">
           <span class="tt-stat-pill">👁️ ${item.views}</span>
-          <span class="tt-stat-pill">❤️ ${item.likes}</span>
+          <span class="tt-stat-pill" onclick="togglePostInteraction('${item.id}', 'like', event)" style="cursor: pointer;" title="إعجاب وتفاعل لحظي">❤️ <strong id="like-count-${item.id}" data-base="${item.likes}">${getLivePostLikes(item.id, item.likes)}</strong></span>
           <span class="tt-stat-pill">⏱️ ${item.duration}</span>
         </div>
       </div>
@@ -2789,6 +2903,10 @@ function renderTikTokGrid(items) {
           <button class="btn-tt-watch" onclick="openTikTokModal('${item.id}')">
             <span>تشغيل المقطع</span>
             <span>▷</span>
+          </button>
+          <button class="btn-live-like ${hasLikedPost(item.id) ? 'has-liked' : ''}" onclick="togglePostInteraction('${item.id}', 'like', event)" title="إعجاب وتفاعل فوري" style="padding: 6px 14px;">
+            <span class="like-heart">❤️</span>
+            <span class="like-label">إعجاب</span>
           </button>
           <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="btn-tt-external" title="فتح الفيديو مباشرة في تيك توك">
             <span>تيك توك ↗</span>
