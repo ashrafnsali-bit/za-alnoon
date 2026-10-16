@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لوحة إدارة ديوان الشاعر ذو النون أحمد نايل | إضافة وتعديل القصائد</title>
+  
+  <!-- Anti-Cache Meta Tags -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/poet_logo.svg">
+
+  <!-- Google Fonts (Cairo & Amiri) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="assets/css/style.css?v=20261016_v6_instant">
+  <link rel="stylesheet" href="assets/css/admin.css?v=20261016_admin_v1">
+</head>
+<body>
+
+  <!-- ==========================================================================
+       1. شاشة القفل وتسجيل الدخول (Passcode Lock Screen)
+       ========================================================================== -->
+  <div id="admin-lock-screen" class="admin-lock-screen">
+    <div class="lock-box">
+      <div class="lock-icon-wrap">
+        <span>🔐</span>
+      </div>
+      <h2 class="lock-title">لوحة تحكم الديوان</h2>
+      <p class="lock-desc">يرجى إدخال رمز المرور السري للدخول إلى لوحة إدارة وتعديل قصائد الشاعر ذوالنون أحمد نايل.</p>
+
+      <div class="pin-inputs-group">
+        <input type="password" maxlength="1" class="pin-input" autofocus inputmode="numeric">
+        <input type="password" maxlength="1" class="pin-input" inputmode="numeric">
+        <input type="password" maxlength="1" class="pin-input" inputmode="numeric">
+        <input type="password" maxlength="1" class="pin-input" inputmode="numeric">
+      </div>
+
+      <button id="btn-submit-pin" class="btn-lock-submit">
+        <span>تأكيد الدخول</span>
+        <span>←</span>
+      </button>
+
+      <div class="lock-hint">
+        <span>💡 رمز الدخول الافتراضي: <code>2026</code></span>
+      </div>
+      
+      <div style="margin-top: 1rem;">
+        <a href="index.html" style="color: var(--text-muted); font-size: 0.8rem; text-decoration: none;">العودة لصفحة الموقع الرئيسية ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       2. ترويسة لوحة التحكم (Admin Header)
+       ========================================================================== -->
+  <header class="admin-header">
+    <div class="admin-header-container">
+      <div class="admin-brand">
+        <div class="admin-brand-avatar">
+          <img src="assets/images/poet_portrait.jpg" alt="ذو النون نايل">
+        </div>
+        <div class="admin-brand-info">
+          <h1>
+            <span>ديوان ذو النون نايل</span>
+            <span class="admin-badge">لوحة الإدارة والتحكم</span>
+          </h1>
+          <p>إدارة وتعديل القصائد • فرز زمني (الأحدث أولاً) • مزامنة فيسبوك وتيك توك</p>
+        </div>
+      </div>
+
+      <div class="admin-header-actions">
+        <button class="btn-header-sync" onclick="fetchSocialFeedForAdmin(true)" title="سحب أحدث المنشورات من فيسبوك وتيك توك الآن">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+          <span>سحب منشورات المنصات</span>
+        </button>
+        <a href="index.html" target="_blank" class="btn-header-link" title="معاينة الموقع للزوار">
+          <span>معاينة الموقع الحية</span>
+          <span>↗</span>
+        </a>
+        <button class="btn-header-link" onclick="adminLogout()" title="تسجيل الخروج">
+          <span>خروج</span>
+          <span>🚪</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       3. المحتوى الرئيسي وشريط الإحصائيات (Main Content & Stats)
+       ========================================================================== -->
+  <main class="admin-main">
+    
+    <!-- Stats Grid -->
+    <div class="admin-stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon-wrap stat-icon-gold">📜</div>
+        <div class="stat-content">
+          <h3 id="stat-total-poems">10</h3>
+          <p>إجمالي القصائد في الديوان</p>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon-wrap stat-icon-blue">🔄</div>
+        <div class="stat-content">
+          <h3 id="stat-sorting-mode" style="font-size: 1.25rem; color: #60a5fa;">من الأحدث للأقدم</h3>
+          <p>ترتيب النشر الزمني اللحظي</p>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon-wrap stat-icon-cyan">📡</div>
+        <div class="stat-content">
+          <h3 id="stat-live-posts">11 منشور ومقطع</h3>
+          <p>تغذية فيسبوك وتيك توك المباشرة</p>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon-wrap stat-icon-green">🟢</div>
+        <div class="stat-content">
+          <h3 id="stat-last-sync" style="font-size: 1.15rem; color: #4ade80;">متصل الآن</h3>
+          <p>جاهزية المزامنة والتحديث الفوري</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs Bar -->
+    <div class="admin-tabs-nav">
+      <button class="admin-tab-btn active" data-target="tab-manage-poems">
+        <span>📚 إدارة وتعديل القصائد</span>
+        <span class="tab-badge-num">مرتبة تنازلياً</span>
+      </button>
+      <button class="admin-tab-btn" data-target="tab-add-poem">
+        <span>✍️ إضافة قصيدة جديدة</span>
+      </button>
+      <button class="admin-tab-btn" data-target="tab-social-radar">
+        <span>📡 سحب منشورات فيسبوك وتيك توك</span>
+      </button>
+      <button class="admin-tab-btn" data-target="tab-export-sync">
+        <span>💾 حفظ وتصدير البيانات</span>
+      </button>
+    </div>
+
+    <!-- ======================================================================
+         التبويب 1: جدول وإدارة القصائد الحالية (Manage Poems)
+         ====================================================================== -->
+    <div id="tab-manage-poems" class="tab-pane active">
+      <div class="panel-head-bar">
+        <div class="panel-title-wrap">
+          <h2>
+            <span>ديوان القصائد المعتمدة</span>
+            <span style="font-size: 0.8rem; color: #4ade80; background: rgba(34,197,94,0.15); padding: 3px 10px; border-radius: 20px;">✓ مرتبة تلقائياً من الأحدث إلى الأقدم</span>
+          </h2>
+          <p>يمكنك تعديل أي قصيدة، مراجعة أبياتها، أو حذفها، وتنعكس التعديلات فورياً على الموقع.</p>
+        </div>
+
+        <div class="panel-controls">
+          <div class="search-input-wrap">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="admin-poem-search" placeholder="بحث في عناوين أو أبيات القصائد..." oninput="filterPoemsTable(this)">
+          </div>
+          <button class="btn-primary-admin" onclick="switchTab('tab-add-poem')">
+            <span>+ إضافة قصيدة جديدة</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Table Container -->
+      <div class="poems-table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th style="width: 60px;">الترتيب</th>
+              <th>عنوان القصيدة ومطلعها</th>
+              <th>التصنيف الأدبي</th>
+              <th>تاريخ النشر</th>
+              <th>التفاعل</th>
+              <th>المصدر</th>
+              <th style="width: 140px;">الإجراءات</th>
+            </tr>
+          </thead>
+          <tbody id="poems-table-body">
+            <!-- Rendered by admin.js -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ======================================================================
+         التبويب 2: إضافة قصيدة جديدة (Add Poem Form)
+         ====================================================================== -->
+    <div id="tab-add-poem" class="tab-pane">
+      <div class="form-panel-card">
+        <div class="panel-title-wrap" style="margin-bottom: 1.5rem;">
+          <h2>✍️ إضافة قصيدة أو نص وجداني جديد</h2>
+          <p>املأ البيانات أدناه وسيتم إدراج القصيدة فورياً في رأس الديوان (الأحدث أولاً).</p>
+        </div>
+
+        <form id="add-poem-form">
+          <div class="form-grid-two">
+            <div class="form-group">
+              <label class="form-label">عنوان القصيدة *</label>
+              <input type="text" id="poem-title-input" class="form-control" placeholder="مثال: خفف خطاك، أو عنوان القصيدة الجديد" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">التصنيف الأدبي *</label>
+              <select id="poem-category-select" class="form-control">
+                <option value="darwish">بوح ودراويش</option>
+                <option value="hawas">ديوان الحواس</option>
+                <option value="musical">أعمال غنائية</option>
+                <option value="social">مقتطفات فيسبوك الحية</option>
+                <option value="tiktok">بوح تيك توك (@drwesh22)</option>
+                <option value="national">قصائد وطنية</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-grid-two">
+            <div class="form-group">
+              <label class="form-label">تاريخ النشر <span>(مثال: ١٦ أكتوبر ٢٠٢٦، اتركه فارغاً لتعيين تاريخ اليوم تلقائياً)</span></label>
+              <input type="text" id="poem-date-input" class="form-control" placeholder="١٦ أكتوبر ٢٠٢٦">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">وقت النشر <span>(مثال: ١٠:١٥ م)</span></label>
+              <input type="text" id="poem-time-input" class="form-control" placeholder="١٠:١٥ م">
+            </div>
+          </div>
+
+          <div class="form-grid-two">
+            <div class="form-group">
+              <label class="form-label">رابط المنشور الأصلي في فيسبوك أو تيك توك</label>
+              <input type="url" id="poem-fburl-input" class="form-control" placeholder="https://www.facebook.com/dhwalnwn.ahmd.nayl/posts/..." value="https://www.facebook.com/dhwalnwn.ahmd.nayl/">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">وسام التمييز البصري <span>(Badge)</span></label>
+              <input type="text" id="poem-badge-input" class="form-control" placeholder="مثال: 🔴 أحدث قصيدة، ✨ جديد، 👑 ديوان الحواس">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">نص وأبيات القصيدة الكاملة * <span>(اكتب كل بيت أو شطر في سطر منفصل)</span></label>
+            <textarea id="poem-text-input" class="form-control" rows="10" placeholder="اكتب أبيات القصيدة هنا..." required></textarea>
+          </div>
+
+          <div class="form-footer-actions">
+            <button type="reset" class="btn-secondary-admin">مسح الحقول</button>
+            <button type="submit" class="btn-primary-admin" style="font-size: 1rem; padding: 10px 28px;">
+              <span>حفظ وإدراج في رأس الديوان 📜</span>
+              <span>←</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ======================================================================
+         التبويب 3: رادار سحب منشورات فيسبوك وتيك توك (Social Ingestion Radar)
+         ====================================================================== -->
+    <div id="tab-social-radar" class="tab-pane">
+      <div class="radar-hub-banner">
+        <div class="radar-banner-info">
+          <h3>
+            <span>📡 رادار السحب اللحظي من صفحات الشاعر</span>
+            <span style="font-size: 0.75rem; background: #22c55e; color: #000; padding: 2px 8px; border-radius: 12px; font-weight: 800;">LIVE</span>
+          </h3>
+          <p>
+            هنا تظهر أحدث المنشورات ومقاطع الفيديو المسحوبة من صفحة فيسبوك وحساب تيك توك. يمكنك بنقرة زر واحدة (1-Click) تحويل أي منشور شعري إلى قصيدة معتمدة داخل الديوان.
+          </p>
+        </div>
+        <button class="btn-primary-admin" onclick="fetchSocialFeedForAdmin(true)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+          <span>تحديث وسحب المنشورات الآن</span>
+        </button>
+      </div>
+
+      <div id="social-radar-cards-container" class="social-cards-grid">
+        <!-- Rendered by admin.js -->
+      </div>
+    </div>
+
+    <!-- ======================================================================
+         التبويب 4: حفظ وتصدير البيانات (Export & Deploy)
+         ====================================================================== -->
+    <div id="tab-export-sync" class="tab-pane">
+      <div class="form-panel-card">
+        <div class="panel-title-wrap" style="margin-bottom: 1.5rem;">
+          <h2>💾 حفظ وتصدير بيانات الديوان</h2>
+          <p>كافة التعديلات تُحفظ فورياً وتظهر على الموقع. يمكنك أيضاً تنزيل نسخة احتياطية أو رفع التحديثات إلى GitHub.</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+          
+          <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-admin); border-radius: var(--radius-md); padding: 1.5rem;">
+            <h4 style="color: var(--gold-light); font-size: 1.1rem; margin-bottom: 8px;">1. حفظ فوري على المتصفح</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+              يتم حفظ أي قصيدة تضيفها أو تعدلها محلياً، وتظهر فوراً عند زيارة الموقع دون أي تأخير.
+            </p>
+            <button class="btn-primary-admin" onclick="deployChangesNotice()">
+              <span>تأكيد الحفظ الفوري للموقع</span>
+            </button>
+          </div>
+
+          <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-admin); border-radius: var(--radius-md); padding: 1.5rem;">
+            <h4 style="color: var(--gold-light); font-size: 1.1rem; margin-bottom: 8px;">2. تصدير ملف القصائد (JSON)</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+              تنزيل ملف بيانات القصائد الكاملة مرتبة من الأحدث إلى الأقدم لحفظها أو أرشفتها.
+            </p>
+            <button class="btn-secondary-admin" onclick="exportPoemsJSON()">
+              <span>تنزيل ملف JSON 📥</span>
+            </button>
+          </div>
+
+        </div>
+
+        <div style="background: rgba(24, 119, 242, 0.08); border: 1px solid rgba(24, 119, 242, 0.3); border-radius: var(--radius-md); padding: 1.5rem;">
+          <h4 style="color: #93c5fd; margin-bottom: 6px;">🚀 رفع التحديثات تلقائياً إلى GitHub Pages</h4>
+          <p style="font-size: 0.88rem; color: #cbd5e1; line-height: 1.8;">
+            بفضل خط الأتمتة المدمج في الموقع عبر <strong>GitHub Actions</strong>، يمكنك تشغيل ملف <code>deploy.ps1</code> في مجلد المشروع، أو تشغيل سير العمل من تبويب Actions في GitHub ليتم نشر التحديثات الحية لجميع الزوار حول العالم في ثوانٍ معدودة.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ==========================================================================
+       4. نافذة التعديل السريع (Poem Edit Modal)
+       ========================================================================== -->
+  <div id="admin-edit-modal" class="admin-modal-overlay">
+    <div class="admin-modal-box">
+      <div class="admin-modal-header">
+        <h3>✏️ تعديل القصيدة الحالية</h3>
+        <button id="close-edit-modal-btn" class="btn-modal-close">×</button>
+      </div>
+
+      <form id="edit-poem-form">
+        <div class="form-grid-two">
+          <div class="form-group">
+            <label class="form-label">عنوان القصيدة *</label>
+            <input type="text" id="edit-title-input" class="form-control" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">التصنيف الأدبي</label>
+            <select id="edit-category-select" class="form-control">
+              <option value="darwish">بوح ودراويش</option>
+              <option value="hawas">ديوان الحواس</option>
+              <option value="musical">أعمال غنائية</option>
+              <option value="social">مقتطفات فيسبوك الحية</option>
+              <option value="tiktok">بوح تيك توك (@drwesh22)</option>
+              <option value="national">قصائد وطنية</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-grid-two">
+          <div class="form-group">
+            <label class="form-label">تاريخ النشر <span>(مثال: ١١ أكتوبر ٢٠٢٦)</span></label>
+            <input type="text" id="edit-date-input" class="form-control">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">وقت النشر</label>
+            <input type="text" id="edit-time-input" class="form-control">
+          </div>
+        </div>
+
+        <div class="form-grid-two">
+          <div class="form-group">
+            <label class="form-label">رابط المنشور الأصلي في فيسبوك أو تيك توك</label>
+            <input type="url" id="edit-fburl-input" class="form-control">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">عدد الإعجابات الافتراضية</label>
+            <input type="number" id="edit-likes-input" class="form-control" min="0">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">نص وأبيات القصيدة الكاملة *</label>
+          <textarea id="edit-text-input" class="form-control" rows="8" required></textarea>
+        </div>
+
+        <div class="form-footer-actions">
+          <button type="button" id="btn-cancel-edit" class="btn-secondary-admin">إلغاء</button>
+          <button type="submit" class="btn-primary-admin">
+            <span>حفظ التعديلات وتحديث الموقع ✓</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="admin-toast" class="admin-toast"></div>
+
+  <!-- Main JavaScript Data & Logic -->
+  <script src="assets/js/main.js?v=20261016_v6_instant"></script>
+  <script src="assets/js/admin.js?v=20261016_admin_v1"></script>
+</body>
+</html>

@@ -971,7 +971,64 @@ function renderPoems(filteredPoems) {
     .join('');
 }
 
+// --- محرك الفرز الزمني (من الأحدث إلى الأقدم) ودمج قصائد الآدمن ---
+const ARABIC_MONTHS_MAP = {
+  'يناير': 0, 'فبراير': 1, 'مارس': 2, 'أبريل': 3, 'مايو': 4, 'يونيو': 5,
+  'يوليو': 6, 'أغسطس': 7, 'سبتمبر': 8, 'أكتوبر': 9, 'نوفمبر': 10, 'ديسمبر': 11
+};
+
+function parseArabicDateToTimestamp(dateStr) {
+  if (!dateStr) return 0;
+  const normalized = String(dateStr).replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d));
+  const standardDate = new Date(normalized);
+  if (!isNaN(standardDate.getTime())) return standardDate.getTime();
+
+  const match = normalized.match(/(\d+)\s+([^\s\d]+)\s+(\d{4})/);
+  if (match) {
+    const day = parseInt(match[1], 10);
+    const monthName = match[2].trim();
+    const year = parseInt(match[3], 10);
+    const month = ARABIC_MONTHS_MAP[monthName] !== undefined ? ARABIC_MONTHS_MAP[monthName] : 0;
+    return new Date(year, month, day).getTime();
+  }
+  const yearMatch = normalized.match(/(\d{4})/);
+  if (yearMatch) return new Date(parseInt(yearMatch[1], 10), 0, 1).getTime();
+  return 0;
+}
+
+function sortPoemsNewestFirst(poemsList) {
+  if (!Array.isArray(poemsList)) return poemsList;
+  return poemsList.sort((a, b) => {
+    const timeA = a.timestamp || parseArabicDateToTimestamp(a.fbPublishDate || a.year);
+    const timeB = b.timestamp || parseArabicDateToTimestamp(b.fbPublishDate || b.year);
+    return timeB - timeA;
+  });
+}
+
+function loadAdminCustomPoems() {
+  try {
+    const custom = localStorage.getItem('za_alnoon_custom_poems_v1');
+    if (custom) {
+      const parsed = JSON.parse(custom);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        parsed.forEach(customPoem => {
+          const idx = POEMS_DATA.findIndex(p => String(p.id) === String(customPoem.id) || p.title === customPoem.title);
+          if (idx !== -1) {
+            POEMS_DATA[idx] = customPoem;
+          } else {
+            POEMS_DATA.unshift(customPoem);
+          }
+        });
+      }
+    }
+  } catch (err) {
+    console.warn('[Admin Poems Loader] Note:', err.message);
+  }
+}
+
 function initPoetryGrid() {
+  loadAdminCustomPoems();
+  sortPoemsNewestFirst(POEMS_DATA);
   renderPoems(POEMS_DATA);
 }
 
@@ -1005,6 +1062,7 @@ function applyFilters() {
       poem.fullText.toLowerCase().includes(currentSearch);
     return matchCat && matchSearch;
   });
+  sortPoemsNewestFirst(filtered);
   renderPoems(filtered);
 }
 

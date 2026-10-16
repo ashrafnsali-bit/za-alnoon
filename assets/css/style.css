@@ -3361,5 +3361,29 @@ section {
   }
 }
 
+/* زر لوحة الإدارة في الترويسة */
+.btn-admin-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--gold-glow);
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  transition: var(--transition-smooth);
+}
+
+.btn-admin-header:hover {
+  background: var(--gold-glow);
+  color: #000;
+  border-color: var(--gold-glow);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+
 
 
