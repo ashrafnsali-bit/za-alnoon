@@ -1902,12 +1902,24 @@ section {
   background: rgba(15, 18, 28, 0.9);
   border: 1px solid var(--gold-border);
   border-radius: var(--radius-lg);
-  padding: 1.5rem;
+  padding: 1.25rem;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7), 0 0 30px rgba(24, 119, 242, 0.1);
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
   overflow: hidden;
-  min-height: 600px;
+  min-height: auto;
+  width: 100%;
+}
+
+.fb-live-frame-box .fb-page,
+.fb-live-frame-box .fb-page span,
+.fb-live-frame-box .fb-page iframe {
+  width: 100% !important;
+  max-width: 500px !important;
+  border-radius: var(--radius-md);
+  margin: 0 auto;
 }
 
 .fb-live-notice .notice-card {

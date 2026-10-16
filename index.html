@@ -42,8 +42,8 @@
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="assets/images/poet_logo.svg">
   
-  <!-- Stylesheets (Updated Centered Oval Badges & Responsive Nav Version) -->
-  <link rel="stylesheet" href="assets/css/style.css?v=20261016_v12_centered_pills">
+  <!-- Stylesheets (Updated Centered Oval Badges & Full-Frame Feed Version) -->
+  <link rel="stylesheet" href="assets/css/style.css?v=20261016_v13_full_frame">
   
   <!-- JSON-LD Schema -->
   <script type="application/ld+json">
@@ -665,23 +665,23 @@
       <!-- Feed Mode Switcher -->
       <div class="fb-view-switcher">
         <div class="switcher-buttons">
-          <button id="btn-view-live" class="switch-btn active" onclick="switchFbView('live')">
-            <span class="icon">🔴</span>
-            البث المباشر التلقائي من فيسبوك (Meta Live)
-          </button>
-          <button id="btn-view-cards" class="switch-btn" onclick="switchFbView('cards')">
+          <button id="btn-view-cards" class="switch-btn active" onclick="switchFbView('cards')">
             <span class="icon">👑</span>
-            البطاقات المنسقة بالثيم الملوكي الداكن
+            البطاقات المنسقة بالثيم الملوكي الداكن (كامل الإطار)
+          </button>
+          <button id="btn-view-live" class="switch-btn" onclick="switchFbView('live')">
+            <span class="icon">🔴</span>
+            البث المباشر من فيسبوك (Meta Live)
           </button>
         </div>
 
         <div class="feed-status-info">
-          <span id="sync-status-text">🟢 البث المباشر متصل بمصدر فيسبوك الرسمي</span>
+          <span id="sync-status-text">👑 عرض البطاقات بالثيم الملوكي الداكن (مباشر ولحظي)</span>
         </div>
       </div>
 
       <!-- View 1: Meta Official Live Page Plugin Container -->
-      <div id="fb-live-view-container" class="fb-live-wrapper">
+      <div id="fb-live-view-container" class="fb-live-wrapper" style="display: none;">
         <div class="fb-live-frame-box">
           <!-- Official Meta Page Embed Widget -->
           <div class="fb-page" 
@@ -716,7 +716,7 @@
       </div>
 
       <!-- View 2: Dark Golden Styled Dynamic Cards Grid -->
-      <div id="fb-cards-view-container" class="fb-cards-wrapper" style="display: none;">
+      <div id="fb-cards-view-container" class="fb-cards-wrapper" style="display: block;">
         <div id="dynamic-fb-cards" class="fb-posts-grid">
           <!-- Rendered via JS Live Sync System -->
         </div>
@@ -1419,8 +1419,8 @@
     </div>
   </footer>
 
-  <!-- Scripts (Updated Centered Oval Badges & Responsive Nav Version) -->
-  <script src="assets/js/main.js?v=20261016_v12_centered_pills"></script>
+  <!-- Scripts (Updated Centered Oval Badges & Full-Frame Feed Version) -->
+  <script src="assets/js/main.js?v=20261016_v13_full_frame"></script>
   <script>
     document.getElementById('year-span').textContent = new Date().getFullYear();
   </script>
