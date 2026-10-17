@@ -154,6 +154,69 @@ function getFormattedArabicDateNow() {
 // ==========================================================================
 // 3. تحميل ودمج القصائد من المصادر (Data Loader)
 // ==========================================================================
+/* ==========================================================================
+   دوال فحص واستخراج المعرّف الموحد لمنع تكرار القصائد والمقاطع بالروابط
+   ========================================================================== */
+function extractCanonicalMediaKey(url, title = '') {
+  if (!url || typeof url !== 'string' || !url.trim()) {
+    return 'title_' + (title || '').trim().replace(/[^\u0621-\u064A0-9a-zA-Z]/g, '');
+  }
+
+  const cleanUrl = url.trim();
+
+  // 1. فحص معرّف مقاطع تيك توك
+  const ttMatch = cleanUrl.match(/tiktok\.com\/@[^/]+\/video\/(\d+)/i);
+  if (ttMatch) return 'tt_vid_' + ttMatch[1];
+
+  // 2. فحص معرّف فيديو فيسبوك المباشر أو الـ Reel
+  const fbMatch = cleanUrl.match(/(?:videos|reel|watch\/?\?v=)\/?(\d+)/i);
+  if (fbMatch) return 'fb_vid_' + fbMatch[1];
+
+  // 3. فحص معرّف رابط مشاركة فيسبوك المختصر (مثل share/v/19wWTZHi8E/)
+  const shareMatch = cleanUrl.match(/facebook\.com\/share\/v\/([^/?#&]+)/i);
+  if (shareMatch) return 'fb_share_' + shareMatch[1];
+
+  // 4. فحص الروابط العامة مع تجريد المعلمات والاستعلامات
+  try {
+    const parsed = new URL(cleanUrl);
+    return parsed.origin + parsed.pathname.replace(/\/$/, '');
+  } catch (e) {
+    return cleanUrl.split('?')[0].replace(/\/$/, '');
+  }
+}
+
+function deduplicatePoemsByLink(poemsList) {
+  if (!Array.isArray(poemsList)) return [];
+  const seenKeys = new Set();
+  const uniqueList = [];
+
+  for (const poem of poemsList) {
+    const key = extractCanonicalMediaKey(poem.fbUrl, poem.title);
+    if (!seenKeys.has(key)) {
+      seenKeys.add(key);
+      uniqueList.push(poem);
+    }
+  }
+
+  return uniqueList;
+}
+
+function deduplicateVideosByLink(videosList) {
+  if (!Array.isArray(videosList)) return [];
+  const seenKeys = new Set();
+  const uniqueList = [];
+
+  for (const vid of videosList) {
+    const key = extractCanonicalMediaKey(vid.fbUrl, vid.title);
+    if (!seenKeys.has(key)) {
+      seenKeys.add(key);
+      uniqueList.push(vid);
+    }
+  }
+
+  return uniqueList;
+}
+
 function loadAdminPoems() {
   // 1. فحص وجود بيانات مخصصة محفوظة محلياً
   const savedCustom = localStorage.getItem('za_alnoon_custom_poems_v1');
@@ -175,6 +238,7 @@ function loadAdminPoems() {
     ADMIN_POEMS = [];
   }
 
+  ADMIN_POEMS = deduplicatePoemsByLink(ADMIN_POEMS);
   sortPoemsNewestFirst(ADMIN_POEMS);
   saveAdminPoemsLocally();
 }
@@ -418,6 +482,16 @@ function initFormEvents() {
       dateStr = nowData.dateArabic;
     }
 
+    // التحقق من عدم تكرار القصيدة بالرابط أو المعرّف
+    if (fbUrl) {
+      const candidateKey = extractCanonicalMediaKey(fbUrl, title);
+      const existing = ADMIN_POEMS.find(p => extractCanonicalMediaKey(p.fbUrl, p.title) === candidateKey);
+      if (existing) {
+        showAdminToast(`⚠️ تم منع التكرار: هذه القصيدة مسجلة مسبقاً باسم «${existing.title}» بنفس الرابط!`);
+        return;
+      }
+    }
+
     const lines = fullText.split('\n').filter(l => l.trim().length > 0);
     const excerpt = lines.slice(0, 3).join('\n.. ');
 
@@ -647,6 +721,15 @@ window.convertSocialPostToPoem = function(id, platform) {
     const post = (ADMIN_SOCIAL_FEED?.facebookPosts || []).find(p => p.id === id);
     if (!post) return;
 
+    // فحص الرابط ومنع التكرار
+    const postKey = extractCanonicalMediaKey(post.url, post.content);
+    const existingPoem = ADMIN_POEMS.find(p => extractCanonicalMediaKey(p.fbUrl, p.title) === postKey);
+    if (existingPoem) {
+      showAdminToast(`ℹ️ هذا المنشور مدرج مسبقاً في الديوان باسم «${existingPoem.title}» ولا يمكن تكراره.`);
+      switchTab('tab-manage-poems');
+      return;
+    }
+
     const lines = post.content.split('\n').filter(l => l.trim().length > 0);
     const rawTitle = lines[0].replace(/[#*]/g, '').trim();
     const title = rawTitle.length > 3 ? rawTitle : 'بوح من فيسبوك';
@@ -676,6 +759,15 @@ window.convertSocialPostToPoem = function(id, platform) {
   } else if (platform === 'tiktok') {
     const vid = (ADMIN_SOCIAL_FEED?.tiktokVideos || []).find(v => v.id === id);
     if (!vid) return;
+
+    // فحص الرابط ومنع التكرار
+    const vidKey = extractCanonicalMediaKey(vid.url, vid.title);
+    const existingPoem = ADMIN_POEMS.find(p => extractCanonicalMediaKey(p.fbUrl, p.title) === vidKey);
+    if (existingPoem) {
+      showAdminToast(`ℹ️ هذا المقطع مدرج مسبقاً في الديوان باسم «${existingPoem.title}» ولا يمكن تكراره.`);
+      switchTab('tab-manage-poems');
+      return;
+    }
 
     const poem = {
       id: 'tt-poem-' + Date.now(),

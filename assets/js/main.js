@@ -1299,6 +1299,69 @@ function sortPoemsNewestFirst(poemsList) {
   });
 }
 
+/* ==========================================================================
+   دوال فحص واستخراج المعرّف الموحد لمنع تكرار القصائد والمقاطع بالروابط
+   ========================================================================== */
+function extractCanonicalMediaKey(url, title = '') {
+  if (!url || typeof url !== 'string' || !url.trim()) {
+    return 'title_' + (title || '').trim().replace(/[^\u0621-\u064A0-9a-zA-Z]/g, '');
+  }
+
+  const cleanUrl = url.trim();
+
+  // 1. فحص معرّف مقاطع تيك توك
+  const ttMatch = cleanUrl.match(/tiktok\.com\/@[^/]+\/video\/(\d+)/i);
+  if (ttMatch) return 'tt_vid_' + ttMatch[1];
+
+  // 2. فحص معرّف فيديو فيسبوك المباشر أو الـ Reel
+  const fbMatch = cleanUrl.match(/(?:videos|reel|watch\/?\?v=)\/?(\d+)/i);
+  if (fbMatch) return 'fb_vid_' + fbMatch[1];
+
+  // 3. فحص معرّف رابط مشاركة فيسبوك المختصر (مثل share/v/19wWTZHi8E/)
+  const shareMatch = cleanUrl.match(/facebook\.com\/share\/v\/([^/?#&]+)/i);
+  if (shareMatch) return 'fb_share_' + shareMatch[1];
+
+  // 4. فحص الروابط العامة مع تجريد المعلمات والاستعلامات
+  try {
+    const parsed = new URL(cleanUrl);
+    return parsed.origin + parsed.pathname.replace(/\/$/, '');
+  } catch (e) {
+    return cleanUrl.split('?')[0].replace(/\/$/, '');
+  }
+}
+
+function deduplicatePoemsByLink(poemsList) {
+  if (!Array.isArray(poemsList)) return [];
+  const seenKeys = new Set();
+  const uniqueList = [];
+
+  for (const poem of poemsList) {
+    const key = extractCanonicalMediaKey(poem.fbUrl, poem.title);
+    if (!seenKeys.has(key)) {
+      seenKeys.add(key);
+      uniqueList.push(poem);
+    }
+  }
+
+  return uniqueList;
+}
+
+function deduplicateVideosByLink(videosList) {
+  if (!Array.isArray(videosList)) return [];
+  const seenKeys = new Set();
+  const uniqueList = [];
+
+  for (const vid of videosList) {
+    const key = extractCanonicalMediaKey(vid.fbUrl, vid.title);
+    if (!seenKeys.has(key)) {
+      seenKeys.add(key);
+      uniqueList.push(vid);
+    }
+  }
+
+  return uniqueList;
+}
+
 function loadAdminCustomPoems() {
   try {
     const custom = localStorage.getItem('za_alnoon_custom_poems_v1');
@@ -1306,13 +1369,22 @@ function loadAdminCustomPoems() {
       const parsed = JSON.parse(custom);
       if (Array.isArray(parsed) && parsed.length > 0) {
         parsed.forEach(customPoem => {
-          const idx = POEMS_DATA.findIndex(p => String(p.id) === String(customPoem.id) || p.title === customPoem.title);
+          const customKey = extractCanonicalMediaKey(customPoem.fbUrl, customPoem.title);
+          const idx = POEMS_DATA.findIndex(p => 
+            String(p.id) === String(customPoem.id) || 
+            p.title === customPoem.title ||
+            extractCanonicalMediaKey(p.fbUrl, p.title) === customKey
+          );
           if (idx !== -1) {
             POEMS_DATA[idx] = customPoem;
           } else {
             POEMS_DATA.unshift(customPoem);
           }
         });
+        // ضمان عدم وجود أي تكرار بالرابط نهائياً
+        const deduped = deduplicatePoemsByLink(POEMS_DATA);
+        POEMS_DATA.length = 0;
+        POEMS_DATA.push(...deduped);
       }
     }
   } catch (err) {
@@ -2586,7 +2658,8 @@ function initVideosShowcase() {
   const container = document.getElementById('videos-container');
   if (!container) return;
 
-  renderVideos(VIDEOS_DATA);
+  const cleanVideos = deduplicateVideosByLink(VIDEOS_DATA);
+  renderVideos(cleanVideos);
 
   // تهيئة أزرار التصفية
   const vTabs = document.querySelectorAll('.v-tab-btn');

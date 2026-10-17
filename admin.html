@@ -254,8 +254,9 @@
 
           <div class="form-grid-two">
             <div class="form-group">
-              <label class="form-label">رابط المنشور الأصلي في فيسبوك أو تيك توك</label>
+              <label class="form-label">رابط المنشور الأصلي في فيسبوك أو تيك توك <span>(يتم التحقق منه تلقائياً لمنع أي تكرار)</span></label>
               <input type="url" id="poem-fburl-input" class="form-control" placeholder="https://www.facebook.com/dhwalnwn.ahmd.nayl/posts/..." value="https://www.facebook.com/dhwalnwn.ahmd.nayl/">
+              <small style="font-size: 0.75rem; color: #4ade80; display: block; margin-top: 4px;">🛡️ نظام الحماية من التكرار نشط: يفحص الروابط تلقائياً ويمنع تسجيل أي قصيدة مكررة مسبقاً.</small>
             </div>
 
             <div class="form-group">
@@ -424,7 +425,7 @@
   <div id="admin-toast" class="admin-toast"></div>
 
   <!-- Main JavaScript Data & Logic -->
-  <script src="assets/js/main.js?v=20261017_v19_itdalli_reeq"></script>
-  <script src="assets/js/admin.js?v=20261016_admin_v3_visitors"></script>
+  <script src="assets/js/main.js?v=20261017_v20_dedup"></script>
+  <script src="assets/js/admin.js?v=20261017_admin_v4_dedup"></script>
 </body>
 </html>
