@@ -281,16 +281,20 @@ function updateAdminStats() {
   updateAdminVisitorMetrics();
 }
 
-// قراءة وتحديث إحصائيات زوار الموقع الحقيقية
+// قراءة وتحديث إحصائيات زوار الموقع الحقيقية والربط السحابي اللحظي
 function updateAdminVisitorMetrics() {
   const visitorsEl = document.getElementById('stat-total-visitors');
   const todayEl = document.getElementById('stat-today-visitors');
   const uniqueEl = document.getElementById('stat-unique-visitors');
   if (!visitorsEl && !todayEl && !uniqueEl) return;
 
+  const formatNum = n => Number(n || 0).toLocaleString('en-US');
   const STORAGE_KEY = 'za_alnoon_site_visits';
-  let stats = null;
+  const COUNT_API_BASE = 'https://countapi.mileshilliard.com/api/v1';
+  const todayKey = 'za_alnoon_official_daily_' + new Date().toISOString().slice(0, 10).replace(/-/g, '_');
 
+  // 1. عرض القيم المحفوظة محلياً أو المضمنة فوراً لتفادي الانتظار
+  let stats = null;
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) stats = JSON.parse(raw);
@@ -298,47 +302,90 @@ function updateAdminVisitorMetrics() {
 
   if (!stats || typeof stats.totalVisits !== 'number') {
     stats = ADMIN_SOCIAL_FEED?.siteAnalytics || {
-      totalVisits: 1485,
-      todayVisits: 42,
+      totalVisits: 1486,
+      todayVisits: 43,
       uniqueVisitors: 1120
     };
   }
 
-  const formatNum = n => Number(n || 0).toLocaleString('en-US');
-
   if (visitorsEl) visitorsEl.textContent = formatNum(stats.totalVisits);
   if (todayEl) todayEl.textContent = formatNum(stats.todayVisits);
   if (uniqueEl) uniqueEl.textContent = formatNum(stats.uniqueVisitors);
+
+  // 2. جلب الأرقام الحقيقية المحدثة لحظياً من السيرفر السحابي الموحد (Live Global Counter)
+  Promise.all([
+    fetch(`${COUNT_API_BASE}/get/za_alnoon_official_site`, { mode: 'cors' }).then(r => r.json()).catch(() => null),
+    fetch(`${COUNT_API_BASE}/get/${todayKey}`, { mode: 'cors' }).then(r => r.json()).catch(() => null),
+    fetch(`${COUNT_API_BASE}/get/za_alnoon_official_unique`, { mode: 'cors' }).then(r => r.json()).catch(() => null)
+  ]).then(([siteData, todayData, uniqueData]) => {
+    let updated = false;
+
+    if (siteData && typeof siteData.value === 'number') {
+      stats.totalVisits = siteData.value;
+      if (visitorsEl) visitorsEl.textContent = formatNum(siteData.value);
+      updated = true;
+    }
+
+    if (todayData && typeof todayData.value === 'number') {
+      stats.todayVisits = todayData.value;
+      if (todayEl) todayEl.textContent = formatNum(todayData.value);
+      updated = true;
+    } else if (todayData && todayData.error === 'Key not found') {
+      stats.todayVisits = 0;
+      if (todayEl) todayEl.textContent = '0';
+      updated = true;
+    }
+
+    if (uniqueData && typeof uniqueData.value === 'number') {
+      stats.uniqueVisitors = uniqueData.value;
+      if (uniqueEl) uniqueEl.textContent = formatNum(uniqueData.value);
+      updated = true;
+    }
+
+    if (updated) {
+      stats.lastDate = new Date().toISOString().slice(0, 10);
+      stats.lastVisitTime = new Date().toISOString();
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(stats));
+    }
+  }).catch(() => {
+    // الاحتفاظ بالبيانات المحلية إذا تعذر الاتصال
+  });
 }
 
 // دالة للإدارة لمعايرة أو تحديث عداد الزيارات عند الحاجة
 window.calibrateAdminVisitors = function(event) {
   if (event) event.stopPropagation();
-  const current = parseInt(document.getElementById('stat-total-visitors')?.textContent?.replace(/,/g, '') || '1485', 10);
+  const current = parseInt(document.getElementById('stat-total-visitors')?.textContent?.replace(/,/g, '') || '1486', 10);
   const promptVal = prompt('👑 [لوحة الإدارة] إدخال رقم أساسي لعدد زوار الموقع:', current);
   if (promptVal !== null) {
     const newCount = parseInt(promptVal.replace(/[^0-9]/g, ''), 10);
     if (!isNaN(newCount) && newCount >= 0) {
       const STORAGE_KEY = 'za_alnoon_site_visits';
+      const COUNT_API_BASE = 'https://countapi.mileshilliard.com/api/v1';
+
+      // تحديث السيرفر السحابي الموحد فوراً
+      fetch(`${COUNT_API_BASE}/set/za_alnoon_official_site?value=${newCount}`).catch(() => {});
+      const uniqueCalc = Math.round(newCount * 0.75);
+      fetch(`${COUNT_API_BASE}/set/za_alnoon_official_unique?value=${uniqueCalc}`).catch(() => {});
+
       let stats = {};
       try {
         const raw = localStorage.getItem(STORAGE_KEY);
         if (raw) stats = JSON.parse(raw) || {};
       } catch (e) {}
       stats.totalVisits = newCount;
-      if (!stats.todayVisits) stats.todayVisits = 42;
-      if (!stats.uniqueVisitors) stats.uniqueVisitors = Math.round(newCount * 0.75);
+      if (!stats.todayVisits) stats.todayVisits = 43;
+      stats.uniqueVisitors = uniqueCalc;
       stats.lastDate = new Date().toISOString().slice(0, 10);
       stats.lastVisitTime = new Date().toISOString();
       localStorage.setItem(STORAGE_KEY, JSON.stringify(stats));
+
       updateAdminVisitorMetrics();
-      showAdminToast(`✅ تم تحديث وتثبيت عداد زوار الموقع إلى: ${newCount.toLocaleString('en-US')}`);
+      showAdminToast(`✅ تم تحديث وتثبيت عداد زوار الموقع سحابياً إلى: ${newCount.toLocaleString('en-US')}`);
     }
   }
 };
 
-// ==========================================================================
-// 5. التبديل بين التبويبات (Admin Tabs Switcher)
 // ==========================================================================
 function initAdminTabs() {
   const tabBtns = document.querySelectorAll('.admin-tab-btn');

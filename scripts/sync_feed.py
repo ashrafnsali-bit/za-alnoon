@@ -156,6 +156,49 @@ def sync_facebook_stats(feed):
     except Exception as e:
         print(f"ℹ️ تعذر تحديث بيانات فيسبوك المباشرة: {e}")
 
+def sync_visitor_analytics(feed):
+    print("🌐 فحص وتحديث إحصائيات زوار الموقع السحابية...")
+    try:
+        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'}
+        if 'siteAnalytics' not in feed:
+            feed['siteAnalytics'] = {}
+
+        # 1. إجمالي الزيارات
+        try:
+            req_t = urllib.request.Request('https://countapi.mileshilliard.com/api/v1/get/za_alnoon_official_site', headers=headers)
+            with urllib.request.urlopen(req_t, timeout=8) as resp:
+                data_t = json.loads(resp.read().decode('utf-8'))
+                if 'value' in data_t:
+                    feed['siteAnalytics']['totalVisits'] = data_t['value']
+                    print(f"✅ تم تحديث إجمالي الزيارات سحابياً: {data_t['value']}")
+        except Exception as e:
+            print(f"ℹ️ تعذر قراءة إجمالي الزيارات: {e}")
+
+        # 2. زوار اليوم
+        try:
+            today_key = 'za_alnoon_official_daily_' + datetime.utcnow().strftime('%Y_%m_%d')
+            req_d = urllib.request.Request(f'https://countapi.mileshilliard.com/api/v1/get/{today_key}', headers=headers)
+            with urllib.request.urlopen(req_d, timeout=8) as resp:
+                data_d = json.loads(resp.read().decode('utf-8'))
+                if 'value' in data_d:
+                    feed['siteAnalytics']['todayVisits'] = data_d['value']
+        except Exception:
+            feed['siteAnalytics']['todayVisits'] = feed['siteAnalytics'].get('todayVisits', 0)
+
+        # 3. الزوار الفريدون
+        try:
+            req_u = urllib.request.Request('https://countapi.mileshilliard.com/api/v1/get/za_alnoon_official_unique', headers=headers)
+            with urllib.request.urlopen(req_u, timeout=8) as resp:
+                data_u = json.loads(resp.read().decode('utf-8'))
+                if 'value' in data_u:
+                    feed['siteAnalytics']['uniqueVisitors'] = data_u['value']
+        except Exception:
+            pass
+
+        feed['siteAnalytics']['lastUpdated'] = datetime.utcnow().isoformat() + "Z"
+    except Exception as e:
+        print(f"ℹ️ تعذر تحديث إحصائيات الزوار السحابية: {e}")
+
 def main():
     print("=" * 60)
     print("🚀 بدء تشغيل محرك المزامنة التلقائية اللحظية (TikTok & Facebook)")
@@ -168,6 +211,7 @@ def main():
         changed = True
 
     sync_facebook_stats(feed)
+    sync_visitor_analytics(feed)
     changed = True
 
     feed['lastUpdated'] = datetime.utcnow().isoformat() + "Z"

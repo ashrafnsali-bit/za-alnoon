@@ -3171,8 +3171,9 @@ function initTikTokModalEvents() {
 }
 
 /* ==========================================================================
-   14. تتبع زيارات الموقع بصمت تام خلف الكواليس (Silent Site Visit Telemetry)
+   14. تتبع زيارات الموقع السحابي بصمت تام خلف الكواليس (Cloud Site Visit Telemetry)
    خاص حصرياً بلوحة تحكم الإدارة (admin.html) - بدون أي أثر أو ظهور في الواجهة الرئيسية
+   يرسل النبضات إلى السيرفر السحابي الموحد لضمان احتساب الزيارات الحقيقية من كافة الأجهزة
    ========================================================================== */
 function trackSiteVisit() {
   try {
@@ -3182,10 +3183,31 @@ function trackSiteVisit() {
     const STORAGE_KEY = 'za_alnoon_site_visits';
     const SESSION_KEY = 'za_alnoon_session_active';
     const UID_KEY = 'za_alnoon_visitor_uid';
+    const COUNT_API_BASE = 'https://countapi.mileshilliard.com/api/v1';
 
     const now = new Date();
     const todayStr = now.toISOString().slice(0, 10); // YYYY-MM-DD
+    const todayKey = 'za_alnoon_official_daily_' + todayStr.replace(/-/g, '_');
 
+    // 1. فحص الجلسة النشطة (تجنب التكرار عند تحديث نفس الزائر للصفحة)
+    const isNewSession = !sessionStorage.getItem(SESSION_KEY);
+    if (isNewSession) {
+      sessionStorage.setItem(SESSION_KEY, 'active_' + Date.now());
+      // إرسال نبضة الزيارة السحابية الموحدة
+      fetch(`${COUNT_API_BASE}/hit/za_alnoon_official_site`, { mode: 'cors' }).catch(() => {});
+      fetch(`${COUNT_API_BASE}/hit/${todayKey}`, { mode: 'cors' }).catch(() => {});
+    }
+
+    // 2. فحص الزائر الفريد
+    let uid = localStorage.getItem(UID_KEY);
+    if (!uid) {
+      uid = 'usr_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+      localStorage.setItem(UID_KEY, uid);
+      // إرسال نبضة زائر فريد جديد للسيرفر السحابي
+      fetch(`${COUNT_API_BASE}/hit/za_alnoon_official_unique`, { mode: 'cors' }).catch(() => {});
+    }
+
+    // 3. تحديث الكاش المحلي كنسخة احتياطية سريعة
     let stats = null;
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
@@ -3194,33 +3216,25 @@ function trackSiteVisit() {
 
     if (!stats || typeof stats.totalVisits !== 'number') {
       stats = {
-        totalVisits: 1485,
-        todayVisits: 42,
+        totalVisits: 1486,
+        todayVisits: 43,
         uniqueVisitors: 1120,
         lastDate: todayStr,
         lastVisitTime: now.toISOString()
       };
     }
 
-    // تجديد وإعادة ضبط زيارات اليوم إذا انتقل اليوم إلى تاريخ جديد
     if (stats.lastDate !== todayStr) {
       stats.todayVisits = 0;
       stats.lastDate = todayStr;
     }
 
-    // فحص الزائر الفريد
-    let uid = localStorage.getItem(UID_KEY);
     if (!uid) {
-      uid = 'usr_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
-      localStorage.setItem(UID_KEY, uid);
       stats.uniqueVisitors = (stats.uniqueVisitors || 1120) + 1;
     }
 
-    // فحص الجلسة النشطة
-    const isNewSession = !sessionStorage.getItem(SESSION_KEY);
     if (isNewSession) {
-      sessionStorage.setItem(SESSION_KEY, 'active_' + Date.now());
-      stats.totalVisits = (stats.totalVisits || 1485) + 1;
+      stats.totalVisits = (stats.totalVisits || 1486) + 1;
       stats.todayVisits = (stats.todayVisits || 0) + 1;
       stats.lastVisitTime = now.toISOString();
     }
