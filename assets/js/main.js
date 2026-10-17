@@ -2304,7 +2304,7 @@ window.toggleFbPageFollow = function(event) {
 
 // --- محرك التغذية الاجتماعية الحية والمزامنة اللحظية (Facebook & TikTok Live Sync Engine) ---
 let CURRENT_FB_POSTS = typeof DEFAULT_FB_POSTS !== 'undefined' ? DEFAULT_FB_POSTS : [];
-let CURRENT_TIKTOK_DATA = typeof TIKTOK_DATA !== 'undefined' ? TIKTOK_DATA : [];
+let CURRENT_TIKTOK_DATA = [];
 
 async function fetchSocialFeed(forceRefresh = false) {
   try {
@@ -2654,6 +2654,27 @@ const VIDEOS_DATA = [
 let activeVideo = null;
 let currentVideoFilter = "all";
 
+// دالة تصفية المرئيات العامة (تعمل بالنقر المباشر أو عبر مستمعات الأحداث)
+window.filterVideosByTab = function(filterCategory, btnEl) {
+  const vTabs = document.querySelectorAll('.v-tab-btn');
+  vTabs.forEach(t => t.classList.remove('active'));
+
+  if (btnEl) {
+    btnEl.classList.add('active');
+  } else {
+    const target = document.querySelector(`.v-tab-btn[data-vfilter="${filterCategory}"]`);
+    if (target) target.classList.add('active');
+  }
+
+  currentVideoFilter = filterCategory || 'all';
+  const allClean = deduplicateVideosByLink(VIDEOS_DATA);
+  const filtered = currentVideoFilter === 'all'
+    ? allClean
+    : allClean.filter(v => v.category === currentVideoFilter);
+
+  renderVideos(filtered);
+};
+
 function initVideosShowcase() {
   const container = document.getElementById('videos-container');
   if (!container) return;
@@ -2664,17 +2685,10 @@ function initVideosShowcase() {
   // تهيئة أزرار التصفية
   const vTabs = document.querySelectorAll('.v-tab-btn');
   vTabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      vTabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-      currentVideoFilter = tab.getAttribute('data-vfilter');
-      
-      const filtered = currentVideoFilter === 'all' 
-        ? VIDEOS_DATA 
-        : VIDEOS_DATA.filter(v => v.category === currentVideoFilter);
-      
-      renderVideos(filtered);
-    });
+    tab.onclick = function() {
+      const filter = this.getAttribute('data-vfilter') || 'all';
+      window.filterVideosByTab(filter, this);
+    };
   });
 
   initVideoModalEvents();
@@ -2686,8 +2700,13 @@ function renderVideos(list) {
 
   if (list.length === 0) {
     container.innerHTML = `
-      <div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--text-muted);">
-        <p style="font-size: 1.2rem; font-family: var(--font-poetry);">لا توجد مقاطع فيديو في هذا التصنيف حالياً..</p>
+      <div style="grid-column: 1/-1; text-align: center; padding: 3.5rem 1.5rem; background: rgba(255,255,255,0.02); border: 1px dashed var(--border-subtle); border-radius: var(--radius-lg);">
+        <div style="font-size: 2.5rem; margin-bottom: 0.8rem;">🎬</div>
+        <p style="font-size: 1.15rem; font-family: var(--font-poetry); color: var(--gold-light); margin-bottom: 0.6rem;">لا توجد تسجيلات مضافة حالياً في هذا التصنيف</p>
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.2rem;">يمكنك مشاهدة كافة المقاطع واللقاءات والمشاركات التلفزيونية مباشرة على صفحة الشاعر الرسمية.</p>
+        <a href="https://www.facebook.com/dhwalnwn.ahmd.nayl/videos" target="_blank" rel="noopener noreferrer" class="btn-facebook" style="display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem; padding: 8px 20px;">
+          <span>مكتبة فيديوهات فيسبوك ↗</span>
+        </a>
       </div>
     `;
     return;

@@ -286,10 +286,10 @@
       <!-- Video Filter Controls -->
       <div class="video-controls">
         <div class="video-filter-tabs">
-          <button class="v-tab-btn active" data-vfilter="all">جميع المرئيات</button>
-          <button class="v-tab-btn" data-vfilter="recitation">إلقاء شعري</button>
-          <button class="v-tab-btn" data-vfilter="musical">أعمال غنائية</button>
-          <button class="v-tab-btn" data-vfilter="programs">برامج ولقاءات</button>
+          <button class="v-tab-btn active" data-vfilter="all" onclick="filterVideosByTab('all', this)">جميع المرئيات</button>
+          <button class="v-tab-btn" data-vfilter="recitation" onclick="filterVideosByTab('recitation', this)">إلقاء شعري</button>
+          <button class="v-tab-btn" data-vfilter="musical" onclick="filterVideosByTab('musical', this)">أعمال غنائية</button>
+          <button class="v-tab-btn" data-vfilter="programs" onclick="filterVideosByTab('programs', this)">برامج ولقاءات</button>
         </div>
 
         <a href="https://www.facebook.com/dhwalnwn.ahmd.nayl/videos" target="_blank" rel="noopener noreferrer"
@@ -1641,8 +1641,8 @@
     </div>
   </footer>
 
-  <!-- Scripts (Updated Cloud Visitor Analytics & Deduplication Version) -->
-  <script src="assets/js/main.js?v=20261017_v21_cloud_analytics"></script>
+  <!-- Scripts (Updated Video Showcase Filters & Cloud Analytics Version) -->
+  <script src="assets/js/main.js?v=20261017_v22_video_filters"></script>
   <script>
     document.getElementById('year-span').textContent = new Date().getFullYear();
   </script>
