@@ -2857,148 +2857,148 @@ function initVideoModalEvents() {
    ========================================================================== */
 const TIKTOK_DATA = [
   {
-    id: "tt-0",
+    id: "tt-synced-7696954333388197141",
     videoId: "7696954333388197141",
     account: "@drwesh22",
     author: "ذوالنون احمد نايل",
-    title: "إلقاء شعري: تعب الوجع (وجهتهن للرجعة ليك)",
-    caption: "#السودان_مشاهير_تيك_توك #شعر #explore وجهتهن للرجعة ليك .. كجرن وأبن يتوجهن",
-    views: "210",
-    likes: "34",
-    comments: "13",
+    title: "تعب الوجع (وجهتهن للرجعة ليك)",
+    caption: "#السودان_مشاهير_تيك_توك #شعر #explore وجهتهن للرجعة ليك .. كجرن وأبن يتوجهن! تعب الوجع وبيوتنا طوبا شكا ورطن..",
+    views: "485",
+    likes: "51",
+    comments: "14",
     duration: "01:47",
     audio: "الصوت الأصلي - ذوالنون احمد نايل",
     url: "https://www.tiktok.com/@drwesh22/video/7696954333388197141",
-    badge: "🔴 أحدث إلقاء شعري (أمس)",
+    badge: "🔴 أحدث مقطع (إلقاء شعري)",
     category: "recitation",
     videoSrc: "assets/videos/tiktok_latest.mp4",
     thumb: "assets/images/tiktok_latest.jpg"
   },
   {
-    id: "tt-1",
+    id: "tt-synced-7696358256222031125",
     videoId: "7696358256222031125",
     account: "@drwesh22",
     author: "ذوالنون احمد نايل",
-    title: "تجربة فنية غنائية: عادي نتفارق (مع ZooZ)",
-    caption: "#ZooZ 🎤🎸 تجربة جمعني بي #عادي_نتفارق🎵تلاقي رضاكم والمحبة",
-    views: "192",
-    likes: "27",
-    comments: "18",
-    duration: "00:45",
-    audio: "الصوت الأصلي - ذوالنون احمد نايل",
+    title: "عادي نتفارق (عمل غنائي جديد مع ZooZ)",
+    caption: "#عادي_نتفارق  تجربة جمعني بي @ZooZ🎤🎸 @🅼🅾🅷🅰🅼🅴🅳 🅺🅷🅾🅶🅰🅻🆈... اتمنى تلاقي رضاكم والمحبة",
+    views: "292",
+    likes: "36",
+    comments: "19",
+    duration: "04:30",
+    audio: "ZooZ - عادي نتفارق (كلمات: ذو النون نايل)",
     url: "https://www.tiktok.com/@drwesh22/video/7696358256222031125",
-    badge: "عمل غنائي مشترك",
-    category: "music",
+    badge: "🎵 عمل غنائي (أغنية)",
+    category: "musical",
     videoSrc: "assets/videos/tiktok_1.mp4",
     thumb: "assets/images/tiktok_1.jpg"
   },
   {
-    id: "tt-2",
+    id: "tt-synced-7695492300868177172",
     videoId: "7695492300868177172",
     account: "@drwesh22",
     author: "ذوالنون احمد نايل",
-    title: "إلقاء شعري: خفف خطاك (تعِب حيل خطاي)",
-    caption: "#سودان_مشاهير_تيك_توك #شعر #explore #خفف_خطاك",
+    title: "خفف خطاك (عمل غنائي مع ZooZ)",
+    caption: "#خفف_خطاك #explore #شعر #السودان_مشاهير_تيك_توك كلمات ذو النون أحمد نايل | الحان محمد خوجلي",
+    views: "427",
+    likes: "58",
+    comments: "22",
+    duration: "01:00",
+    audio: "إنتاج مشترك - كلمات: ذو النون نايل",
+    url: "https://www.tiktok.com/@drwesh22/video/7695492300868177172",
+    badge: "🎵 عمل غنائي (أغنية)",
+    category: "musical",
+    videoSrc: "assets/videos/tiktok_3.mp4",
+    thumb: "assets/images/tiktok_3.jpg"
+  },
+  {
+    id: "tt-synced-7694075214056951060",
+    videoId: "7694075214056951060",
+    account: "@drwesh22",
+    author: "ذوالنون احمد نايل",
+    title: "كواليس التحضير لعمل فني جديد (مع ZooZ ومحمد خوجلي)",
+    caption: "انا و@ZooZ🎤🎸 و @🅼🅾🅷🅰🅼🅴🅳 🅺🅷🅾🅶🅰🅻🆈 .. عاملين ليكم حاجة سمحة .. انتظرونا وهاكم المحبة",
+    views: "556",
+    likes: "56",
+    comments: "15",
+    duration: "00:50",
+    audio: "الصوت الأصلي - ذوالنون احمد نايل",
+    url: "https://www.tiktok.com/@drwesh22/video/7694075214056951060",
+    badge: "🎬 كواليس وتجارب",
+    category: "programs",
+    videoSrc: "assets/videos/tiktok_2.mp4",
+    thumb: "assets/images/tiktok_2.jpg"
+  },
+  {
+    id: "tt-synced-7691755438961904917",
+    videoId: "7691755438961904917",
+    account: "@drwesh22",
+    author: "ذوالنون احمد نايل",
+    title: "حواس (هاك رعشتك)",
+    caption: "#حواس #السودان_مشاهير_تيك_توك #explore #شعر هاك رعشتك يا تنفلت يا تجمعا",
     views: "379",
     likes: "49",
     comments: "20",
     duration: "01:15",
     audio: "الصوت الأصلي - ذوالنون احمد نايل",
-    url: "https://www.tiktok.com/@drwesh22/video/7695492300868177172",
-    badge: "قصيدة خفف خطاك",
-    category: "recitation",
-    videoSrc: "assets/videos/tiktok_2.mp4",
-    thumb: "assets/images/tiktok_2.jpg"
-  },
-  {
-    id: "tt-3",
-    videoId: "7694075214056951060",
-    account: "@drwesh22",
-    author: "ذوالنون احمد نايل",
-    title: "لمحة فنية قادمة مع ZooZ ومحمد خوجلي",
-    caption: "@ZooZ 🎤🎸 انا و محمد خوجلي .. انتظارونا بس .. جايتكم .. ودي لمحة عايتو .. وهاكم المحبة",
-    views: "556",
-    likes: "56",
-    comments: "80",
-    duration: "00:50",
-    audio: "الصوت الأصلي - ذوالنون احمد نايل",
-    url: "https://www.tiktok.com/@drwesh22/video/7694075214056951060",
-    badge: "كواليس وإطلالة فنية",
-    category: "art",
-    videoSrc: "assets/videos/tiktok_3.mp4",
-    thumb: "assets/images/tiktok_3.jpg"
-  },
-  {
-    id: "tt-4",
-    videoId: "7691755438961904917",
-    account: "@drwesh22",
-    author: "ذوالنون احمد نايل",
-    title: "إلقاء شعري: حواس (هاك رعشتك)",
-    caption: "#شعر #explore #السودان_مشاهير_تيك_توك #حواس",
-    views: "352",
-    likes: "36",
-    comments: "10",
-    duration: "01:05",
-    audio: "الصوت الأصلي - ذوالنون احمد نايل",
     url: "https://www.tiktok.com/@drwesh22/video/7691755438961904917",
-    badge: "ديوان الحواس",
-    category: "recitation",
-    videoSrc: "assets/videos/tiktok_4.mp4",
-    thumb: "assets/images/tiktok_4.jpg"
-  },
-  {
-    id: "tt-5",
-    videoId: "7688419609950817556",
-    account: "@drwesh22",
-    author: "ذوالنون احمد نايل",
-    title: "إلقاء شعري: ضجيج (لا تحِن يا السُّقا)",
-    caption: "#السودان_مشاهير_تيك_توك #explore #شعر #ضجيج",
-    views: "571",
-    likes: "63",
-    comments: "21",
-    duration: "01:20",
-    audio: "الصوت الأصلي - ذوالنون احمد نايل",
-    url: "https://www.tiktok.com/@drwesh22/video/7688419609950817556",
-    badge: "قصيدة ضجيج",
+    badge: "🎙️ إلقاء شعري",
     category: "recitation",
     videoSrc: "assets/videos/tiktok_5.mp4",
     thumb: "assets/images/tiktok_5.jpg"
   },
   {
-    id: "tt-6",
-    videoId: "7685060833055083796",
+    id: "tt-synced-7688419609950817556",
+    videoId: "7688419609950817556",
     account: "@drwesh22",
     author: "ذوالنون احمد نايل",
-    title: "إلقاء شعري: رهان (ما تكسرك إيد الظروف)",
-    caption: "#سودان_مشاهير_تيك_توك #explore #شعر #مشاهير #رهان",
-    views: "577",
-    likes: "67",
-    comments: "24",
-    duration: "01:10",
+    title: "ضجيج (لا تحِن يا السُّقا)",
+    caption: "#ضجيج #شعر #explore #السودان_مشاهير_تيك_توك لا تحِن يا السُّقا وتندسا بين أنغامي",
+    views: "410",
+    likes: "45",
+    comments: "16",
+    duration: "01:25",
     audio: "الصوت الأصلي - ذوالنون احمد نايل",
-    url: "https://www.tiktok.com/@drwesh22/video/7685060833055083796",
-    badge: "قصيدة رهان",
+    url: "https://www.tiktok.com/@drwesh22/video/7688419609950817556",
+    badge: "🎙️ إلقاء شعري",
     category: "recitation",
     videoSrc: "assets/videos/tiktok_6.mp4",
     thumb: "assets/images/tiktok_6.jpg"
   },
   {
-    id: "tt-7",
-    videoId: "7680619000958635285",
+    id: "tt-synced-7685060833055083796",
+    videoId: "7685060833055083796",
     account: "@drwesh22",
     author: "ذوالنون احمد نايل",
-    title: "بوح شعري وجداني وإلقاء حي",
-    caption: "#شعر #السودان_مشاهير_تيك_توك مقطع شعري وإلقاء وجداني بصوت الشاعر ذوالنون أحمد نايل",
-    views: "650",
-    likes: "52",
-    comments: "16",
-    duration: "01:30",
+    title: "رهان (ما تكسرك إيد الظروف)",
+    caption: "#رهان #مشاهير #explore #شعر #السودان_مشاهير_تيك_توك ما تكسرك إيد الظروف لا يسجنك ضيق المكان",
+    views: "340",
+    likes: "42",
+    comments: "13",
+    duration: "01:35",
     audio: "الصوت الأصلي - ذوالنون احمد نايل",
-    url: "https://www.tiktok.com/@drwesh22/video/7680619000958635285",
-    badge: "إلقاء وجداني",
+    url: "https://www.tiktok.com/@drwesh22/video/7685060833055083796",
+    badge: "🎙️ إلقاء شعري",
     category: "recitation",
     videoSrc: "assets/videos/tiktok_7.mp4",
     thumb: "assets/images/tiktok_7.jpg"
+  },
+  {
+    id: "tt-synced-7680619000958635285",
+    videoId: "7680619000958635285",
+    account: "@drwesh22",
+    author: "ذوالنون احمد نايل",
+    title: "داويني (كفَّني ليلك ياحزن)",
+    caption: "#السودان_مشاهير_تيك_توك #شعر #explore #مشاهير #داويني كفَّني ليلك ياحزن كتَّفني شيلك يا اساي",
+    views: "395",
+    likes: "48",
+    comments: "17",
+    duration: "02:10",
+    audio: "الصوت الأصلي - ذوالنون احمد نايل",
+    url: "https://www.tiktok.com/@drwesh22/video/7680619000958635285",
+    badge: "🎙️ إلقاء شعري",
+    category: "recitation",
+    videoSrc: "assets/videos/tiktok_4.mp4",
+    thumb: "assets/images/tiktok_4.jpg"
   }
 ];
 
@@ -3016,10 +3016,20 @@ function renderTikTokGrid(items) {
   const container = document.getElementById('tiktok-container');
   if (!container) return;
 
-  container.innerHTML = items.map(item => `
+  container.innerHTML = items.map(item => {
+    let badgeClass = 'badge-recitation';
+    if (item.category === 'musical' || item.category === 'music' || (item.badge && item.badge.includes('غنائي'))) {
+      badgeClass = 'badge-musical';
+    } else if (item.category === 'programs' || item.category === 'art' || (item.badge && (item.badge.includes('كواليس') || item.badge.includes('تجارب')))) {
+      badgeClass = 'badge-programs';
+    } else if (item.badge && (item.badge.includes('أحدث') || item.badge.includes('لحظياً'))) {
+      badgeClass = 'badge-latest';
+    }
+
+    return `
     <article class="tiktok-card" data-ttid="${item.id}">
       <div class="tiktok-card-header">
-        <span class="tt-card-badge">${item.badge}</span>
+        <span class="tt-card-badge ${badgeClass}">${item.badge}</span>
         <div class="tt-card-user">
           <span class="verified">✓</span>
           <span>${item.account}</span>
@@ -3060,11 +3070,13 @@ function renderTikTokGrid(items) {
         </div>
       </div>
     </article>
-  `).join('');
+  `;
+  }).join('');
 }
 
 window.openTikTokModal = function(id) {
-  const item = (CURRENT_TIKTOK_DATA && CURRENT_TIKTOK_DATA.length ? CURRENT_TIKTOK_DATA : TIKTOK_DATA).find(t => t.id === id);
+  const dataset = (CURRENT_TIKTOK_DATA && CURRENT_TIKTOK_DATA.length ? CURRENT_TIKTOK_DATA : TIKTOK_DATA);
+  const item = dataset.find(t => t.id === id || t.videoId === id || (t.id && t.id.includes(id)) || (id && id.includes(t.videoId)));
   if (!item) return;
 
   activeTikTokVideo = item;
